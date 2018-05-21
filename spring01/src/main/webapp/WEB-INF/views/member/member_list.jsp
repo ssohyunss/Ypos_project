@@ -10,6 +10,7 @@
 <body>
 	<%@ include file="../include/menu.jsp"%>
 	<h2>회원목록</h2>
+	<input type="button" value="회원등록" onclick="location.href='${path}/member/write.do'">
 	<table border="1" width="700px">
 		<tr>
 			<th>아이디</th>
