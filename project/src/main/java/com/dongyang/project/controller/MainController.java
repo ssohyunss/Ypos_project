@@ -1,5 +1,7 @@
 package com.dongyang.project.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -13,21 +15,31 @@ private static final Logger logger = LoggerFactory.getLogger(MainController.clas
 	
 	//url mapping
 	@RequestMapping("/")
+	public String login(HttpServletRequest request) {
+		String cmd = request.getParameter("cmd");
+		Model model = null;
+		if(null !=cmd && "LOGINCHECK".equals(cmd)) {
+			request.setAttribute("stringOut", "Y");
+			return "stringout";
+		}
+		return "login";
+	}
+
+	@RequestMapping("/main.do")
 	public String main(Model model) {
 		model.addAttribute("message","메인화면");
-		
 		return "main";
 	}
 	
-	@RequestMapping("sale.do")
-	public void sale() {
-		
+	@RequestMapping("/sale.do")
+	public String sale(Model model) {
+		model.addAttribute("message","판매관리");
+		return "sale";
 	}
 	
 	@RequestMapping("sale/regist")
 	public String regist(Model model) {
 		model.addAttribute("message","판매등록");
-		
 		return "sale/regist";
 	}
 	
@@ -53,9 +65,10 @@ private static final Logger logger = LoggerFactory.getLogger(MainController.clas
 		
 	}
 	
-	@RequestMapping("manage.do")
-	public void manage() {
-		
+	@RequestMapping("/manage.do")
+	public String manage(Model model) {
+		model.addAttribute("message","재고관리");
+		return "manage";
 	}
 	
 	@RequestMapping("manage/otherStore")
@@ -86,9 +99,10 @@ private static final Logger logger = LoggerFactory.getLogger(MainController.clas
 		return "manage/dateStatus";
 	}
 	
-	@RequestMapping("inout.do")
-	public void inout() {
-		
+	@RequestMapping("/inout.do")
+	public String inout(Model model) {
+		model.addAttribute("message","입/출고관리");
+		return "inout";
 	}
 	
 	@RequestMapping("inout/orderRegist")
@@ -124,5 +138,10 @@ private static final Logger logger = LoggerFactory.getLogger(MainController.clas
 		model.addAttribute("message","반품현황");
 		
 		return "inout/returnStatus";
+	}
+	@RequestMapping("/commu.do")
+	public String commu(Model model) {
+		model.addAttribute("message","커뮤니티");
+		return "commu";
 	}
 }
