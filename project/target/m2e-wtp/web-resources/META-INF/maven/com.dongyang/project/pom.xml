@@ -47,7 +47,11 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-
+		<dependency>
+		 <groupId>org.json</groupId>
+		 <artifactId>json</artifactId>
+		 <version>20090211</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>

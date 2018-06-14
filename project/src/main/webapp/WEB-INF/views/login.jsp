@@ -37,7 +37,7 @@ window.top.location.href='/ipscan.do?cmd=FORWARDLIST';
 	<div style="width: 268px; margin-left: 400px; margin-top: 162px;">
 		<label style="background:url(../com/scope/ipscannac/common/img/icon/console.png) no-repeat; background-size: 137px 13px; display:block; width:137px; height:13px; margin: 200px 0px 0px 66px;"></label>
 		<div>
-			<input type="text" name="txt_mid" id="txt_mid" 
+			<input type="text" name="mid" id="txt_mid" 
 					style="font-size: 10pt; border: 1px solid #4587c0; width:238px; height: 40px; margin: 20px 15px 0px 15px; padding: 0px 10px 0px 40px; z-index: 1; background-size: 25px 25px; background-position: 10px 6px; " 
 					onkeydown="return loginCheckEnter();" 
 					autocomplete="off"
@@ -45,7 +45,7 @@ window.top.location.href='/ipscan.do?cmd=FORWARDLIST';
 					autofocus="autofocus"/>
 		</div>
 		<div>
-			<input type="password" name="txt_mpw" id="txt_mpw" 
+			<input type="password" name="mpw" id="txt_mpw" 
 					style="font-size: 10pt; border: 1px solid #4587c0; width:238px; height: 40px; margin: 10px 15px 0px 15px; padding: 0px 10px 0px 40px; z-index: 1; background-size: 25px 25px; background-position: 10px 6px;"
 					onkeydown="return loginCheckEnter();"
 					autocomplete="off"
@@ -66,37 +66,30 @@ window.top.location.href='/ipscan.do?cmd=FORWARDLIST';
 </body>
 <script type="text/javascript">
 //disable text selection
-function ajaxCall_formData(){
-	var args = this.ajaxCall_formData.arguments;
-	$.ajax({
-		xhr: function() {
-		    var xhr = new window.XMLHttpRequest();
-		    xhr.upload.addEventListener("progress", function(evt) {
-		      if (evt.lengthComputable) {
-		        var percentComplete = evt.loaded / evt.total;
-		        percentComplete = parseInt(percentComplete * 100);
-		        var obj = top.$('#loadingTitle');
-		        if(null != obj) {
-			        if (percentComplete === 100) {
-			        	obj.text('Processing...');
-			        }else {
-			        	obj.text('Uploading...'+percentComplete+'%');
-			        }		        	
-		        }
-		      }
-		    }, false);
-
-		    return xhr;
-		},
-	    url: args[0],
-	    processData: false,
-	    contentType: false,
-	    data: args[1],
-	    type: 'POST',
-	    success: function(result){
-	       args[2](result, args[3], args[4]);
-	    }
-	});		
+function ajaxCall(){		
+	var req = null;
+	var args = this.ajaxCall.arguments;
+	// 브라우져 호환성 검사
+	if(window.XMLHttpRequest) {
+		req = new XMLHttpRequest();		
+	} else if (window.ActiveXObject) {
+		req = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	if(req) {		
+		req.open('POST', args[0], true);		// request open
+		req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");	// 헤더지정
+		req.send(args[1]);					// 요청
+		req.onreadystatechange =  function() {	
+			if(req.readyState == 4) {					
+				if(req.status == 200) {
+					args[2](req.responseText, args[3], args[4]);
+				}
+			}
+		};
+		
+	} else {
+		alert("request 생성 실패!!");
+	}	
 }
 var forceLoginYN = 'N';
 document.onselectstart = function() {
@@ -128,19 +121,25 @@ function loginCheck(){
 		return;
 	}
 	var formData = new FormData();
-	formData.append("cmd", "LOGINCHECK");
 	formData.append("mid", $("#txt_mid").val());
 	formData.append("mpw", $("#txt_mpw").val());
 	formData.append("forceLoginYN", forceLoginYN);
-	ajaxCall_formData('/project/?cmd=LOGINCHECK', formData, loginCheckResult);
+	ajaxCall('/project/select', "&mid="+$("#txt_mid").val()+"&mpw="+$("#txt_mpw").val()+"", loginCheckResult);
 }
 function loginCheckResult(obj) {
-	 $('#thisForm').attr('action', '/project/main.do');
-	 $('#thisForm')[0].submit();
+	var mapResult = JSON.parse(obj);
+	var loginYN = mapResult['loginYN'];
+	if('Y' == loginYN){
+		 $('#thisForm').attr('action', '/project/main.do');
+		 $('#thisForm')[0].submit();
+	}else {
+		alert('로그인에 실패했습니다.');
+		return;
+	}
+
 // 	try {
 // 		forceLoginYN = 'N';
-// 		var mapResult = JSON.parse(obj);
-// 		var resultCode = mapResult['resultCode'];
+
 // 		var sysYN = mapResult['sysYN'];
 // 		var message = mapResult['message'];
 // 		var firstPage = mapResult['firstPage'];

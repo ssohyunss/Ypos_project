@@ -45,7 +45,7 @@ body{overflow-y:no; height:calc(100% - 100px);}
 		<button class="menu_btn menu_btn_setting" onclick="javascript:menu('COMMU')">커뮤니티</button>
 	</div>
 </div>
-<div id="logout"><%=session.getAttribute("name") %> 안녕하세요. <button class="btn logout" onclick="javascript:menu('LOGOUT')">로그아웃</button></div>
+<div id="logout"><%=session.getAttribute("name") %>님 안녕하세요. <button class="btn logout" onclick="javascript:menu('LOGOUT')">로그아웃</button></div>
 <div id="content">
 <h2>${message}</h2>
 </div>

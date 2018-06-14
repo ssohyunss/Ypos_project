@@ -6,15 +6,17 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<!-- 드라이버 클래스 이름이 변경됨 -->
-		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-		<!-- 연결문자열에 log4jdbc가 추가됨 -->
-		<property name="url"
-			value="jdbc:log4jdbc:oracle:thin:@localhost:1521:orcl" />
-		<property name="username" value="project" />
-		<property name="password" value="1234" />
+		<!-- MySQL JDBC DataSource -->
+	 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
+
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+
+		<property name="url" value="jdbc:mysql://13.124.251.39:3306/ypos" />
+
+		<property name="username" value="root" />
+
+		<property name="password" value="1234" /> 
+
 	</bean>
 	<!-- 아파치 DBCP 설정 -->
 	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" 
@@ -31,12 +33,13 @@
 		<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"></property>
 		<!--  classpath : src/main/resources -->
 	</bean>
+	
 	<!-- SqlSession 객체 주입 -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate"
 		destroy-method="clearCache">
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
 	</bean>
-
+	<context:component-scan base-package="com.dongyang.project.dao"></context:component-scan>
 </beans>
 
 

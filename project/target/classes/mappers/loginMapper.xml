@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.dongyang.project.loginMapper">
+	<select id="selectManager" resultType="com.dongyang.project.domain.LoginVO">
+		select * from MANAGER_MASTER where 1=1 and SITE_TID = '1' and MID = #{mid}
+	</select>
+</mapper>

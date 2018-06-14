@@ -23,6 +23,10 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.dongyang.project" />
+	<context:component-scan base-package="com.dongyang.project.dao" />
+	<context:component-scan base-package="com.dongyang.project.domain" />
+	<context:component-scan base-package="com.dongyang.project.service" />
+	<context:component-scan base-package="com.dongyang.project.controller" />
 	
 	
 </beans:beans>
