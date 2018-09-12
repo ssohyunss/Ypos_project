@@ -30,7 +30,7 @@ body{overflow-y:no; height:calc(100% - 100px);}
 </style>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Y-POS</title>
 <%@ include file = "include/header.jsp" %>
 </head>
 <body>
@@ -47,7 +47,7 @@ body{overflow-y:no; height:calc(100% - 100px);}
 </div>
 <div id="logout"><%=session.getAttribute("name") %>님 안녕하세요. <button class="btn logout" onclick="javascript:menu('LOGOUT')">로그아웃</button></div>
 <div id="content">
-<h2>${message}</h2>
+<div style="width: 100%; font-size: 26px;">입출고관리</div><br>
 </div>
 </div>
 </form>

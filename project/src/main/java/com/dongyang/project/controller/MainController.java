@@ -1,5 +1,8 @@
 package com.dongyang.project.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dongyang.project.domain.LoginVO;
+import com.dongyang.project.domain.ProductVO;
 import com.dongyang.project.service.LoginService;
 
 @Controller
@@ -47,7 +51,7 @@ private LoginService service;
 		return "stringout";
 	}
 	@RequestMapping("/main.do")
-	public String main(Model model) {
+	public String main(HttpServletRequest request,Model model) throws Exception {
 		model.addAttribute("message","메인화면");
 		return "main";
 	}
@@ -86,9 +90,13 @@ private LoginService service;
 		
 	}
 	
-	@RequestMapping("/manage.do")
-	public String manage(Model model) {
-		model.addAttribute("message","재고관리");
+	@RequestMapping(value="/manage.do",method = {RequestMethod.GET,RequestMethod.POST})
+	public String manage(HttpServletRequest request,ProductVO vo, Model model) throws Exception {
+		List<ProductVO> list = service.selectProduct();
+		if(null == list) {
+			list = new ArrayList<ProductVO>(); 
+		}
+		request.setAttribute("list",list);
 		return "manage";
 	}
 	
@@ -100,9 +108,12 @@ private LoginService service;
 	}
 	
 	@RequestMapping("manage/store")
-	public String store(Model model) {
-		model.addAttribute("message","매장재고현황");
-		
+	public String store(HttpServletRequest request,Model model) throws Exception {
+		List<ProductVO> list = service.selectProduct();
+		if(null == list) {
+			list = new ArrayList<ProductVO>(); 
+		}
+		request.setAttribute("list",list);
 		return "manage/store";
 	}
 	
