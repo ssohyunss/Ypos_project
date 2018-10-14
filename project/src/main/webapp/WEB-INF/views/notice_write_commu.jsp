@@ -1,14 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+	pageEncoding="EUC-KR"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta name="viewport " content="width=device-width ,initial-scale=1">
+<link rel="stylesheet" href="css/bootstrap.css">
 <title>Y-POS</title>
 </head>
 <style>
@@ -170,6 +167,9 @@ body {
 }
 </style>
 <body>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	
 	<form id="thisForm" name="thisForm" onsubmit="return false;" action="/"
 		method="post" enctype="multipart/form-data">
 		<div class="text-center">
@@ -192,34 +192,34 @@ body {
 									<ul id="fresponsive" class="nav navbar-nav dropdown">
 										<li class="active"><a href="javascript:menu('MAIN')">Y-POS</a></li>
 										<li class="dropdown"><a data-toggle="dropdown"
-											class="dropdown-toggle">íŒë§¤ê´€ë¦¬<span class="caret"></span></a>
+											class="dropdown-toggle">ÆÇ¸Å°ü¸®<span class="caret"></span></a>
 											<ul class="dropdown-menu">
-												<li><a href="#">íŒë§¤ë“±ë¡</a></li>
-												<li><a href="#">íŒë§¤ë§ˆê°í˜„í™©</a></li>
-												<li><a href="#">í’ˆë²ˆë³„ íŒë§¤í˜„í™©</a></li>
-												<li><a href="#">ì›”ë³„ì¶”ì´ê·¸ë˜í”„</a></li>
+												<li><a href="#">ÆÇ¸Åµî·Ï</a></li>
+												<li><a href="#">ÆÇ¸Å¸¶°¨ÇöÈ²</a></li>
+												<li><a href="#">Ç°¹øº° ÆÇ¸ÅÇöÈ²</a></li>
+												<li><a href="#">¿ùº°ÃßÀÌ±×·¡ÇÁ</a></li>
 											</ul></li>
 										<li class="dropdown"><a data-toggle="dropdown"
-											class="dropdown-toggle">ì¬ê³ ê´€ë¦¬<span class="caret"></span></a>
+											class="dropdown-toggle">Àç°í°ü¸®<span class="caret"></span></a>
 											<ul class="dropdown-menu">
-												<li><a href="javascript:menu('MANAGE')">ë§¤ì¥ì¬ê³ í˜„í™©</a></li>
-												<li><a href="#">íƒ€ë§¤ì¥ ì¬ê³ í˜„í™©</a></li>
-												<li><a href="#">í’ˆë²ˆë³„ ìˆ˜ë¶ˆí˜„í™©</a></li>
-												<li><a href="#">ì¼ìë³„ ìˆ˜ë¶ˆí˜„í™©</a></li>
+												<li><a href="javascript:menu('MANAGE')">¸ÅÀåÀç°íÇöÈ²</a></li>
+												<li><a href="#">Å¸¸ÅÀå Àç°íÇöÈ²</a></li>
+												<li><a href="#">Ç°¹øº° ¼öºÒÇöÈ²</a></li>
+												<li><a href="#">ÀÏÀÚº° ¼öºÒÇöÈ²</a></li>
 											</ul></li>
 										<li class="dropdown"><a data-toggle="dropdown"
-											class="dropdown-toggle">ì…/ì¶œê³ ê´€ë¦¬<span class="caret"></span></a>
+											class="dropdown-toggle">ÀÔ/Ãâ°í°ü¸®<span class="caret"></span></a>
 											<ul class="dropdown-menu">
-												<li><a href="#">ì£¼ë¬¸ë“±ë¡ ë° í˜„í™©</a></li>
-												<li><a href="#">ë°˜í’ˆë“±ë¡ ë° í˜„í™©</a></li>
-												<li><a href="#">ì…ì í™•ì¸</a></li>
+												<li><a href="#">ÁÖ¹®µî·Ï ¹× ÇöÈ²</a></li>
+												<li><a href="#">¹İÇ°µî·Ï ¹× ÇöÈ²</a></li>
+												<li><a href="#">ÀÔÁ¡È®ÀÎ</a></li>
 											</ul></li>
 										<li class="dropdown"><a data-toggle="dropdown"
-											class="dropdown-toggle">ì»¤ë®¤ë‹ˆí‹°<span class="caret"></span></a>
+											class="dropdown-toggle">Ä¿¹Â´ÏÆ¼<span class="caret"></span></a>
 											<ul class="dropdown-menu">
-												<li><a href="#">ê³µì§€ì‚¬í•­</a></li>
-												<li><a href="#">ììœ ê²Œì‹œíŒ</a></li>
-												<li><a href="#">ìª½ì§€ë³´ë‚´ê¸°</a></li>
+												<li><a href="#">°øÁö»çÇ×</a></li>
+												<li><a href="#">ÀÚÀ¯°Ô½ÃÆÇ</a></li>
+												<li><a href="#">ÂÊÁöº¸³»±â</a></li>
 											</ul></li>
 									</ul>
 									<ul class="nav navbar-nav navbar-right">
@@ -240,29 +240,35 @@ body {
 		</div>
 
 	</form>
+	
+	<div class="container">
+		<div class="row">
+			<form method="post" action="#">
+				<table class="table table-striped" style="text-align: center;">
+					<thead>
+						<tr>
+							<th colspan="2"
+								style="background-color: #eeeeee; text-align: center;">°øÁö»çÇ×
+								±Û¾²±â</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input type="text" class="form-control"
+								placeholder="°øÁö»çÇ× Á¦¸ñ" name="noticeTitle" maxlength="50"></td>
+						</tr>
+						<tr>
+							<td><textarea class="form-control" placeholder="°øÁö»çÇ× ³»¿ë"
+									name="noticeContent" maxlength="2048" style="height: 350px;"></textarea></td>
+
+						</tr>
+					</tbody>
+
+				</table>
+				<input type="submit" class="btn btn-primary pull-right" value="±Û¾²±â" style="border: none; background-color:#56baed">
+			</form>
+		</div>
+	</div>
 </body>
 </html>
-
-
-
-<script type="text/javascript">
-	function menu(cmd) {
-		var path = "${pageContext.request.contextPath}";
-		if ("MAIN" == cmd) {
-			$('#thisForm').attr('action', path + '/main.do');
-		} else if ("SALE" == cmd) {
-			$('#thisForm').attr('action', path + '/sale.do');
-		} else if ("MANAGE" == cmd) {
-			$('#thisForm').attr('action', path + '/manage.do');
-		} else if ("INOUT" == cmd) {
-			$('#thisForm').attr('action', path + '/inout.do');
-		} else if ("COMMU" == cmd) {
-			$('#thisForm').attr('action', path + '/commu.do');
-		} else if ("LOGOUT" == cmd) {
-			$('#thisForm').attr('action', path);
-		}
-		$('#thisForm')[0].submit();
-	}
-</script>
-
-

@@ -211,10 +211,8 @@ body {
 										<li class="dropdown"><a data-toggle="dropdown"
 											class="dropdown-toggle">입/출고관리<span class="caret"></span></a>
 											<ul class="dropdown-menu">
-												<li><a href="#">주문등록</a></li>
-												<li><a href="#">주문현황</a></li>
-												<li><a href="#">반품등록</a></li>
-												<li><a href="#">반품현황</a></li>
+												<li><a href="#">주문등록 및 현황</a></li>
+												<li><a href="#">반품등록 및 현황</a></li>
 												<li><a href="#">입점확인</a></li>
 											</ul></li>
 										<li class="dropdown"><a data-toggle="dropdown"

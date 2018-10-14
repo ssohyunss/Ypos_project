@@ -5,15 +5,15 @@
 <%
 	List<ProductVO> list = (List<ProductVO>) request.getAttribute("list");
 %>
+<!------ Include the above in your HEAD tag ---------->
+<html>
+<head>
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-<html>
-<head>
 <title>Y-POS</title>
 </head>
 <style>
@@ -215,10 +215,8 @@ body {
 										<li class="dropdown"><a data-toggle="dropdown"
 											class="dropdown-toggle">입/출고관리<span class="caret"></span></a>
 											<ul class="dropdown-menu">
-												<li><a href="#">주문등록</a></li>
-												<li><a href="#">주문현황</a></li>
-												<li><a href="#">반품등록</a></li>
-												<li><a href="#">반품현황</a></li>
+												<li><a href="#">주문등록 및 현황</a></li>
+												<li><a href="#">반품등록 및 현황</a></li>
 												<li><a href="#">입점확인</a></li>
 											</ul></li>
 										<li class="dropdown"><a data-toggle="dropdown"
@@ -252,20 +250,20 @@ body {
 				<b>매장재고현황</b>
 			</h3>
 		
-			<!--  검색창 수정하기 
+	
 			<section class="search">
-				<form method="get" action="#" class="form-inline mt-3" display="inline">
-					<select name="manageDivide" class="form-control mx-1 mt-2" style="width:150px;">
+				<form method="get" action="#" class="form-inline mt-3">
+					<select name="manageDivide" class="form-control mx-1 mt-2">
 						<option value="전체">전체</option>
 						<option value="상품코드">상품코드</option>
 						<option value="상품명">상품명</option>
 						<option value="바코드">바코드</option>
 					</select> 
-					<input type="text" name="search" class="form-control mx-1 mt-2" placeholder="내용을 입력하세요." style="width:350px;">
+					<input type="text" name="search" class="form-control mx-1 mt-2" placeholder="내용을 입력하세요.">
 					<button type="submit" class="btn btn-primary mx-1 mt-2" style="border: none; background-color:#56baed">검색</button>
 				</form>
-			</section>-->
-			
+			</section>
+			<!-- 
 			<div class="search"  align="right" >
 				<table>
 				<tr>
@@ -285,15 +283,16 @@ body {
 				</tr>
 				</table>
 			</div>
-			
+			 -->
 			<div class="row" style="margin-top:20px">
 				<table class="table table-striped" style="text-align:center">
 					<thead>
 						<tr>
 							<th style="background-color: #eeeeee; text-align: center;">상품코드</th>
 							<th style="background-color: #eeeeee; text-align: center;">상품명</th>
+							<th style="background-color: #eeeeee; text-align: center;">색상</th>
 							<th style="background-color: #eeeeee; text-align: center;">상품가격</th>
-							<th style="background-color: #eeeeee; text-align: center;">상품수량</th>
+							<th style="background-color: #eeeeee; text-align: center;">수량</th>
 							<th style="background-color: #eeeeee; text-align: center;">바코드</th>
 						</tr>
 					</thead>
@@ -307,6 +306,7 @@ body {
 						<tr>
 							<td><%=bean.getBarcode()%></td>
 							<td><%=bean.getName()%></td>
+							<td>블랙(BK)</td>
 							<td><%=bean.getPrice()%></td>
 							<td><%=bean.getCount()%></td>
 							<td><%=bean.getBarcode()%></td>
