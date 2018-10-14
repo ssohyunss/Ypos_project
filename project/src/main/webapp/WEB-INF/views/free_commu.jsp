@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<meta name=viewport " content="width=device-width" ,initial-scale="1">
+<meta name="viewport" content="width=device-width ,initial-scale=1">
 <link rel="stylesheet" href="css/bootstrap.css">
 <title>Y-POS</title>
 </head>
@@ -264,7 +264,7 @@ body {
 				</tbody>
 
 			</table>
-			<a href="free_commu_wirte.jsp" class="btn btn-primary pull-right">글쓰기 </a>
+			<a href="free_commu_wirte.jsp" class="btn btn-primary pull-right" style="border: none; background-color:#56baed">글쓰기 </a>
 		</div>
 	</div>
 </body>

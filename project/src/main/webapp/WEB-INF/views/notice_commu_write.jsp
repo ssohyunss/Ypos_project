@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<meta name=viewport " content="width=device-width" ,initial-scale="1">
+<meta name="viewport " content="width=device-width ,initial-scale=1">
 <link rel="stylesheet" href="css/bootstrap.css">
 <title>Y-POS</title>
 </head>
@@ -268,7 +268,7 @@ body {
 					</tbody>
 
 				</table>
-				<input type="submit" class="btn btn-primary pull-right" value="글쓰기">
+				<input type="submit" class="btn btn-primary pull-right" value="글쓰기" style="border: none; background-color:#56baed">
 			</form>
 		</div>
 	</div>
