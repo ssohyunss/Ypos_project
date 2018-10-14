@@ -252,7 +252,7 @@ body {
 				<b>매장재고현황</b>
 			</h3>
 		
-<!--  검색창 수정하기 
+			<!--  검색창 수정하기 
 			<section class="search">
 				<form method="get" action="#" class="form-inline mt-3" display="inline">
 					<select name="manageDivide" class="form-control mx-1 mt-2" style="width:150px;">
