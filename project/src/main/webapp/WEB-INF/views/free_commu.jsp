@@ -189,9 +189,23 @@ body {
 								<!-- Collection of nav links and other content for toggling -->
 								<div id="navbarCollapse" class="collapse navbar-collapse">
 									<ul id="fresponsive" class="nav navbar-nav dropdown">
-										<li class="active"><a href="#">메인</a></li>
-										<li><a href="javascript:menu('SALE')">판매관리</a></li>
-										<li><a href="#">재고관리</a></li>
+										<li class="active"><a href="javascript:menu('MAIN')">Y-POS</a></li>
+										<li class="dropdown"><a data-toggle="dropdown"
+											class="dropdown-toggle">판매관리<span class="caret"></span></a>
+											<ul class="dropdown-menu">
+												<li><a href="#">판매등록</a></li>
+												<li><a href="#">판매마감현황</a></li>
+												<li><a href="#">품번별 판매현황</a></li>
+												<li><a href="#">월별추이그래프</a></li>
+											</ul></li>
+										<li class="dropdown"><a data-toggle="dropdown"
+											class="dropdown-toggle">재고관리<span class="caret"></span></a>
+											<ul class="dropdown-menu">
+												<li><a href="javascript:menu('MANAGE')">매장재고현황</a></li>
+												<li><a href="#">타매장 재고현황</a></li>
+												<li><a href="#">품번별 수불현황</a></li>
+												<li><a href="#">일자별 수불현황</a></li>
+											</ul></li>
 										<li class="dropdown"><a data-toggle="dropdown"
 											class="dropdown-toggle">입/출고관리<span class="caret"></span></a>
 											<ul class="dropdown-menu">
@@ -204,7 +218,7 @@ body {
 										<li class="dropdown"><a data-toggle="dropdown"
 											class="dropdown-toggle">커뮤니티<span class="caret"></span></a>
 											<ul class="dropdown-menu">
-												<li><a href="include/notice_commu.jsp">공지사항</a></li>
+												<li><a href="#">공지사항</a></li>
 												<li><a href="#">자유게시판</a></li>
 												<li><a href="#">쪽지보내기</a></li>
 											</ul></li>

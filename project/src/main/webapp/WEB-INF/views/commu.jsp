@@ -194,7 +194,7 @@ body {
 										<li class="dropdown"><a data-toggle="dropdown"
 											class="dropdown-toggle">판매관리<span class="caret"></span></a>
 											<ul class="dropdown-menu">
-												<li><a href="javascript:menu('MANAGE')">판매등록</a></li>
+												<li><a href="#">판매등록</a></li>
 												<li><a href="#">판매마감현황</a></li>
 												<li><a href="#">품번별 판매현황</a></li>
 												<li><a href="#">월별추이그래프</a></li>
@@ -224,7 +224,6 @@ body {
 												<li><a href="#">쪽지보내기</a></li>
 											</ul></li>
 									</ul>
-
 									<ul class="nav navbar-nav navbar-right">
 										<li><a href="#"> <%=session.getAttribute("name")%> <span
 												class="glyphicon glyphicon-log-out"></span>Logout
