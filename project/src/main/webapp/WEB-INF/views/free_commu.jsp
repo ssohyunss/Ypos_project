@@ -1,14 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+	pageEncoding="EUC-KR"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta name=viewport " content="width=device-width" ,initial-scale="1">
+<link rel="stylesheet" href="css/bootstrap.css">
 <title>Y-POS</title>
 </head>
 <style>
@@ -170,6 +167,8 @@ body {
 }
 </style>
 <body>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="js/bootstrap.js"></script>
 	<form id="thisForm" name="thisForm" onsubmit="return false;" action="/"
 		method="post" enctype="multipart/form-data">
 		<div class="text-center">
@@ -190,24 +189,24 @@ body {
 								<!-- Collection of nav links and other content for toggling -->
 								<div id="navbarCollapse" class="collapse navbar-collapse">
 									<ul id="fresponsive" class="nav navbar-nav dropdown">
-										<li class="active"><a href="#">ë©”ì¸</a></li>
-										<li><a href="javascript:menu('SALE')">íŒë§¤ê´€ë¦¬</a></li>
-										<li><a href="#">ì¬ê³ ê´€ë¦¬</a></li>
+										<li class="active"><a href="#">¸ŞÀÎ</a></li>
+										<li><a href="javascript:menu('SALE')">ÆÇ¸Å°ü¸®</a></li>
+										<li><a href="#">Àç°í°ü¸®</a></li>
 										<li class="dropdown"><a data-toggle="dropdown"
-											class="dropdown-toggle">ì…/ì¶œê³ ê´€ë¦¬<span class="caret"></span></a>
+											class="dropdown-toggle">ÀÔ/Ãâ°í°ü¸®<span class="caret"></span></a>
 											<ul class="dropdown-menu">
-												<li><a href="#">ì£¼ë¬¸ë“±ë¡</a></li>
-												<li><a href="#">ì£¼ë¬¸í˜„í™©</a></li>
-												<li><a href="#">ë°˜í’ˆë“±ë¡</a></li>
-												<li><a href="#">ë°˜í’ˆí˜„í™©</a></li>
-												<li><a href="#">ì…ì í™•ì¸</a></li>
+												<li><a href="#">ÁÖ¹®µî·Ï</a></li>
+												<li><a href="#">ÁÖ¹®ÇöÈ²</a></li>
+												<li><a href="#">¹İÇ°µî·Ï</a></li>
+												<li><a href="#">¹İÇ°ÇöÈ²</a></li>
+												<li><a href="#">ÀÔÁ¡È®ÀÎ</a></li>
 											</ul></li>
 										<li class="dropdown"><a data-toggle="dropdown"
-											class="dropdown-toggle">ì»¤ë®¤ë‹ˆí‹°<span class="caret"></span></a>
+											class="dropdown-toggle">Ä¿¹Â´ÏÆ¼<span class="caret"></span></a>
 											<ul class="dropdown-menu">
-												<li><a href="include/notice_commu.jsp">ê³µì§€ì‚¬í•­</a></li>
-												<li><a href="#">ììœ ê²Œì‹œíŒ</a></li>
-												<li><a href="#">ìª½ì§€ë³´ë‚´ê¸°</a></li>
+												<li><a href="include/notice_commu.jsp">°øÁö»çÇ×</a></li>
+												<li><a href="#">ÀÚÀ¯°Ô½ÃÆÇ</a></li>
+												<li><a href="#">ÂÊÁöº¸³»±â</a></li>
 											</ul></li>
 									</ul>
 
@@ -229,29 +228,30 @@ body {
 		</div>
 
 	</form>
+	
+	<div class="container">
+		<div class="row">
+			<table class="table table-striped" style="text-align: center;">
+				<thead>
+					<tr>
+						<th style="background-color: #eeeeee; text-align: center;">¹øÈ£</th>
+						<th style="background-color: #eeeeee; text-align: center;">Á¦¸ñ</th>
+						<th style="background-color: #eeeeee; text-align: center;">ÀÛ¼ºÀÚ</th>
+						<th style="background-color: #eeeeee; text-align: center;">ÀÛ¼ºÀÏ</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>¼­¿ïÁ¡ ³ëÆ®ºÏ Àç°í È®ÀÎ ºÎÅ¹µå·Á¿ä.</td>
+						<td>ÀÎÃµÁ¡(È«±æµ¿)</td>
+						<td>2018-10-09</td>
+					</tr>
+				</tbody>
+
+			</table>
+			<a href="free_commu_wirte.jsp" class="btn btn-primary pull-right">±Û¾²±â </a>
+		</div>
+	</div>
 </body>
 </html>
-
-
-
-<script type="text/javascript">
-	function menu(cmd) {
-		var path = "${pageContext.request.contextPath}";
-		if ("MAIN" == cmd) {
-			$('#thisForm').attr('action', path + '/main.do');
-		} else if ("SALE" == cmd) {
-			$('#thisForm').attr('action', path + '/sale.do');
-		} else if ("MANAGE" == cmd) {
-			$('#thisForm').attr('action', path + '/manage.do');
-		} else if ("INOUT" == cmd) {
-			$('#thisForm').attr('action', path + '/inout.do');
-		} else if ("COMMU" == cmd) {
-			$('#thisForm').attr('action', path + '/commu.do');
-		} else if ("LOGOUT" == cmd) {
-			$('#thisForm').attr('action', path);
-		}
-		$('#thisForm')[0].submit();
-	}
-</script>
-
-
