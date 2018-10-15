@@ -176,4 +176,17 @@ private LoginService service;
 		model.addAttribute("message","커뮤니티");
 		return "commu";
 	}
+	
+	@RequestMapping("/order_manage_inout.do")
+	public String order(Model model) {
+		model.addAttribute("message","주문등록 및 현황");
+		return "order_manage_inout";
+	}
+	
+
+	@RequestMapping("/return_manage_inout.do")
+	public String return_inout (Model model) {
+		model.addAttribute("message","반품등록 및 현황");
+		return "return_manage_inout";
+	}
 }

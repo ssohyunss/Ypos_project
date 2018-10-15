@@ -86,7 +86,6 @@ body {
 .navbar-default .navbar-toggle .icon-bar {
 	background-color: #fff
 } /*Toggle Button*/
-
 /*==========Sub Menu=v==========*/
 .mainmenu .collapse ul>li:hover>a {
 	background: #54c6d4;
@@ -114,7 +113,6 @@ body {
 	{
 	background: #e4eeb8
 }
-
 /******************************Drop-down menu work on hover**********************************/
 .mainmenu {
 	background: none;
@@ -210,15 +208,15 @@ body {
 										<li class="dropdown"><a data-toggle="dropdown"
 											class="dropdown-toggle">입/출고관리<span class="caret"></span></a>
 											<ul class="dropdown-menu">
-												<li><a href="#">주문등록 및 현황</a></li>
-												<li><a href="#">반품등록 및 현황</a></li>
+												<li><a href="javascript:menu('ORDER')">주문등록 및 현황</a></li>
+												<li><a href="javascript:menu('RETURN')">반품등록 및 현황</a></li>
 												<li><a href="#">입점확인</a></li>
 											</ul></li>
 										<li class="dropdown"><a data-toggle="dropdown"
 											class="dropdown-toggle">커뮤니티<span class="caret"></span></a>
 											<ul class="dropdown-menu">
-												<li><a href="#">공지사항</a></li>
-												<li><a href="#">자유게시판</a></li>
+												<li><a href="javascript:menu('NOTICE')">공지사항</a></li>
+												<li><a href="javascript:menu('FREE')">자유게시판</a></li>
 												<li><a href="#">쪽지보내기</a></li>
 											</ul></li>
 									</ul>
@@ -259,11 +257,18 @@ body {
 			$('#thisForm').attr('action', path + '/inout.do');
 		} else if ("COMMU" == cmd) {
 			$('#thisForm').attr('action', path + '/commu.do');
+		} else if ("ORDER" == cmd) {
+			$('#thisForm').attr('action', path + '/order_manage_inout.do');
+		} else if ("RETURN" == cmd) {
+			$('#thisForm').attr('action', path + '/return_manage_inout.do');
+		}  else if ("NOTICE" == cmd) {
+			$('#thisForm').attr('action', path + '/notice_commu.do');
+		}  else if ("FREE" == cmd) {
+			$('#thisForm').attr('action', path + '/free_commu.do');
 		} else if ("LOGOUT" == cmd) {
 			$('#thisForm').attr('action', path);
 		}
 		$('#thisForm')[0].submit();
 	}
 </script>
-
 

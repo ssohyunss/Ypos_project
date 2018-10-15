@@ -253,7 +253,7 @@ body {
 	
 			<section class="search">
 				<form method="get" action="#" class="form-inline mt-3">
-					<select name="manageDivide" class="form-control mx-1 mt-2">
+					<select name="manageDivide" class="form-control mx-1 mt-2" style="">
 						<option value="전체">전체</option>
 						<option value="상품코드">상품코드</option>
 						<option value="상품명">상품명</option>
