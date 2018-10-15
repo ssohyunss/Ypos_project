@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
@@ -9,274 +10,56 @@
 <title>Y-POS</title>
 </head>
 <style>
-@import url('https://fonts.googleapis.cosm/css?family=Roboto');
 
-a:hover, a:focus {
-	text-decoration: none;
-	outline: none;
-}
-
-body {
-	font-family: 'Roboto', sans-serif;
-}
-/*
-1.1 Header Area
-***************************************************/
-/*Bootstrap Reset*/
-.navbar-nav>li>a {
-	padding-top: 0;
-	padding-bottom: 0;
-}
-
-.mainmenu {
-	background-color: transparent;
-	border-color: transparent;
-	margin-bottom: 0;
-	border: 0px !important;
-}
-
-.navbar-nav>li:last-child>a {
-	padding-right: 0px;
-	margin-right: 0px;
-}
-
-.dropdown-menu {
-	padding: 0px 0;
-	margin: 0 0 0;
-	border: 0px solid transition !important;
-	border: 0px solid rgba(0, 0, 0, .15);
-	border-radius: 0px;
-	-webkit-box-shadow: none !important;
-	box-shadow: none !important;
-}
-/*=-====Main Menu=====*/
-.navbar-nav .open .dropdown-menu>li>a {
-	padding: 16px 15px 16px 25px;
-}
-
-.header_bottom {
-	background: #56baed
-}
-
-.header_area .header_bottom .mainmenu a, .navbar-default .navbar-nav>li>a
-	{
-	color: #fff;
-	font-size: 16px;
-	text-transform: capitalize;
-	padding: 16px 15px;
-	font-family: 'Roboto', sans-serif;
-}
-
-.header_area .mainmenu .active a, .header_area .mainmenu .active a:focus,
-	.header_area .mainmenu .active a:hover, .header_area .mainmenu li a:hover,
-	.header_area .mainmenu li a:focus, .navbar-default .navbar-nav>.open>a,
-	.navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover
-	{
-	color: #fff;
-	background: #54c6d4;
-	outline: 0;
-}
-/*-----./ Main Menu-----*/
-.navbar-default .navbar-toggle {
-	border-color: #fff
-} /*Toggle Button*/
-.navbar-default .navbar-toggle .icon-bar {
-	background-color: #fff
-} /*Toggle Button*/
-
-/*==========Sub Menu=v==========*/
-.mainmenu .collapse ul>li:hover>a {
-	background: #54c6d4;
-}
-
-.mainmenu .collapse ul ul>li:hover>a, .navbar-default .navbar-nav .open .dropdown-menu>li>a:focus,
-	.navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
-	background: #CBEAF0;
-}
-
-.mainmenu .collapse ul ul ul>li:hover>a {
-	background: #CBEAF0;
-}
-
-.mainmenu .collapse ul ul, .mainmenu .collapse ul ul.dropdown-menu {
-	background: #98D7E1;
-}
-
-.mainmenu .collapse ul ul ul, .mainmenu .collapse ul ul ul.dropdown-menu
-	{
-	background: #0a1464
-}
-
-.mainmenu .collapse ul ul ul ul, .mainmenu .collapse ul ul ul ul.dropdown-menu
-	{
-	background: #e4eeb8
-}
-
-/******************************Drop-down menu work on hover**********************************/
-.mainmenu {
-	background: none;
-	border: 0 solid;
-	margin: 0;
-	padding: 0;
-	min-height: 20px
-}
-
-@media only screen and (min-width: 767px) {
-	.mainmenu .collapse ul li {
-		position: relative;
-	}
-	.mainmenu .collapse ul li:hover>ul {
-		display: block
-	}
-	.mainmenu .collapse ul ul {
-		position: absolute;
-		top: 100%;
-		left: 0;
-		min-width: 250px;
-		display: none
-	}
-	/*******/
-	.mainmenu .collapse ul ul li {
-		position: relative
-	}
-	.mainmenu .collapse ul ul li:hover>ul {
-		display: block
-	}
-	.mainmenu .collapse ul ul ul {
-		position: absolute;
-		top: 0;
-		left: 100%;
-		min-width: 250px;
-		display: none
-	}
-	/*******/
-	.mainmenu .collapse ul ul ul li {
-		position: relative
-	}
-	.mainmenu .collapse ul ul ul li:hover ul {
-		display: block
-	}
-	.mainmenu .collapse ul ul ul ul {
-		position: absolute;
-		top: 0;
-		left: -100%;
-		min-width: 250px;
-		display: none;
-		z-index: 1
-	}
-}
 </style>
 <body>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<form id="thisForm" name="thisForm" onsubmit="return false;" action="/"
 		method="post" enctype="multipart/form-data">
-		<div class="text-center">
-			<div id="header-area" class="header_area">
-				<div class="header_bottom">
-					<div class="container">
-						<div class="row">
-							<nav role="navigation" class="navbar navbar-default mainmenu">
-								<!-- Brand and toggle get grouped for better mobile display -->
-								<div class="navbar-header">
-									<button type="button" data-target="#navbarCollapse"
-										data-toggle="collapse" class="navbar-toggle">
-										<span class="sr-only">Toggle navigation</span> <span
-											class="icon-bar"></span> <span class="icon-bar"></span> <span
-											class="icon-bar"></span>
-									</button>
-								</div>
-								<!-- Collection of nav links and other content for toggling -->
-								<div id="navbarCollapse" class="collapse navbar-collapse">
-									<ul id="fresponsive" class="nav navbar-nav dropdown">
-										<li class="active"><a href="javascript:menu('MAIN')">Y-POS</a></li>
-										<li class="dropdown"><a data-toggle="dropdown"
-											class="dropdown-toggle">ÆÇ¸Å°ü¸®<span class="caret"></span></a>
-											<ul class="dropdown-menu">
-												<li><a href="#">ÆÇ¸Åµî·Ï</a></li>
-												<li><a href="#">ÆÇ¸Å¸¶°¨ÇöÈ²</a></li>
-												<li><a href="#">Ç°¹øº° ÆÇ¸ÅÇöÈ²</a></li>
-												<li><a href="#">¿ùº°ÃßÀÌ±×·¡ÇÁ</a></li>
-											</ul></li>
-										<li class="dropdown"><a data-toggle="dropdown"
-											class="dropdown-toggle">Àç°í°ü¸®<span class="caret"></span></a>
-											<ul class="dropdown-menu">
-												<li><a href="javascript:menu('MANAGE')">¸ÅÀåÀç°íÇöÈ²</a></li>
-												<li><a href="#">Å¸¸ÅÀå Àç°íÇöÈ²</a></li>
-												<li><a href="#">Ç°¹øº° ¼öºÒÇöÈ²</a></li>
-												<li><a href="#">ÀÏÀÚº° ¼öºÒÇöÈ²</a></li>
-											</ul></li>
-										<li class="dropdown"><a data-toggle="dropdown"
-											class="dropdown-toggle">ÀÔ/Ãâ°í°ü¸®<span class="caret"></span></a>
-											<ul class="dropdown-menu">
-												<li><a href="#">ÁÖ¹®µî·Ï ¹× ÇöÈ²</a></li>
-												<li><a href="#">¹ÝÇ°µî·Ï ¹× ÇöÈ²</a></li>
-												<li><a href="#">ÀÔÁ¡È®ÀÎ</a></li>
-											</ul></li>
-										<li class="dropdown"><a data-toggle="dropdown"
-											class="dropdown-toggle">Ä¿¹Â´ÏÆ¼<span class="caret"></span></a>
-											<ul class="dropdown-menu">
-												<li><a href="#">°øÁö»çÇ×</a></li>
-												<li><a href="#">ÀÚÀ¯°Ô½ÃÆÇ</a></li>
-												<li><a href="#">ÂÊÁöº¸³»±â</a></li>
-											</ul></li>
-									</ul>
-									<ul class="nav navbar-nav navbar-right">
-										<li><a href="#"> <%=session.getAttribute("name")%> <span
-												class="glyphicon glyphicon-log-out"></span>Logout
-										</a></li>
-									</ul>
-								</div>
-							</nav>
-						</div>
-					</div>
-				</div>
-			</div>
-			<br>
-			<div class="text-center"></div>
-		</div>
-
+			<%@include file="./include/menu.jsp"%>
+		
 	</form>
 
 	<div class="container">
 
 		<h3>
-			<b>¹ÝÇ°µî·Ï ¹× ÇöÈ²</b>
+			<b>ë°˜í’ˆë“±ë¡ ë° í˜„í™©</b>
 		</h3>
-		<a class="btn btn-primary pull-right" data-toggle="modal" href="#retrunRegist" style="border: none; margin-bottom:20px; background-color: red">¹ÝÇ°µî·ÏÇÏ±â</a>
+		<a class="btn btn-primary pull-right" data-toggle="modal" href="#retrunRegist" style="border: none; margin-bottom:20px; background-color: red">ë°˜í’ˆë“±ë¡í•˜ê¸°</a>
 			
 			<div class="row">
 			<table class="table table-striped" style="text-align: center;">
 				<thead>
 					<tr>
-						<th style="background-color: #eeeeee; text-align: center;">¹ÝÇ°¸í</th>
-						<th style="background-color: #eeeeee; text-align: center;">»óÇ°ÄÚµå</th>
-						<th style="background-color: #eeeeee; text-align: center;">»óÇ°¸í</th>
-						<th style="background-color: #eeeeee; text-align: center;">»ö»ó</th>
-						<th style="background-color: #eeeeee; text-align: center;">¼ö·®</th>
-						<th style="background-color: #eeeeee; text-align: center;">³»¿ë</th>
-						<th style="background-color: #eeeeee; text-align: center;">µî·ÏÀÏ</th>
-						<th style="background-color: #eeeeee; text-align: center;">¹ÝÇ°¿©ºÎ</th>
+						<th style="background-color: #eeeeee; text-align: center;">ë°˜í’ˆëª…</th>
+						<th style="background-color: #eeeeee; text-align: center;">ìƒí’ˆì½”ë“œ</th>
+						<th style="background-color: #eeeeee; text-align: center;">ìƒí’ˆëª…</th>
+						<th style="background-color: #eeeeee; text-align: center;">ìƒ‰ìƒ</th>
+						<th style="background-color: #eeeeee; text-align: center;">ìˆ˜ëŸ‰</th>
+						<th style="background-color: #eeeeee; text-align: center;">ë‚´ìš©</th>
+						<th style="background-color: #eeeeee; text-align: center;">ë“±ë¡ì¼</th>
+						<th style="background-color: #eeeeee; text-align: center;">ë°˜í’ˆì—¬ë¶€</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td>¾ÆÀÌÆù8Ãë¼Ò</td>
+						<td>ì•„ì´í°8ì·¨ì†Œ</td>
 						<td>iphone8_AA128</td>
-						<td>¾ÆÀÌÆù8_256GB</td>
-						<td>BK(ºí·¢)</td>
+						<td>ì•„ì´í°8_256GB</td>
+						<td>BK(ë¸”ëž™)</td>
 						<td>2</td>
-						<td>´Ü¼øº¯½É</td>
+						<td>ë‹¨ìˆœë³€ì‹¬</td>
 						<td>2018-09-22</td>
 						<td>X</td>
 					</tr>
 					<tr>
-						<td>¸¶¿ì½º Ãë¼Ò</td>
+						<td>ë§ˆìš°ìŠ¤ ì·¨ì†Œ</td>
 						<td>mouse_razer</td>
-						<td>¸¶¿ì½º_·¹ÀÌÀú</td>
-						<td>BK(ºí·¢)</td>
+						<td>ë§ˆìš°ìŠ¤_ë ˆì´ì €</td>
+						<td>BK(ë¸”ëž™)</td>
 						<td>10</td>
-						<td>·ÎÁöÅØÀ¸·Î ±³Ã¼</td>
+						<td>ë¡œì§€í…ìœ¼ë¡œ êµì²´</td>
 						<td>2018-10-11</td>
 						<td>X<td>
 					</tr>
@@ -294,7 +77,7 @@ body {
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="modal">¹ÝÇ° µî·Ï</h5>
+					<h5 class="modal-title" id="modal">ë°˜í’ˆ ë“±ë¡</h5>
 					<button type="button" class="close" data-dismiss="modal"aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -304,7 +87,7 @@ body {
 					<form action="#" method="post">
 						<div class="form-row">
 							<div class="form-group col-sm-4">
-								<label>³â</label> <select name="orderYear" class="form-control">
+								<label>ë…„</label> <select name="orderYear" class="form-control">
 									<option value="2016">2016</option>
 									<option value="2017">2017</option>
 									<option value="2018" selected>2018</option>
@@ -312,7 +95,7 @@ body {
 								</select>
 							</div>
 							<div class="form-group col-sm-4">
-								<label>¿ù</label> <select name="orderMonth" class="form-control">
+								<label>ì›”</label> <select name="orderMonth" class="form-control">
 									<option value="01">01</option>
 									<option value="02">02</option>
 									<option value="03">03</option>
@@ -328,7 +111,7 @@ body {
 								</select>
 							</div>
 							<div class="form-group col-sm-4">
-								<label>ÀÏ</label> <select name="orderMonth" class="form-control">
+								<label>ì¼</label> <select name="orderMonth" class="form-control">
 									<option value="01">01</option>
 									<option value="02">02</option>
 									<option value="03">03</option>
@@ -365,32 +148,32 @@ body {
 						</div>
 
 						<div class="form-group col-sm-12">
-							<label>¹ÝÇ°¸í</label> <input type="text" name="evaluationTime"
+							<label>ë°˜í’ˆëª…</label> <input type="text" name="evaluationTime"
 								class="form-control" maxlength=30">
 						</div>
 						<div class="form-row">
 							<div class="form-group col-sm-4">
-								<label>»óÇ°ÄÚµå</label> <input type="text" name="orderNum"
+								<label>ìƒí’ˆì½”ë“œ</label> <input type="text" name="orderNum"
 									class="form-control" maxlength="20">
 							</div>
 							<div class="form-group col-sm-4">
-								<label>»ö»ó</label> <input type="text" name="orderName"
+								<label>ìƒ‰ìƒ</label> <input type="text" name="orderName"
 									class="form-control" maxlength="20">
 							</div>
 							<div class="form-group col-sm-4">
-								<label>¼ö·®</label> <input type="text" name="orderName"
+								<label>ìˆ˜ëŸ‰</label> <input type="text" name="orderName"
 									class="form-control" maxlength="20">
 							</div>
 						</div>
 						<div class="form-group col-sm-12">
-							<label>³»¿ë</label>
+							<label>ë‚´ìš©</label>
 							<textarea type="text" name="evaluationContent"
 								class="form-control" maxlength=2048 " style="height: 150px;"></textarea>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Ãë¼Ò</button>
-							<button type="submit" class="btn btn-primary" style="border: none; background-color: red">µî·Ï</button>
+								data-dismiss="modal">ì·¨ì†Œ</button>
+							<button type="submit" class="btn btn-primary" style="border: none; background-color: red">ë“±ë¡</button>
 						</div>
 
 					</form>

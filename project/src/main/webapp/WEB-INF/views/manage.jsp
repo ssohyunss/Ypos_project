@@ -5,9 +5,10 @@
 <%
 	List<ProductVO> list = (List<ProductVO>) request.getAttribute("list");
 %>
-<!------ Include the above in your HEAD tag ---------->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
@@ -15,245 +16,22 @@
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <title>Y-POS</title>
+
 </head>
 <style>
-@import url('https://fonts.googleapis.com/css?family=Roboto');
 
-a:hover, a:focus {
-	text-decoration: none;
-	outline: none;
-}
-
-body {
-	font-family: 'Roboto', sans-serif;
-}
-/*
-1.1 Header Area
-***************************************************/
-/*Bootstrap Reset*/
-.navbar-nav>li>a {
-	padding-top: 0;
-	padding-bottom: 0;
-}
-
-.mainmenu {
-	background-color: transparent;
-	border-color: transparent;
-	margin-bottom: 0;
-	border: 0px !important;
-}
-
-.navbar-nav>li:last-child>a {
-	padding-right: 0px;
-	margin-right: 0px;
-}
-
-.dropdown-menu {
-	padding: 0px 0;
-	margin: 0 0 0;
-	border: 0px solid transition !important;
-	border: 0px solid rgba(0, 0, 0, .15);
-	border-radius: 0px;
-	-webkit-box-shadow: none !important;
-	box-shadow: none !important;
-}
-/*=-====Main Menu=====*/
-.navbar-nav .open .dropdown-menu>li>a {
-	padding: 16px 15px 16px 25px;
-}
-
-.header_bottom {
-	background: #56baed
-}
-
-.header_area .header_bottom .mainmenu a, .navbar-default .navbar-nav>li>a
-	{
-	color: #fff;
-	font-size: 16px;
-	text-transform: capitalize;
-	padding: 16px 15px;
-	font-family: 'Roboto', sans-serif;
-}
-
-.header_area .mainmenu .active a, .header_area .mainmenu .active a:focus,
-	.header_area .mainmenu .active a:hover, .header_area .mainmenu li a:hover,
-	.header_area .mainmenu li a:focus, .navbar-default .navbar-nav>.open>a,
-	.navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover
-	{
-	color: #fff;
-	background: #54c6d4;
-	outline: 0;
-}
-/*-----./ Main Menu-----*/
-.navbar-default .navbar-toggle {
-	border-color: #fff
-} /*Toggle Button*/
-.navbar-default .navbar-toggle .icon-bar {
-	background-color: #fff
-} /*Toggle Button*/
-
-/*==========Sub Menu=v==========*/
-.mainmenu .collapse ul>li:hover>a {
-	background: #54c6d4;
-}
-
-.mainmenu .collapse ul ul>li:hover>a, .navbar-default .navbar-nav .open .dropdown-menu>li>a:focus,
-	.navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
-	background: #CBEAF0;
-}
-
-.mainmenu .collapse ul ul ul>li:hover>a {
-	background: #CBEAF0;
-}
-
-.mainmenu .collapse ul ul, .mainmenu .collapse ul ul.dropdown-menu {
-	background: #98D7E1;
-}
-
-.mainmenu .collapse ul ul ul, .mainmenu .collapse ul ul ul.dropdown-menu
-	{
-	background: #0a1464
-}
-
-.mainmenu .collapse ul ul ul ul, .mainmenu .collapse ul ul ul ul.dropdown-menu
-	{
-	background: #e4eeb8
-}
-
-/******************************Drop-down menu work on hover**********************************/
-.mainmenu {
-	background: none;
-	border: 0 solid;
-	margin: 0;
-	padding: 0;
-	min-height: 20px
-}
-
-@media only screen and (min-width: 767px) {
-	.mainmenu .collapse ul li {
-		position: relative;
-	}
-	.mainmenu .collapse ul li:hover>ul {
-		display: block
-	}
-	.mainmenu .collapse ul ul {
-		position: absolute;
-		top: 100%;
-		left: 0;
-		min-width: 250px;
-		display: none
-	}
-	/*******/
-	.mainmenu .collapse ul ul li {
-		position: relative
-	}
-	.mainmenu .collapse ul ul li:hover>ul {
-		display: block
-	}
-	.mainmenu .collapse ul ul ul {
-		position: absolute;
-		top: 0;
-		left: 100%;
-		min-width: 250px;
-		display: none
-	}
-	/*******/
-	.mainmenu .collapse ul ul ul li {
-		position: relative
-	}
-	.mainmenu .collapse ul ul ul li:hover ul {
-		display: block
-	}
-	.mainmenu .collapse ul ul ul ul {
-		position: absolute;
-		top: 0;
-		left: -100%;
-		min-width: 250px;
-		display: none;
-		z-index: 1
-	}
-}
 </style>
 <body>
 	<form id="thisForm" name="thisForm" onsubmit="return false;" action="/"
 		method="post" enctype="multipart/form-data">
-		<div class="text-center">
-			<div id="header-area" class="header_area">
-				<div class="header_bottom">
-					<div class="container">
-						<div class="row">
-							<nav role="navigation" class="navbar navbar-default mainmenu">
-								<!-- Brand and toggle get grouped for better mobile display -->
-								<div class="navbar-header">
-									<button type="button" data-target="#navbarCollapse"
-										data-toggle="collapse" class="navbar-toggle">
-										<span class="sr-only">Toggle navigation</span> <span
-											class="icon-bar"></span> <span class="icon-bar"></span> <span
-											class="icon-bar"></span>
-									</button>
-								</div>
-								<!-- Collection of nav links and other content for toggling -->
-								<div id="navbarCollapse" class="collapse navbar-collapse">
-									<ul id="fresponsive" class="nav navbar-nav dropdown">
-										<li class="active"><a href="javascript:menu('MAIN')">Y-POS</a></li>
-										<li class="dropdown"><a data-toggle="dropdown"
-											class="dropdown-toggle">판매관리<span class="caret"></span></a>
-											<ul class="dropdown-menu">
-												<li><a href="#">판매등록</a></li>
-												<li><a href="#">판매마감현황</a></li>
-												<li><a href="#">품번별 판매현황</a></li>
-												<li><a href="#">월별추이그래프</a></li>
-											</ul></li>
-										<li class="dropdown"><a data-toggle="dropdown"
-											class="dropdown-toggle">재고관리<span class="caret"></span></a>
-											<ul class="dropdown-menu">
-												<li><a href="javascript:menu('MANAGE')">매장재고현황</a></li>
-												<li><a href="#">타매장 재고현황</a></li>
-												<li><a href="#">품번별 수불현황</a></li>
-												<li><a href="#">일자별 수불현황</a></li>
-											</ul></li>
-										<li class="dropdown"><a data-toggle="dropdown"
-											class="dropdown-toggle">입/출고관리<span class="caret"></span></a>
-											<ul class="dropdown-menu">
-												<li><a href="#">주문등록 및 현황</a></li>
-												<li><a href="#">반품등록 및 현황</a></li>
-												<li><a href="#">입점확인</a></li>
-											</ul></li>
-										<li class="dropdown"><a data-toggle="dropdown"
-											class="dropdown-toggle">커뮤니티<span class="caret"></span></a>
-											<ul class="dropdown-menu">
-												<li><a href="#">공지사항</a></li>
-												<li><a href="#">자유게시판</a></li>
-												<li><a href="#">쪽지보내기</a></li>
-											</ul></li>
-									</ul>
-
-									<ul class="nav navbar-nav navbar-right">
-										<li><a href="#"> <%=session.getAttribute("name")%> <span
-												class="glyphicon glyphicon-log-out"></span>Logout
-										</a></li>
-									</ul>
-								</div>
-							</nav>
-						</div>
-					</div>
-				</div>
-				<!-- /.header_bottom -->
-
-			</div>
-			<br>
-			<div class="text-center"></div>
-		</div>
-
+		<%@include file="./include/menu.jsp"%>
+		
 		<div class="container">
 			<h3>
 				<b>매장재고현황</b>
 			</h3>
-		
-	
-			<section class="search">
-				<form method="get" action="#" class="form-inline mt-3">
-					<select name="manageDivide" class="form-control mx-1 mt-2" style="">
+			<!-- <section class="search" >
+					<select name="manageDivide" class="form-control mx-1 mt-2" style="width:10%;">
 						<option value="전체">전체</option>
 						<option value="상품코드">상품코드</option>
 						<option value="상품명">상품명</option>
@@ -261,14 +39,13 @@ body {
 					</select> 
 					<input type="text" name="search" class="form-control mx-1 mt-2" placeholder="내용을 입력하세요.">
 					<button type="submit" class="btn btn-primary mx-1 mt-2" style="border: none; background-color:#56baed">검색</button>
-				</form>
-			</section>
-			<!-- 
+			</section> -->
+		 
 			<div class="search"  align="right" >
 				<table>
 				<tr>
 				<td>
-				<select name="manageDivide" class="form-control mx-1 mt-2" style="width:150px;">
+				<select name="manageDivide" class="form-control mx-1 mt-2" style="width:100%;">
 						<option value="전체">전체</option>
 						<option value="상품코드">상품코드</option>
 						<option value="상품명">상품명</option>
@@ -276,21 +53,20 @@ body {
 					</select> 
 				</td>
 				
-				<td><input type="text" name="search" class="form-control mx-1 mt-2" placeholder="내용을 입력하세요." style="width:350px; margin-left:5px"></td>
+				<td colspan="3"><input type="text" name="search" class="form-control mx-1 mt-2" placeholder="내용을 입력하세요." style="width:350px; margin-left:5px"></td>
 				
 				<td><button type="submit" class="btn btn-primary mx-1 mt-2" style="border: none; background-color:#56baed; margin-left:5px">검색</button></td>
 				
 				</tr>
 				</table>
 			</div>
-			 -->
+
 			<div class="row" style="margin-top:20px">
 				<table class="table table-striped" style="text-align:center">
 					<thead>
 						<tr>
 							<th style="background-color: #eeeeee; text-align: center;">상품코드</th>
 							<th style="background-color: #eeeeee; text-align: center;">상품명</th>
-							<th style="background-color: #eeeeee; text-align: center;">색상</th>
 							<th style="background-color: #eeeeee; text-align: center;">상품가격</th>
 							<th style="background-color: #eeeeee; text-align: center;">수량</th>
 							<th style="background-color: #eeeeee; text-align: center;">바코드</th>
@@ -306,7 +82,6 @@ body {
 						<tr>
 							<td><%=bean.getBarcode()%></td>
 							<td><%=bean.getName()%></td>
-							<td>블랙(BK)</td>
 							<td><%=bean.getPrice()%></td>
 							<td><%=bean.getCount()%></td>
 							<td><%=bean.getBarcode()%></td>
@@ -324,27 +99,4 @@ body {
 	</form>
 </body>
 </html>
-
-
-
-<script type="text/javascript">
-	function menu(cmd) {
-		var path = "${pageContext.request.contextPath}";
-		if ("MAIN" == cmd) {
-			$('#thisForm').attr('action', path + '/main.do');
-		} else if ("SALE" == cmd) {
-			$('#thisForm').attr('action', path + '/sale.do');
-		} else if ("MANAGE" == cmd) {
-			$('#thisForm').attr('action', path + '/manage.do');
-		} else if ("INOUT" == cmd) {
-			$('#thisForm').attr('action', path + '/inout.do');
-		} else if ("COMMU" == cmd) {
-			$('#thisForm').attr('action', path + '/commu.do');
-		} else if ("LOGOUT" == cmd) {
-			$('#thisForm').attr('action', path);
-		}
-		$('#thisForm')[0].submit();
-	}
-</script>
-
 
