@@ -100,12 +100,27 @@ private LoginService service;
 		return "manage";
 	}
 	
-	@RequestMapping("manage/otherStore")
+	@RequestMapping("/other_manage.do")
 	public String otherStore(Model model) {
 		model.addAttribute("message","타매장재고현황");
 		
-		return "manage/otherStore";
+		return "other_manage";
 	}
+	
+	@RequestMapping("/product_manage.do")
+	public String product_manage(Model model) {
+		model.addAttribute("message","상품코드별 수불현황");
+		
+		return "product_manage";
+	}
+	
+	@RequestMapping("/date_manage.do")
+	public String date_manage(Model model) {
+		model.addAttribute("message","일자별 수불현황");
+		
+		return "date_manage";
+	}
+	
 	
 	@RequestMapping("manage/store")
 	public String store(HttpServletRequest request,Model model) throws Exception {

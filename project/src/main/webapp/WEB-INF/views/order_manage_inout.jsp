@@ -38,7 +38,6 @@
 						<th style="background-color: #eeeeee; text-align: center;">주문명</th>
 						<th style="background-color: #eeeeee; text-align: center;">상품코드</th>
 						<th style="background-color: #eeeeee; text-align: center;">상품명</th>
-						<th style="background-color: #eeeeee; text-align: center;">색상</th>
 						<th style="background-color: #eeeeee; text-align: center;">수량</th>
 						<th style="background-color: #eeeeee; text-align: center;">내용</th>
 						<th style="background-color: #eeeeee; text-align: center;">등록일</th>
@@ -50,7 +49,6 @@
 						<td>아이폰x주문</td>
 						<td>iphoneX_AA128</td>
 						<td>아이폰x_128GB</td>
-						<td>GO(골드)</td>
 						<td>8</td>
 						<td>주문건입니다. 입고부탁드려요.</td>
 						<td>2018-10-08</td>
@@ -60,7 +58,6 @@
 						<td>헤드셋주문</td>
 						<td>headset_HH_SONY</td>
 						<td>헤드셋_소니</td>
-						<td>WH(화이트)</td>
 						<td>1</td>
 						<td>불량/교체건입니다.</td>
 						<td>2018-10-09</td>
@@ -70,7 +67,6 @@
 						<td>마우스 주문</td>
 						<td>mouse_logitech</td>
 						<td>마우스_로지텍</td>
-						<td>BK(블랙)</td>
 						<td>10</td>
 						<td>쓰리팝단체주문건입니다.</td>
 						<td>2018-10-11</td>
