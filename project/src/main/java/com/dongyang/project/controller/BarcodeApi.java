@@ -64,6 +64,7 @@ public class BarcodeApi {
         	jResponse.put("error", "1");
         	jResponse.put("message", "중복된 아이디입니다.");
         }else {
+        	//테스트
         	LoginVO vo = new LoginVO();
         	vo.setMid(uid);
         	vo.setMpw(upw);
