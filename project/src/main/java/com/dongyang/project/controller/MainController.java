@@ -137,43 +137,31 @@ private LoginService service;
 		return "inout";
 	}
 	
-	@RequestMapping("inout/orderRegist")
-	public String orderRegist(Model model) {
-		model.addAttribute("message","주문등록");
-		
-		return "inout/orderRegist";
+	
+	@RequestMapping("/order_manage_inout.do")
+	public String order(Model model) {
+		model.addAttribute("message","주문등록 및 현황");
+		return "order_manage_inout";
 	}
 	
-	@RequestMapping("inout/orderStatus")
-	public String orderStatus(Model model) {
-		model.addAttribute("message","주문현황");
-		
-		return "inout/orderStatus";
+
+	@RequestMapping("/return_manage_inout.do")
+	public String return_inout (Model model) {
+		model.addAttribute("message","반품등록 및 현황");
+		return "return_manage_inout";
 	}
 	
-	@RequestMapping("inout/confirm")
-	public String confirm(Model model) {
-		model.addAttribute("message","입점확인");
-		
-		return "inout/confirm";
+	@RequestMapping("/notice_commu.do")
+	public String notice_commu (Model model) {
+		model.addAttribute("message","공지사항");
+		return "notice_commu";
 	}
 	
-	@RequestMapping("inout/returnRegist")
-	public String returnRegist(Model model) {
-		model.addAttribute("message","반품등록");
-		
-		return "inout/returnRegist";
+	@RequestMapping("/free_commu.do")
+	public String free_commu (Model model) {
+		model.addAttribute("message","자유게시판");
+		return "free_commu";
 	}
 	
-	@RequestMapping("inout/returnStatus")
-	public String returnStatus(Model model) {
-		model.addAttribute("message","반품현황");
-		
-		return "inout/returnStatus";
-	}
-	@RequestMapping("/commu.do")
-	public String commu(Model model) {
-		model.addAttribute("message","커뮤니티");
-		return "commu";
-	}
+	
 }
