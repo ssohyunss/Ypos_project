@@ -26,7 +26,7 @@
 		<h3>
 			<b>반품등록 및 현황</b>
 		</h3>
-		<a class="btn btn-primary pull-right" data-toggle="modal" href="#retrunRegist" style="border: none; margin-bottom:20px; background-color: red">반품등록하기</a>
+		<a class="btn btn-primary pull-right" data-toggle="modal" href="#retrunRegist" style="border: none; margin-bottom:20px; background-color: #56baed">반품등록하기</a>
 			
 			<div class="row">
 			<table class="table table-striped" style="text-align: center;">
@@ -165,7 +165,7 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
 								data-dismiss="modal">취소</button>
-							<button type="submit" class="btn btn-primary" style="border: none; background-color: red">등록</button>
+							<button type="submit" class="btn btn-primary" style="border: none; background-color: #56baed">등록</button>
 						</div>
 
 					</form>
