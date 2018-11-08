@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -33,16 +36,32 @@
 				<tbody>
 					<tr>
 						<td>1</td>
-						<td>서울점 노트북 재고 확인 부탁드려요.</td>
+						<td><a href="javascript:button('VIEW')">서울점 노트북 재고 확인
+								부탁드려요.</a></td>
 						<td>인천점(홍길동)</td>
 						<td>2018-10-09</td>
 					</tr>
 				</tbody>
 
 			</table>
-			<a href="free_commu_wirte.jsp" class="btn btn-primary pull-right"
+			<a href="javascript:button('WRITE')"
+				class="btn btn-primary pull-right"
 				style="border: none; background-color: #56baed">글쓰기 </a>
 		</div>
 	</div>
 </body>
 </html>
+
+<script type="text/javascript">
+	function button(cmd) {
+		var path = "${pageContext.request.contextPath}";
+		if ("WRITE" == cmd) {
+			$('#thisForm').attr('action', path + '/free_write_commu.do');
+		} else if ("NOTICE_VIEW" == cmd) {
+			$('#thisForm').attr('action', path + '/notice_commu_view.do');
+		} else if ("VIEW" == cmd) {
+			$('#thisForm').attr('action', path + '/free_commu_view.do');
+		}
+		$('#thisForm')[0].submit();
+	}
+</script>

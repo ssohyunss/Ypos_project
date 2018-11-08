@@ -26,38 +26,33 @@
 		<h3>
 			<b>반품등록 및 현황</b>
 		</h3>
-		<a class="btn btn-primary pull-right" data-toggle="modal" href="#retrunRegist" style="border: none; margin-bottom:20px; background-color: red">반품등록하기</a>
+		<a class="btn btn-primary pull-right" data-toggle="modal" href="#retrunRegist" style="border: none; margin-bottom:20px; background-color: #56baed">반품등록하기</a>
 			
 			<div class="row">
 			<table class="table table-striped" style="text-align: center;">
 				<thead>
 					<tr>
-						<th style="background-color: #eeeeee; text-align: center;">반품명</th>
+
 						<th style="background-color: #eeeeee; text-align: center;">상품코드</th>
 						<th style="background-color: #eeeeee; text-align: center;">상품명</th>
-						<th style="background-color: #eeeeee; text-align: center;">색상</th>
 						<th style="background-color: #eeeeee; text-align: center;">수량</th>
-						<th style="background-color: #eeeeee; text-align: center;">내용</th>
+						<th style="background-color: #eeeeee; text-align: center;">반품사유</th>
 						<th style="background-color: #eeeeee; text-align: center;">등록일</th>
 						<th style="background-color: #eeeeee; text-align: center;">반품여부</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td>아이폰8취소</td>
 						<td>iphone8_AA128</td>
 						<td>아이폰8_256GB</td>
-						<td>BK(블랙)</td>
 						<td>2</td>
 						<td>단순변심</td>
 						<td>2018-09-22</td>
 						<td>X</td>
 					</tr>
 					<tr>
-						<td>마우스 취소</td>
 						<td>mouse_razer</td>
 						<td>마우스_레이저</td>
-						<td>BK(블랙)</td>
 						<td>10</td>
 						<td>로지텍으로 교체</td>
 						<td>2018-10-11</td>
@@ -147,10 +142,7 @@
 							</div>
 						</div>
 
-						<div class="form-group col-sm-12">
-							<label>반품명</label> <input type="text" name="evaluationTime"
-								class="form-control" maxlength=30">
-						</div>
+
 						<div class="form-row">
 							<div class="form-group col-sm-4">
 								<label>상품코드</label> <input type="text" name="orderNum"
@@ -166,14 +158,14 @@
 							</div>
 						</div>
 						<div class="form-group col-sm-12">
-							<label>내용</label>
+							<label>반품사유</label>
 							<textarea type="text" name="evaluationContent"
 								class="form-control" maxlength=2048 " style="height: 150px;"></textarea>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
 								data-dismiss="modal">취소</button>
-							<button type="submit" class="btn btn-primary" style="border: none; background-color: red">등록</button>
+							<button type="submit" class="btn btn-primary" style="border: none; background-color: #56baed">등록</button>
 						</div>
 
 					</form>

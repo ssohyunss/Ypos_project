@@ -100,12 +100,27 @@ private LoginService service;
 		return "manage";
 	}
 	
-	@RequestMapping("manage/otherStore")
+	@RequestMapping("/other_manage.do")
 	public String otherStore(Model model) {
 		model.addAttribute("message","타매장재고현황");
 		
-		return "manage/otherStore";
+		return "other_manage";
 	}
+	
+	@RequestMapping("/product_manage.do")
+	public String product_manage(Model model) {
+		model.addAttribute("message","상품코드별 수불현황");
+		
+		return "product_manage";
+	}
+	
+	@RequestMapping("/date_manage.do")
+	public String date_manage(Model model) {
+		model.addAttribute("message","일자별 수불현황");
+		
+		return "date_manage";
+	}
+	
 	
 	@RequestMapping("manage/store")
 	public String store(HttpServletRequest request,Model model) throws Exception {
@@ -161,6 +176,24 @@ private LoginService service;
 	public String free_commu (Model model) {
 		model.addAttribute("message","자유게시판");
 		return "free_commu";
+	}
+	
+	@RequestMapping("/free_write_commu.do")
+	public String free_write_commu (Model model) {
+		model.addAttribute("message","글쓰기");
+		return "free_write_commu";
+	}
+	
+	@RequestMapping("/notice_commu_view.do")
+	public String notice_commu_view (Model model) {
+		model.addAttribute("message","공지사항상세보기");
+		return "notice_commu_view";
+	}
+	
+	@RequestMapping("/free_commu_view.do")
+	public String free_commu_view (Model model) {
+		model.addAttribute("message","자유게시판상세보기");
+		return "free_commu_view";
 	}
 	
 	

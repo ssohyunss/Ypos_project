@@ -49,11 +49,10 @@
 						<option value="전체">전체</option>
 						<option value="상품코드">상품코드</option>
 						<option value="상품명">상품명</option>
-						<option value="바코드">바코드</option>
-					</select> 
+						</select> 
 				</td>
 				
-				<td colspan="3"><input type="text" name="search" class="form-control mx-1 mt-2" placeholder="내용을 입력하세요." style="width:350px; margin-left:5px"></td>
+				<td colspan="3"><input type="text" name="search" class="form-control mx-1 mt-2" placeholder="내용을 입력하세요." style="width:300px; margin-left:5px"></td>
 				
 				<td><button type="submit" class="btn btn-primary mx-1 mt-2" style="border: none; background-color:#56baed; margin-left:5px">검색</button></td>
 				
@@ -69,7 +68,6 @@
 							<th style="background-color: #eeeeee; text-align: center;">상품명</th>
 							<th style="background-color: #eeeeee; text-align: center;">상품가격</th>
 							<th style="background-color: #eeeeee; text-align: center;">수량</th>
-							<th style="background-color: #eeeeee; text-align: center;">바코드</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -84,7 +82,7 @@
 							<td><%=bean.getName()%></td>
 							<td><%=bean.getPrice()%></td>
 							<td><%=bean.getCount()%></td>
-							<td><%=bean.getBarcode()%></td>
+							
 						</tr>
 						<%
 							}
