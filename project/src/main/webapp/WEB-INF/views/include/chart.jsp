@@ -140,8 +140,7 @@
         let massPopChart = new Chart(myChart, {
             type: 'bar'
             , data: {
-                labels: ['1월', '2월', '3월', '4월', '5월','6월','7월', '8월', '9월', '10월', '11월','12월']
-                , datasets: [{
+                datasets: [{
                     label: '월매출'
                     , data: [
                        200000
@@ -176,12 +175,32 @@
                     , borderColor: '#777'
                     , hoverBorderWidth: 3
                     , hoberBorderColor: '#000'
-               }]
+               },{
+            	   label : '전년대비',
+            	   data: [
+                       200000
+                       , 203030
+                       , 305050
+                       , 91020
+                       , 330200
+                        , 225050
+                        , 180000
+                       , 503030
+                       , 605050
+                       , 201020
+                       , 301000
+                        , 405120
+                   ],
+                   type:'line',
+                   borderColor:'#56baed'
+               }],
+               labels: ['1월', '2월', '3월', '4월', '5월','6월','7월', '8월', '9월', '10월', '11월','12월']
+            
             }
             , options: {
                 title: {
                     display: true
-                    , text: '월별 매출 비교',
+                    , text: '매출 비교 그래프',
                     fontSize: 25
                 }
                 , legend: {
