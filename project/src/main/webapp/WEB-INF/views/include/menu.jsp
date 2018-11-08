@@ -56,7 +56,7 @@
 							</ul>
 
 							<ul class="nav navbar-nav navbar-right">
-								<li><a href="#"> <%=session.getAttribute("name")%>&nbsp;
+								<li><a href="javascript:menu('LOGOUT')"> <%=session.getAttribute("name")%>&nbsp;
 										<span class="glyphicon glyphicon-log-out"></span>Logout
 								</a></li>
 							</ul>
