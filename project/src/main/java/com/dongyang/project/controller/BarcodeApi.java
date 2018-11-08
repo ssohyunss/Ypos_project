@@ -70,6 +70,7 @@ public class BarcodeApi {
         	vo.setMpw(upw);
         	vo.setName(name);
         	vo.setSite_tid(site);
+        	
         	vo.setCreate_date(default_format.format(new Date()));
         	if(0 < service.insert(vo)) {
              	jResponse.put("error", "0");
