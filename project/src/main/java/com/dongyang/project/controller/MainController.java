@@ -178,5 +178,23 @@ private LoginService service;
 		return "free_commu";
 	}
 	
+	@RequestMapping("/free_write_commu.do")
+	public String free_write_commu (Model model) {
+		model.addAttribute("message","글쓰기");
+		return "free_write_commu";
+	}
+	
+	@RequestMapping("/notice_commu_view.do")
+	public String notice_commu_view (Model model) {
+		model.addAttribute("message","공지사항상세보기");
+		return "notice_commu_view";
+	}
+	
+	@RequestMapping("/free_commu_view.do")
+	public String free_commu_view (Model model) {
+		model.addAttribute("message","자유게시판상세보기");
+		return "free_commu_view";
+	}
+	
 	
 }

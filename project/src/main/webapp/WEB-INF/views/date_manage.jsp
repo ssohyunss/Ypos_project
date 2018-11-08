@@ -47,8 +47,7 @@
 			<div class="input-group date" style="width: 20%;" >
 
             <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-            <button type="submit" class="btn btn-primary"
-								style="border: none; background-color: #56baed; margin-left: 5px">확인</button>
+
         </div>
 			<div class="row" style="margin-top: 20px">
 				<table class="table table-striped" style="text-align: center">

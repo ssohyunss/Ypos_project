@@ -10,7 +10,6 @@
 <title>Y-POS</title>
 </head>
 <style>
-
 </style>
 <body>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -39,9 +38,12 @@
 						<th style="background-color: #eeeeee; text-align: center;">상품코드</th>
 						<th style="background-color: #eeeeee; text-align: center;">상품명</th>
 						<th style="background-color: #eeeeee; text-align: center;">수량</th>
+						<th style="background-color: #eeeeee; text-align: center;">지점명</th>
 						<th style="background-color: #eeeeee; text-align: center;">내용</th>
 						<th style="background-color: #eeeeee; text-align: center;">등록일</th>
 						<th style="background-color: #eeeeee; text-align: center;">출고여부</th>
+						<th style="background-color: #eeeeee; text-align: center;">출고일</th>
+						
 					</tr>
 				</thead>
 				<tbody>
@@ -50,27 +52,33 @@
 						<td>iphoneX_AA128</td>
 						<td>아이폰x_128GB</td>
 						<td>8</td>
+						<td>인천점</td>
 						<td>주문건입니다. 입고부탁드려요.</td>
 						<td>2018-10-08</td>
 						<td>O</td>
+						<td>2018-10-08</td>
 					</tr>
 					<tr>
 						<td>헤드셋주문</td>
 						<td>headset_HH_SONY</td>
 						<td>헤드셋_소니</td>
 						<td>1</td>
+						<td>본사</td>
 						<td>불량/교체건입니다.</td>
 						<td>2018-10-09</td>
-						<td>O<td>
+						<td>O</td>
+						<td>2018-10-11</td>
 					</tr>
 					<tr>
 						<td>마우스 주문</td>
 						<td>mouse_logitech</td>
 						<td>마우스_로지텍</td>
 						<td>10</td>
+						<td>본사</td>
 						<td>쓰리팝단체주문건입니다.</td>
 						<td>2018-10-11</td>
-						<td>X<td>
+						<td>X</td>
+						<td>-</td>
 					</tr>
 				</tbody>
 
@@ -79,8 +87,6 @@
 		
 	</div>
 	
-	
-
 	<div class="modal fade" id="orderRegist" tabindex="-1" role="dialog"
 		aria-labelledby="modal" aria-hidden="true">
 		<div class="modal-dialog">
@@ -94,6 +100,18 @@
 
 				<div class="modal-body">
 					<form action="#" method="post">
+					
+
+					<div class="form-group col-sm-12">
+					<label>지점선택</label>
+					<select name="selectstore" class="form-control">
+									<option value="본사">본사</option>
+									<option value="서울점">서울점</option>
+									<option value="인천점">인천점</option>
+								</select>
+
+					
+					</div>
 						<div class="form-row">
 							<div class="form-group col-sm-4">
 								<label>년</label> <select name="orderYear" class="form-control">
@@ -177,7 +195,7 @@
 						<div class="form-group col-sm-12">
 							<label>내용</label>
 							<textarea type="text" name="evaluationContent"
-								class="form-control" maxlength=2048 " style="height: 150px;"></textarea>
+								class="form-control" maxlength=2048  style="height: 150px;"></textarea>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
@@ -191,7 +209,6 @@
 			</div>
 		</div>
 	</div>
-
 
 
 </body>
