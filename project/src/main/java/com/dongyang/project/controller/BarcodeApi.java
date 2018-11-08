@@ -58,16 +58,18 @@ public class BarcodeApi {
         String uid = request.getParameter("uid");
         String upw = request.getParameter("upw");
         String name = request.getParameter("name");
+        String site = request.getParameter("site");
         LoginVO bean = service.select(uid);
         if(null != bean) {
         	jResponse.put("error", "1");
         	jResponse.put("message", "중복된 아이디입니다.");
         }else {
+        	//테스트
         	LoginVO vo = new LoginVO();
-        	vo.setSite_tid("1");
         	vo.setMid(uid);
         	vo.setMpw(upw);
         	vo.setName(name);
+        	vo.setSite_tid(site);
         	vo.setCreate_date(default_format.format(new Date()));
         	if(0 < service.insert(vo)) {
              	jResponse.put("error", "0");
