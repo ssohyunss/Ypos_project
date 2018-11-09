@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.dongyang.project.domain.LoginVO;
 import com.dongyang.project.domain.ProductVO;
@@ -21,38 +21,33 @@ import com.dongyang.project.service.LoginService;
 
 @Controller
 public class MainController {
-	
-private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 @Inject
 private LoginService service;
-
 	//url mapping
 	@RequestMapping("/")
 	public String login(HttpServletRequest request) {
 		return "login";
 	}
 	@RequestMapping(value="/select",method = RequestMethod.POST)
-	public String selectPOST(HttpServletRequest request,LoginVO login, Model model) throws Exception{
+	public String selectPOST(HttpServletRequest request,LoginVO login, Model model, HttpSession session) throws Exception{
 		JSONObject obj = new JSONObject();
 		obj.put("loginYN", "N");
-		request.setAttribute("jsonOut", obj);
 		LoginVO bean = service.select((String)request.getParameter("mid"));
-		HttpSession session = request.getSession();
 		if(null != bean) {
 			if(request.getParameter("mpw").equals(bean.getMpw())) {
 				obj.put("loginYN", "Y");
-				session.setAttribute("name", bean.getName());
+				session.setAttribute("userName", bean.getName());
 			}else{
 				obj.put("loginYN", "N");
 			}
 		}else {
 			obj.put("loginYN", "N");
 		}
+		request.setAttribute("jsonOut", obj);
 		return "stringout";
 	}
-	@RequestMapping("/main.do")
-	public String main(HttpServletRequest request,Model model) throws Exception {
-		model.addAttribute("message","메인화면");
+	@RequestMapping(value="/main.do", method = RequestMethod.POST)
+	public String main(HttpServletRequest request,Model model, HttpSession session) throws Exception {
 		return "main";
 	}
 	
