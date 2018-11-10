@@ -1,7 +1,11 @@
 package com.dongyang.project.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -10,17 +14,19 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.dongyang.project.domain.LoginVO;
+import com.dongyang.project.domain.OrderVO;
 import com.dongyang.project.domain.ProductVO;
+import com.dongyang.project.domain.ReturnVO;
 import com.dongyang.project.service.LoginService;
 
 @Controller
 public class MainController {
+public static Locale default_locale = Locale.getDefault();
+public static SimpleDateFormat default_format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", default_locale);
 @Inject
 private LoginService service;
 	//url mapping
@@ -37,6 +43,7 @@ private LoginService service;
 			if(request.getParameter("mpw").equals(bean.getMpw())) {
 				obj.put("loginYN", "Y");
 				session.setAttribute("userName", bean.getName());
+				session.setAttribute("site", bean.getSite_tid());
 			}else{
 				obj.put("loginYN", "N");
 			}
@@ -85,9 +92,20 @@ private LoginService service;
 		
 	}
 	
-	@RequestMapping(value="/manage.do",method = {RequestMethod.GET,RequestMethod.POST})
-	public String manage(HttpServletRequest request,ProductVO vo, Model model) throws Exception {
-		List<ProductVO> list = service.selectProduct();
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value="/manage.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String manage(HttpServletRequest request,ProductVO vo, Model model, HttpSession session) throws Exception {
+		List<ProductVO> list = new ArrayList<ProductVO>();
+		if(null != (String)request.getParameter("searchText")) {
+			@SuppressWarnings("rawtypes")
+			HashMap<String,Object> map = new HashMap();
+			map.put("type", (String)request.getParameter("type"));
+			map.put("keyword", (String)request.getParameter("searchText"));
+			map.put("site", (String)session.getAttribute("site"));
+			list = service.searchProduct(map);
+		}else {
+			list = service.selectProduct();
+		}
 		if(null == list) {
 			list = new ArrayList<ProductVO>(); 
 		}
@@ -147,20 +165,77 @@ private LoginService service;
 		return "inout";
 	}
 	
-	
 	@RequestMapping("/order_manage_inout.do")
-	public String order(Model model) {
-		model.addAttribute("message","주문등록 및 현황");
+	public String order(HttpServletRequest request, OrderVO vo, Model model, HttpSession session) throws Exception {
+		String site = (String)session.getAttribute("site");
+		List<OrderVO> list = service.selectOrder(site);
+		if(null == list) {
+			list = new ArrayList<OrderVO>(); 
+		}
+		List<ProductVO> productList = service.selectProduct();
+		if(null == productList) {
+			productList = new ArrayList<ProductVO>(); 
+		}
+		request.setAttribute("list",list);
+		request.setAttribute("productList",productList);
 		return "order_manage_inout";
 	}
-	
-
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("/insertOrder")
+	public String insertOrder(HttpServletRequest request, OrderVO vo, Model model, HttpSession session) throws Exception {
+		JSONObject obj = new JSONObject();
+		int result = 0;
+		obj.put("successYN", "N");
+		HashMap<String,Object> map = new HashMap();
+		map.put("site", (String)session.getAttribute("site"));
+		map.put("orderName", (String)request.getParameter("orderName"));
+		map.put("orderCode", (String)request.getParameter("orderCode"));
+		map.put("orderCount", (String)request.getParameter("orderCount"));
+		map.put("orderDesc", (String)request.getParameter("orderDesc"));
+		map.put("order", (String)request.getParameter("order"));
+		map.put("date", default_format.format(new Date()));
+		result = service.insertOrder(map);
+		if(0 < result) {
+			obj.put("successYN", "Y");
+		}
+		request.setAttribute("jsonOut", obj);
+		return "stringout";
+	}
 	@RequestMapping("/return_manage_inout.do")
-	public String return_inout (Model model) {
-		model.addAttribute("message","반품등록 및 현황");
+	public String return_inout (HttpServletRequest request, ReturnVO vo, Model model, HttpSession session) throws Exception {
+		String site = (String)session.getAttribute("site");
+		List<ReturnVO> list = service.selectReturn(site);
+		if(null == list) {
+			list = new ArrayList<ReturnVO>(); 
+		}
+		List<ProductVO> productList = service.selectProduct();
+		if(null == productList) {
+			productList = new ArrayList<ProductVO>(); 
+		}
+		request.setAttribute("list",list);
+		request.setAttribute("productList",productList);
 		return "return_manage_inout";
 	}
-	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("/insertReturn")
+	public String insertReturn (HttpServletRequest request, ReturnVO vo, Model model, HttpSession session) throws Exception {
+		JSONObject obj = new JSONObject();
+		int result = 0;
+		obj.put("successYN", "N");
+		HashMap<String,Object> map = new HashMap();
+		map.put("site", (String)session.getAttribute("site"));
+		map.put("returnName", (String)request.getParameter("returnName"));
+		map.put("returnCode", (String)request.getParameter("returnCode"));
+		map.put("returnCount", (String)request.getParameter("returnCount"));
+		map.put("returnReason", (String)request.getParameter("returnReason"));
+		map.put("date", default_format.format(new Date()));
+		result = service.insertReturn(map);
+		if(0 < result) {
+			obj.put("successYN", "Y");
+		}
+		request.setAttribute("jsonOut", obj);
+		return "stringout";
+	}
 	@RequestMapping("/notice_commu.do")
 	public String notice_commu (Model model) {
 		model.addAttribute("message","공지사항");

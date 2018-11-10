@@ -1,7 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.dongyang.project.domain.ReturnVO "%>
+<%@ page import="com.dongyang.project.domain.ProductVO "%>
+<%@ page import="java.util.List"%>
+<%
+	List<ProductVO> productList = (List<ProductVO>) request.getAttribute("productList");
+	List<ReturnVO> list = (List<ReturnVO>) request.getAttribute("list");
+%>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
@@ -32,41 +37,38 @@
 			<table class="table table-striped" style="text-align: center;">
 				<thead>
 					<tr>
-
-						<th style="background-color: #eeeeee; text-align: center;">상품코드</th>
 						<th style="background-color: #eeeeee; text-align: center;">상품명</th>
+						<th style="background-color: #eeeeee; text-align: center;">상품코드</th>
 						<th style="background-color: #eeeeee; text-align: center;">수량</th>
+						<th style="background-color: #eeeeee; text-align: center;">지점</th>
 						<th style="background-color: #eeeeee; text-align: center;">반품사유</th>
 						<th style="background-color: #eeeeee; text-align: center;">등록일</th>
 						<th style="background-color: #eeeeee; text-align: center;">반품여부</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>iphone8_AA128</td>
-						<td>아이폰8_256GB</td>
-						<td>2</td>
-						<td>단순변심</td>
-						<td>2018-09-22</td>
-						<td>X</td>
-					</tr>
-					<tr>
-						<td>mouse_razer</td>
-						<td>마우스_레이저</td>
-						<td>10</td>
-						<td>로지텍으로 교체</td>
-						<td>2018-10-11</td>
-						<td>X<td>
-					</tr>
-				</tbody>
+						<%
+						if (0 < list.size()) {
 
+							for (int i = 0; i < list.size(); i++) {
+								ReturnVO bean = list.get(i);
+					%>
+					<tr>
+						<td><%=bean.getProduct_name()%></td>
+						<td><%=bean.getProduct_code()%></td>
+						<td><%=bean.getCount()%></td>
+						<td><%=bean.getSite_name()%></td>
+						<td><%=bean.getDescription()%></td>
+						<td><%=bean.getCreate_date()%></td>
+						<td><%=bean.getReturn_yn()%></td>
+					</tr>
+					<%
+						} }
+					%>
+				</tbody>
 			</table>
 		</div>
-		
 	</div>
-	
-	
-
 	<div class="modal fade" id="retrunRegist" tabindex="-1" role="dialog"
 		aria-labelledby="modal" aria-hidden="true">
 		<div class="modal-dialog">
@@ -77,105 +79,86 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-
 				<div class="modal-body">
-					<form action="#" method="post">
-						<div class="form-row">
-							<div class="form-group col-sm-4">
-								<label>년</label> <select name="orderYear" class="form-control">
-									<option value="2016">2016</option>
-									<option value="2017">2017</option>
-									<option value="2018" selected>2018</option>
-									<option value="2019">2019</option>
-								</select>
-							</div>
-							<div class="form-group col-sm-4">
-								<label>월</label> <select name="orderMonth" class="form-control">
-									<option value="01">01</option>
-									<option value="02">02</option>
-									<option value="03">03</option>
-									<option value="04">04</option>
-									<option value="05">05</option>
-									<option value="06">06</option>
-									<option value="07">07</option>
-									<option value="08">08</option>
-									<option value="09">09</option>
-									<option value="10" selected>10</option>
-									<option value="11">11</option>
-									<option value="12">12</option>
-								</select>
-							</div>
-							<div class="form-group col-sm-4">
-								<label>일</label> <select name="orderMonth" class="form-control">
-									<option value="01">01</option>
-									<option value="02">02</option>
-									<option value="03">03</option>
-									<option value="04">04</option>
-									<option value="05">05</option>
-									<option value="06">06</option>
-									<option value="07">07</option>
-									<option value="08">08</option>
-									<option value="09">09</option>
-									<option value="10">10</option>
-									<option value="11">11</option>
-									<option value="12">12</option>
-									<option value="13" selected>13</option>
-									<option value="14">14</option>
-									<option value="15">15</option>
-									<option value="16">16</option>
-									<option value="17">17</option>
-									<option value="18">18</option>
-									<option value="19">19</option>
-									<option value="20">20</option>
-									<option value="21">21</option>
-									<option value="22">22</option>
-									<option value="23">23</option>
-									<option value="24">24</option>
-									<option value="25">25</option>
-									<option value="26">26</option>
-									<option value="27">27</option>
-									<option value="28">28</option>
-									<option value="29">29</option>
-									<option value="30">30</option>
-									<option value="31">31</option>
-								</select>
-							</div>
+					<div class="form-row">
+						<div class="form-group col-sm-4">
+							<label>상품명</label>
+							<select id="returnName" class="form-control" onchange="changeReturnName()">
+								<option hidden>상품을 선택해주세요.</option>
+								<%if(0 < productList.size()){
+									for(int i = 0; i < productList.size(); i++){
+								%>
+									<option value="<%=productList.get(i).getName()%>" data-value="<%=productList.get(i).getBarcode()%>"><%=productList.get(i).getName() %></option>
+								<%} }%>
+							</select> 
 						</div>
-
-
-						<div class="form-row">
-							<div class="form-group col-sm-4">
-								<label>상품코드</label> <input type="text" name="orderNum"
-									class="form-control" maxlength="20">
-							</div>
-							<div class="form-group col-sm-4">
-								<label>색상</label> <input type="text" name="orderName"
-									class="form-control" maxlength="20">
-							</div>
-							<div class="form-group col-sm-4">
-								<label>수량</label> <input type="text" name="orderName"
-									class="form-control" maxlength="20">
-							</div>
+						<div class="form-group col-sm-4">
+							<label>상품코드</label> 
+							<input type="text" id="returnCode"class="form-control" maxlength="20" readonly="readonly">
 						</div>
-						<div class="form-group col-sm-12">
-							<label>반품사유</label>
-							<textarea type="text" name="evaluationContent"
-								class="form-control" maxlength=2048 " style="height: 150px;"></textarea>
+						<div class="form-group col-sm-4">
+							<label>수량</label> 
+							<input type="text" id="returnCount" class="form-control" maxlength="20">
 						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">취소</button>
-							<button type="submit" class="btn btn-primary" style="border: none; background-color: #56baed">등록</button>
-						</div>
-
-					</form>
-
+					</div>
+					<div class="form-group col-sm-12">
+						<label>반품사유</label>
+						<textarea type="text" id="returnReason" class="form-control" maxlength=2048 " style="height: 150px;"></textarea>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-secondary" data-dismiss="modal">취소</button>
+						<button class="btn btn-primary" style="border: none; background-color: #56baed" onclick="insertReturn()">등록</button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-
-
 </body>
+<script>
+function ajaxCall() {
+	var req = null;
+	var args = this.ajaxCall.arguments;
+	// 브라우져 호환성 검사
+	if (window.XMLHttpRequest) {
+		req = new XMLHttpRequest();
+	} else if (window.ActiveXObject) {
+		req = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	if (req) {
+		req.open('POST', args[0], true); // request open
+		req.setRequestHeader("Content-Type",
+				"application/x-www-form-urlencoded; charset=UTF-8"); // 헤더지정
+		req.send(args[1]); // 요청
+		req.onreadystatechange = function() {
+			if (req.readyState == 4) {
+				if (req.status == 200) {
+					args[2](req.responseText, args[3], args[4]);
+				}
+			}
+		};
+
+	} else {
+		alert("request 생성 실패!!");
+	}
+}
+function changeReturnName(){
+	$('#returnCode').text('');
+	$('#returnCode').val($('#returnName option:selected').attr('data-value'));
+}
+function insertReturn(){
+	var param = "returnName="+$('#returnName').val()+"";
+	param += "&returnCode="+$('#returnCode').val()+"";
+	param += "&returnCount="+$('#returnCount').val()+"";
+	param += "&returnReason="+$('#returnReason').val()+"";
+	ajaxCall('/project/insertReturn',param , function(data){
+		var mapResult = JSON.parse(data);
+		if("Y" == mapResult['successYN']){
+			$('#thisForm').attr('action', '/project/return_manage_inout.do');
+			$('#thisForm')[0].submit();
+		}else{
+			alert('주문등록에 실패했습니다.');
+		}
+	});
+}
+</script>
 </html>

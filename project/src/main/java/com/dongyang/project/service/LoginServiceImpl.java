@@ -1,5 +1,6 @@
 package com.dongyang.project.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -9,7 +10,9 @@ import org.springframework.stereotype.Service;
 import com.dongyang.project.dao.MainDao;
 import com.dongyang.project.domain.ImageVO;
 import com.dongyang.project.domain.LoginVO;
+import com.dongyang.project.domain.OrderVO;
 import com.dongyang.project.domain.ProductVO;
+import com.dongyang.project.domain.ReturnVO;
 
 @Service
 public class LoginServiceImpl implements LoginService{
@@ -55,5 +58,25 @@ public class LoginServiceImpl implements LoginService{
 	@Override
 	public int updateProductOut(ProductVO vo) throws Exception{
 		return dao.updateProductOut(vo);
+	}
+	@Override
+	public List<ProductVO> searchProduct(HashMap<String,Object> map) throws Exception{
+		return dao.searchProduct(map);
+	}
+	@Override
+	public List<OrderVO> selectOrder(String site) throws Exception{
+		return dao.selectOrder(site);
+	}
+	@Override
+	public List<ReturnVO> selectReturn(String site) throws Exception {
+		return dao.selectReturn(site);
+	}
+	@Override
+	public int insertOrder(HashMap<String, Object> map) {
+		return dao.insertOrder(map);
+	}
+	@Override
+	public int insertReturn(HashMap<String, Object> map) {
+		return dao.insertReturn(map);
 	}
 }

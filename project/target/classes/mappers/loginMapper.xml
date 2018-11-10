@@ -5,16 +5,30 @@
 	
 <mapper namespace="com.dongyang.project.loginMapper">
 	<select id="selectManager" resultType="com.dongyang.project.domain.LoginVO">
-		select * from MANAGER_MASTER where 1=1 and SITE_TID = '1' and MID = #{mid}
+		select * from MANAGER_MASTER where 1=1 and MID = #{mid}
 	</select>
 	<select id="insertManager" resultType="com.dongyang.project.domain.LoginVO">
 		insert into MANAGER_MASTER(SITE_TID,MID,MPW,NAME,CREATE_DATE) VALUES(#{site_tid},#{mid},#{mpw},#{name},#{create_date})
 	</select>
-		<select id="insertImageManager" resultType="com.dongyang.project.domain.ImageVO">
+	<select id="insertImageManager" resultType="com.dongyang.project.domain.ImageVO">
 		insert into ImageEntity(content,fileName,mimeType) VALUES(#{content},#{fileName},#{mimeType})
 	</select>
 	<select id="selectProduct" resultType="com.dongyang.project.domain.ProductVO">
 		select * from PRODUCT_LIST where 1=1 and SITE_TID = '1'
+	</select>
+	<select id="searchProduct" parameterType="hashmap" resultType="com.dongyang.project.domain.ProductVO">
+	  SELECT * FROM PRODUCT_LIST WHERE 1=1 AND SITE_TID = #{site}
+  	  <choose>
+	    <when test="keyword != null and type != null and type.equals('ALL')">
+	    	AND NAME = #{keyword} OR BARCODE = #{keyword}
+	    </when>
+	    <when test="keyword != null and type != null and type.equals('NAME')">
+	    	AND NAME = #{keyword}
+	    </when>
+	    <otherwise>
+	    	AND BARCODE = #{keyword}
+	    </otherwise>
+	  </choose>
 	</select>
 	<select id="selectImage" resultType="com.dongyang.project.domain.ImageVO">
 		select * from ImageEntity where 1=1 and id = #{id}
@@ -33,5 +47,26 @@
 	</select>
 	<select id="updateProductOut" resultType="com.dongyang.project.domain.ProductVO">
 		update PRODUCT_LIST set count = count - #{count} where 1=1 and BARCODE = #{barcode}
-	</select>	
+	</select>
+	<select id="selectOrder" resultType="com.dongyang.project.domain.OrderVO">
+		select *, (select name from SITE where 1=1 and TID = SITE_TID) SITE_NAME from ORDER_LIST where 1=1
+		<if test="null != _parameter and _parameter != 1">
+			and SITE_TID = #{_parameter}
+		</if>
+	</select>
+		<select id="selectReturn" resultType="com.dongyang.project.domain.ReturnVO">
+		select *, (select name from SITE where 1=1 and TID = SITE_TID) SITE_NAME from RETURN_LIST where 1=1
+		<if test="null != _parameter and _parameter != 1">
+			and SITE_TID = #{_parameter}
+		</if>
+	</select>
+	<select id="insertOrder" resultType="com.dongyang.project.domain.OrderVO">
+		insert into ORDER_LIST(SITE_TID, ORDER_NAME, PRODUCT_NAME, PRODUCT_CODE, COUNT, DESCRIPTION, CREATE_DATE) 
+		VALUES(#{site},#{order},#{orderName},#{orderCode},#{orderCount},#{orderDesc},#{date})
+	</select>
+		<select id="insertReturn" resultType="com.dongyang.project.domain.ReturnVO">
+		insert into RETURN_LIST(SITE_TID, PRODUCT_NAME, PRODUCT_CODE, COUNT, DESCRIPTION, CREATE_DATE) 
+		VALUES(#{site},#{returnName},#{returnCode},#{returnCount},#{returnReason},#{date})
+	</select>
+		
 </mapper>

@@ -1,5 +1,6 @@
 package com.dongyang.project.domain;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -52,5 +53,24 @@ public class MainDaoImp implements MainDao{
 	@Override
 	public int updateProductOut(ProductVO vo) throws Exception{
 		return sqlSession.update(namespace+".updateProductOut",vo);
+	}
+	public List<ProductVO> searchProduct(HashMap<String,Object> map) throws Exception {
+		return sqlSession.selectList(namespace+".searchProduct",map);
+	}
+	@Override
+	public List<OrderVO> selectOrder(String site) throws Exception {
+		return sqlSession.selectList(namespace+".selectOrder", site);
+	}
+	@Override
+	public List<ReturnVO> selectReturn(String site) throws Exception {
+		return sqlSession.selectList(namespace+".selectReturn", site);
+	}
+	@Override
+	public int insertOrder(HashMap<String, Object> map) {
+		return sqlSession.insert(namespace+".insertOrder", map);
+	}	
+	@Override
+	public int insertReturn(HashMap<String, Object> map) {
+		return sqlSession.insert(namespace+".insertReturn", map);
 	}	
 }
