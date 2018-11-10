@@ -64,9 +64,25 @@
 		insert into ORDER_LIST(SITE_TID, ORDER_NAME, PRODUCT_NAME, PRODUCT_CODE, COUNT, DESCRIPTION, CREATE_DATE) 
 		VALUES(#{site},#{order},#{orderName},#{orderCode},#{orderCount},#{orderDesc},#{date})
 	</select>
-		<select id="insertReturn" resultType="com.dongyang.project.domain.ReturnVO">
+	<select id="insertReturn" resultType="com.dongyang.project.domain.ReturnVO">
 		insert into RETURN_LIST(SITE_TID, PRODUCT_NAME, PRODUCT_CODE, COUNT, DESCRIPTION, CREATE_DATE) 
 		VALUES(#{site},#{returnName},#{returnCode},#{returnCount},#{returnReason},#{date})
 	</select>
-		
+	<select id="selectCommunity" resultType="com.dongyang.project.domain.CommunityVO">
+		select *, (SELECT NAME FROM MANAGER_MASTER WHERE 1=1 AND TID = USER_MASTER_TID) USER_NAME from COMMUNITY order by CREATE_DATE DESC
+	</select>
+	<select id="insertCommunity" resultType="com.dongyang.project.domain.CommunityVO">
+		insert into COMMUNITY(SITE_TID, USER_MASTER_TID, TITLE, CONTENTS, CREATE_DATE) 
+		VALUES(#{site},#{userTid},#{title},#{contents},#{date})
+	</select>
+	<select id="selectCommunityBean" resultType="com.dongyang.project.domain.CommunityVO">
+		select *, (SELECT NAME FROM MANAGER_MASTER WHERE 1=1 AND TID = USER_MASTER_TID) USER_NAME from COMMUNITY WHERE TID = #{_parameter}
+	</select>	
+	<select id="deleteCommunity" resultType="com.dongyang.project.domain.CommunityVO">
+		delete from COMMUNITY WHERE TID = #{_parameter}
+	</select>
+	<select id="modifyCommunity" resultType="com.dongyang.project.domain.CommunityVO">
+		update COMMUNITY set TITLE = #{title}, CONTENTS = #{contents}, MODIFY_DATE = #{date} where 1=1 and TID = #{tid}  
+	</select>
+	
 </mapper>

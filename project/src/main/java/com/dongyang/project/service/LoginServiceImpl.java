@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.dongyang.project.dao.MainDao;
+import com.dongyang.project.domain.CommunityVO;
 import com.dongyang.project.domain.ImageVO;
 import com.dongyang.project.domain.LoginVO;
 import com.dongyang.project.domain.OrderVO;
@@ -78,5 +79,25 @@ public class LoginServiceImpl implements LoginService{
 	@Override
 	public int insertReturn(HashMap<String, Object> map) {
 		return dao.insertReturn(map);
+	}
+	@Override
+	public List<CommunityVO> selectCommunity() {
+		return dao.selectCommunity();
+	}
+	@Override
+	public CommunityVO selectCommunity(String tid) {
+		return dao.selectCommunity(tid);
+	}
+	@Override
+	public int insertCommunity(HashMap<String, Object> map) {
+		return dao.insertCommunity(map);
+	}
+	@Override
+	public int deleteCommunity(String tid) {
+		return dao.deleteCommunity(tid);
+	}
+	@Override
+	public int modifyCommunity(HashMap<String, Object> map) {
+		return dao.modifyCommunity(map);
 	}
 }

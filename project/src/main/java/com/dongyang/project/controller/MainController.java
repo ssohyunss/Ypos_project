@@ -11,12 +11,14 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.dongyang.project.domain.CommunityVO;
 import com.dongyang.project.domain.LoginVO;
 import com.dongyang.project.domain.OrderVO;
 import com.dongyang.project.domain.ProductVO;
@@ -42,8 +44,9 @@ private LoginService service;
 		if(null != bean) {
 			if(request.getParameter("mpw").equals(bean.getMpw())) {
 				obj.put("loginYN", "Y");
-				session.setAttribute("userName", bean.getName());
+				session.setAttribute("userTid", bean.getTid());
 				session.setAttribute("site", bean.getSite_tid());
+				session.setAttribute("userName", bean.getName());
 			}else{
 				obj.put("loginYN", "N");
 			}
@@ -243,28 +246,79 @@ private LoginService service;
 	}
 	
 	@RequestMapping("/free_commu.do")
-	public String free_commu (Model model) {
-		model.addAttribute("message","자유게시판");
+	public String free_commu (HttpServletRequest request, CommunityVO vo, Model model, HttpSession session) {
+		List<CommunityVO> list = service.selectCommunity();
+		if(null == list) {
+			list = new ArrayList<CommunityVO>(); 
+		}
+		request.setAttribute("list",list);
 		return "free_commu";
 	}
 	
 	@RequestMapping("/free_write_commu.do")
-	public String free_write_commu (Model model) {
-		model.addAttribute("message","글쓰기");
+	public String free_write_commu (HttpServletRequest request, CommunityVO vo, Model model, HttpSession session) {
+		CommunityVO bean = new CommunityVO();
+		if(null != (String)request.getParameter("tid")) {
+			bean = service.selectCommunity((String)request.getParameter("tid"));
+		}
+		request.setAttribute("bean",bean);
 		return "free_write_commu";
+	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("/insertCommunity")
+	public String insertCommunity (HttpServletRequest request, CommunityVO vo, Model model, HttpSession session) throws JSONException {
+		JSONObject obj = new JSONObject();
+		int result = 0;
+		obj.put("successYN", "N");
+		HashMap<String,Object> map = new HashMap();
+		map.put("site", (String)session.getAttribute("site"));
+		map.put("userTid", (String)session.getAttribute("userTid"));
+		map.put("title", (String)request.getParameter("title"));
+		map.put("contents", (String)request.getParameter("contents"));
+		map.put("date", default_format.format(new Date()));
+		result = service.insertCommunity(map);
+		if(0 < result) {
+			obj.put("successYN", "Y");
+		}
+		request.setAttribute("jsonOut", obj);
+		return "stringout";
 	}
 	
 	@RequestMapping("/notice_commu_view.do")
-	public String notice_commu_view (Model model) {
-		model.addAttribute("message","공지사항상세보기");
+	public String notice_commu_view (HttpServletRequest request, CommunityVO vo, Model model, HttpSession session) {
 		return "notice_commu_view";
 	}
 	
 	@RequestMapping("/free_commu_view.do")
-	public String free_commu_view (Model model) {
-		model.addAttribute("message","자유게시판상세보기");
+	public String free_commu_view (HttpServletRequest request, CommunityVO vo, Model model, HttpSession session) {
+		CommunityVO bean = new CommunityVO();
+		if(null != (String)request.getParameter("tid")) {
+			bean = service.selectCommunity((String)request.getParameter("tid"));
+		}
+		request.setAttribute("bean",bean);
 		return "free_commu_view";
 	}
-	
-	
+	@RequestMapping("/deleteCommunity")
+	public String deleteCommunity (HttpServletRequest request, CommunityVO vo, Model model, HttpSession session) {
+		int result = service.deleteCommunity((String)request.getParameter("tid"));
+		return free_commu(request, vo, model, session);
+	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("/modifyCommunity")
+	public String modifyCommunity (HttpServletRequest request, CommunityVO vo, Model model, HttpSession session) throws JSONException {
+		JSONObject obj = new JSONObject();
+		int result = 0;
+		obj.put("successYN", "N");
+		HashMap<String,Object> map = new HashMap();
+		map.put("title", (String)request.getParameter("title"));
+		map.put("contents", (String)request.getParameter("contents"));
+		map.put("tid", (String)request.getParameter("tid"));
+		map.put("date", default_format.format(new Date()));
+		result = service.modifyCommunity(map);
+		if(0 < result) {
+			obj.put("successYN", "Y");
+		}
+		request.setAttribute("jsonOut", obj);
+		return "stringout";
+	}
 }

@@ -72,5 +72,25 @@ public class MainDaoImp implements MainDao{
 	@Override
 	public int insertReturn(HashMap<String, Object> map) {
 		return sqlSession.insert(namespace+".insertReturn", map);
+	}
+	@Override
+	public List<CommunityVO> selectCommunity() {
+		return sqlSession.selectList(namespace+".selectCommunity");
+	}
+	@Override
+	public CommunityVO selectCommunity(String tid) {
+		return sqlSession.selectOne(namespace+".selectCommunityBean", tid);
+	}
+	@Override
+	public int insertCommunity(HashMap<String, Object> map) {
+		return sqlSession.insert(namespace+".insertCommunity", map);
 	}	
+	@Override
+	public int deleteCommunity(String tid) {
+		return sqlSession.insert(namespace+".deleteCommunity", tid);
+	}
+	@Override
+	public int modifyCommunity(HashMap<String, Object> map) {
+		return sqlSession.insert(namespace+".modifyCommunity", map);
+	}
 }
