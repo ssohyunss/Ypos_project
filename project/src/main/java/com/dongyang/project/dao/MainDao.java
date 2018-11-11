@@ -6,6 +6,7 @@ import java.util.List;
 import com.dongyang.project.domain.CommunityVO;
 import com.dongyang.project.domain.ImageVO;
 import com.dongyang.project.domain.LoginVO;
+import com.dongyang.project.domain.NoticeVO;
 import com.dongyang.project.domain.OrderVO;
 import com.dongyang.project.domain.ProductVO;
 import com.dongyang.project.domain.ReturnVO;
@@ -31,4 +32,9 @@ public interface MainDao {
 	public int insertCommunity(HashMap<String, Object> map);
 	public int deleteCommunity(String tid);
 	public int modifyCommunity(HashMap<String, Object> map);
+	public List<NoticeVO> selectNotice();
+	public NoticeVO selectNotice(String tid);
+	public int insertNotice(HashMap<String, Object> map);
+	public int deleteNotice(String tid);
+	public int modifyNotice(HashMap<String, Object> map);
 }

@@ -93,4 +93,24 @@ public class MainDaoImp implements MainDao{
 	public int modifyCommunity(HashMap<String, Object> map) {
 		return sqlSession.insert(namespace+".modifyCommunity", map);
 	}
+	@Override
+	public List<NoticeVO> selectNotice() {
+		return sqlSession.selectList(namespace+".selectNotice");
+	}
+	@Override
+	public NoticeVO selectNotice(String tid) {
+		return sqlSession.selectOne(namespace+".selectNoticeBean", tid);
+	}
+	@Override
+	public int insertNotice(HashMap<String, Object> map) {
+		return sqlSession.insert(namespace+".insertNotice", map);
+	}	
+	@Override
+	public int deleteNotice(String tid) {
+		return sqlSession.insert(namespace+".deleteNotice", tid);
+	}
+	@Override
+	public int modifyNotice(HashMap<String, Object> map) {
+		return sqlSession.insert(namespace+".modifyNotice", map);
+	}
 }

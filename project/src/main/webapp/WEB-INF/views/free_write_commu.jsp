@@ -26,7 +26,7 @@
 	<div class="container">
 		<div class="row">
 			<form method="post" action="#">
-			<%if(null != bean) {%>
+			<%if("" != bean.getTid()) {%>
 				<table class="table table-striped" style="text-align: center;">
 					<thead>
 						<tr>

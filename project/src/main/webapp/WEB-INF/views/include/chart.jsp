@@ -1,6 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.dongyang.project.domain.NoticeVO "%>
+<%@ page import="java.util.List"%>
+<%
+	List<NoticeVO> list = (List<NoticeVO>) request.getAttribute("list");
+%>
+<!DOCTYPE>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
@@ -28,24 +32,21 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td><a href="javascript:button('NOTICE_VIEW')">안녕하세요.</td>
-						<td>관리자(권소현)</td>
-						<td>2018-10-14</td>
+					<%
+						if (0 < list.size()) {
+							for (int i = 0; i < list.size(); i++) {
+								NoticeVO bean = list.get(i);
+					%>
+					<tr style="cursor: pointer;" onclick="viewNotice('<%=bean.getTid()%>')">
+						<td><%=bean.getTid()%></td>
+						<td><%=bean.getTitle()%></td>
+						<td><%=bean.getUser_name()%></td>
+						<td><%=bean.getCreate_date()%></td>
 					</tr>
-					<tr>
-						<td>2</td>
-						<td><a href="javascript:button('NOTICE_VIEW')">안녕하세요.</td>
-						<td>관리자(권소현)</td>
-						<td>2018-11-04</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td><a href="javascript:button('NOTICE_VIEW')">안녕하세요.</td>
-						<td>관리자(권소현)</td>
-						<td>2018-11-07</td>
-					</tr>
+					<%
+						}
+						}
+					%>		
 				</tbody>
 
 			</table>
@@ -228,4 +229,11 @@
     </script>
 
 </body>
+<script type="text/javascript">
+function viewNotice(tid){
+	var path = "${pageContext.request.contextPath}";
+	$('#thisForm').attr('action', path + '/notice_commu_view.do?tid='+tid+'');
+	$('#thisForm')[0].submit();
+}
+</script>
 </html>

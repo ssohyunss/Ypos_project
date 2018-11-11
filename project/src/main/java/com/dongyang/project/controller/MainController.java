@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dongyang.project.domain.CommunityVO;
 import com.dongyang.project.domain.LoginVO;
+import com.dongyang.project.domain.NoticeVO;
 import com.dongyang.project.domain.OrderVO;
 import com.dongyang.project.domain.ProductVO;
 import com.dongyang.project.domain.ReturnVO;
@@ -57,7 +58,12 @@ private LoginService service;
 		return "stringout";
 	}
 	@RequestMapping(value="/main.do", method = RequestMethod.POST)
-	public String main(HttpServletRequest request,Model model, HttpSession session) throws Exception {
+	public String main(HttpServletRequest request,Model model, HttpSession session, NoticeVO vo) throws Exception {
+		List<NoticeVO> list = service.selectNotice();
+		if(null == list) {
+			list = new ArrayList<NoticeVO>(); 
+		}
+		request.setAttribute("list",list);
 		return "main";
 	}
 	
@@ -240,9 +246,74 @@ private LoginService service;
 		return "stringout";
 	}
 	@RequestMapping("/notice_commu.do")
-	public String notice_commu (Model model) {
-		model.addAttribute("message","공지사항");
+	public String notice_commu (HttpServletRequest request, NoticeVO vo, Model model, HttpSession session) {
+		List<NoticeVO> list = service.selectNotice();
+		if(null == list) {
+			list = new ArrayList<NoticeVO>(); 
+		}
+		request.setAttribute("list",list);
 		return "notice_commu";
+	}
+	@RequestMapping("/notice_write_commu.do")
+	public String notice_write_commu (HttpServletRequest request, CommunityVO vo, Model model, HttpSession session) {
+		NoticeVO bean = new NoticeVO();
+		if(null != (String)request.getParameter("tid")) {
+			bean = service.selectNotice((String)request.getParameter("tid"));
+		}
+		request.setAttribute("bean",bean);
+		return "notice_write_commu";
+	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("/insertNotice")
+	public String insertNotice (HttpServletRequest request, NoticeVO vo, Model model, HttpSession session) throws JSONException {
+		JSONObject obj = new JSONObject();
+		int result = 0;
+		obj.put("successYN", "N");
+		HashMap<String,Object> map = new HashMap();
+		map.put("site", (String)session.getAttribute("site"));
+		map.put("userTid", (String)session.getAttribute("userTid"));
+		map.put("title", (String)request.getParameter("title"));
+		map.put("contents", (String)request.getParameter("contents"));
+		map.put("date", default_format.format(new Date()));
+		result = service.insertNotice(map);
+		if(0 < result) {
+			obj.put("successYN", "Y");
+		}
+		request.setAttribute("jsonOut", obj);
+		return "stringout";
+	}
+	
+	@RequestMapping("/notice_commu_view.do")
+	public String notice_commu_view (HttpServletRequest request, NoticeVO vo, Model model, HttpSession session) {
+		NoticeVO bean = new NoticeVO();
+		if(null != (String)request.getParameter("tid")) {
+			bean = service.selectNotice((String)request.getParameter("tid"));
+		}
+		request.setAttribute("bean",bean);
+		return "notice_commu_view";
+	}
+	@RequestMapping("/deleteNotice")
+	public String deleteCommunity (HttpServletRequest request, NoticeVO vo, Model model, HttpSession session) {
+		int result = service.deleteNotice((String)request.getParameter("tid"));
+		return notice_commu(request, vo, model, session);
+	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("/modifyNotice")
+	public String modifyNotice (HttpServletRequest request, NoticeVO vo, Model model, HttpSession session) throws JSONException {
+		JSONObject obj = new JSONObject();
+		int result = 0;
+		obj.put("successYN", "N");
+		HashMap<String,Object> map = new HashMap();
+		map.put("title", (String)request.getParameter("title"));
+		map.put("contents", (String)request.getParameter("contents"));
+		map.put("tid", (String)request.getParameter("tid"));
+		map.put("date", default_format.format(new Date()));
+		result = service.modifyNotice(map);
+		if(0 < result) {
+			obj.put("successYN", "Y");
+		}
+		request.setAttribute("jsonOut", obj);
+		return "stringout";
 	}
 	
 	@RequestMapping("/free_commu.do")
@@ -283,12 +354,6 @@ private LoginService service;
 		request.setAttribute("jsonOut", obj);
 		return "stringout";
 	}
-	
-	@RequestMapping("/notice_commu_view.do")
-	public String notice_commu_view (HttpServletRequest request, CommunityVO vo, Model model, HttpSession session) {
-		return "notice_commu_view";
-	}
-	
 	@RequestMapping("/free_commu_view.do")
 	public String free_commu_view (HttpServletRequest request, CommunityVO vo, Model model, HttpSession session) {
 		CommunityVO bean = new CommunityVO();

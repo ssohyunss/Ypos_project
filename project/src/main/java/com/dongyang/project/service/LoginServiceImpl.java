@@ -11,6 +11,7 @@ import com.dongyang.project.dao.MainDao;
 import com.dongyang.project.domain.CommunityVO;
 import com.dongyang.project.domain.ImageVO;
 import com.dongyang.project.domain.LoginVO;
+import com.dongyang.project.domain.NoticeVO;
 import com.dongyang.project.domain.OrderVO;
 import com.dongyang.project.domain.ProductVO;
 import com.dongyang.project.domain.ReturnVO;
@@ -99,5 +100,25 @@ public class LoginServiceImpl implements LoginService{
 	@Override
 	public int modifyCommunity(HashMap<String, Object> map) {
 		return dao.modifyCommunity(map);
+	}
+	@Override
+	public List<NoticeVO> selectNotice() {
+		return dao.selectNotice();
+	}
+	@Override
+	public NoticeVO selectNotice(String tid) {
+		return dao.selectNotice(tid);
+	}
+	@Override
+	public int insertNotice(HashMap<String, Object> map) {
+		return dao.insertNotice(map);
+	}
+	@Override
+	public int deleteNotice(String tid) {
+		return dao.deleteNotice(tid);
+	}
+	@Override
+	public int modifyNotice(HashMap<String, Object> map) {
+		return dao.modifyNotice(map);
 	}
 }

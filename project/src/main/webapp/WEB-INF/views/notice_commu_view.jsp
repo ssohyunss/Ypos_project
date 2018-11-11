@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.dongyang.project.domain.CommunityVO "%>
+<%@ page import="com.dongyang.project.domain.NoticeVO "%>
 <%
-	CommunityVO bean = (CommunityVO) request.getAttribute("bean");
+	NoticeVO bean = (NoticeVO) request.getAttribute("bean");
 %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
@@ -50,14 +50,29 @@
 			
 				<!-- 자유게시판 글 목록 데이터 베이스 넣기 -->
 				<a href="javascript:menu('NOTICE')" class="btn btn-primary" style="border: none; background-color:#56baed">목록</a>
-				<!-- 작성자가 관리자 일때 수정,삭제 버튼 표시하기
-				<a href="#" class="btn btn-primary" style="border: none; background-color:#56baed">수정</a>
-				<a href="#" class="btn btn-primary" style="border: none; background-color:#ccc">삭제</a>-->
+				<!-- 작성자가 관리자 일때 수정,삭제 버튼 표시하기-->
+				<%if(bean.getUser_master_tid().equals((String)session.getAttribute("userTid"))) {%>
+					<a href="javascript:modifyNotice('<%=bean.getTid() %>')" class="btn btn-primary" style="border: none; background-color:#56baed">수정</a>
+					<a href="javascript:deleteNotice('<%=bean.getTid() %>')" class="btn btn-primary" style="border: none; background-color:#ccc">삭제</a>
+				<%} %>
 			</div>
 		</div>
 	</div>
-
-
 </body>
+<script type="text/javascript">
+function modifyNotice(tid){
+	var path = "${pageContext.request.contextPath}";
+	$('#thisForm').attr('action', path + '/notice_write_commu.do?tid='+tid+'');
+	$('#thisForm')[0].submit();
+}
+function deleteNotice(tid){
+	if(!confirm("삭제하시겠습니까?")){
+		return false;
+	}
+	var path = "${pageContext.request.contextPath}";
+	$('#thisForm').attr('action', path + '/deletenotice?tid='+tid+'');
+	$('#thisForm')[0].submit();
+}
+</script>
 </html>
 
