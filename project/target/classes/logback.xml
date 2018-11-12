@@ -29,13 +29,13 @@
 
 	<!-- 로그의 레벨( 지정된 로그 레벨 이상만 수집 ) : DEBUG < INFO < WARN < ERROR < FATAL -->
 	<logger name="myweb" additivity="false">
-		<level value="INFO" />
+		<level value="DEBUG" />
 		<appender-ref ref="LOGFILE" />
 		<appender-ref ref="CONSOLE" />
 	</logger>
 
 	<root>
-		<level value="INFO" />
+		<level value="DEBUG" />
 		<appender-ref ref="CONSOLE" />
 	</root>
 

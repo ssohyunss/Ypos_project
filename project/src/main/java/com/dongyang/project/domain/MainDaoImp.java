@@ -1,5 +1,6 @@
 package com.dongyang.project.domain;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -52,5 +53,64 @@ public class MainDaoImp implements MainDao{
 	@Override
 	public int updateProductOut(ProductVO vo) throws Exception{
 		return sqlSession.update(namespace+".updateProductOut",vo);
+	}
+	public List<ProductVO> searchProduct(HashMap<String,Object> map) throws Exception {
+		return sqlSession.selectList(namespace+".searchProduct",map);
+	}
+	@Override
+	public List<OrderVO> selectOrder(String site) throws Exception {
+		return sqlSession.selectList(namespace+".selectOrder", site);
+	}
+	@Override
+	public List<ReturnVO> selectReturn(String site) throws Exception {
+		return sqlSession.selectList(namespace+".selectReturn", site);
+	}
+	@Override
+	public int insertOrder(HashMap<String, Object> map) {
+		return sqlSession.insert(namespace+".insertOrder", map);
 	}	
+	@Override
+	public int insertReturn(HashMap<String, Object> map) {
+		return sqlSession.insert(namespace+".insertReturn", map);
+	}
+	@Override
+	public List<CommunityVO> selectCommunity() {
+		return sqlSession.selectList(namespace+".selectCommunity");
+	}
+	@Override
+	public CommunityVO selectCommunity(String tid) {
+		return sqlSession.selectOne(namespace+".selectCommunityBean", tid);
+	}
+	@Override
+	public int insertCommunity(HashMap<String, Object> map) {
+		return sqlSession.insert(namespace+".insertCommunity", map);
+	}	
+	@Override
+	public int deleteCommunity(String tid) {
+		return sqlSession.insert(namespace+".deleteCommunity", tid);
+	}
+	@Override
+	public int modifyCommunity(HashMap<String, Object> map) {
+		return sqlSession.insert(namespace+".modifyCommunity", map);
+	}
+	@Override
+	public List<NoticeVO> selectNotice() {
+		return sqlSession.selectList(namespace+".selectNotice");
+	}
+	@Override
+	public NoticeVO selectNotice(String tid) {
+		return sqlSession.selectOne(namespace+".selectNoticeBean", tid);
+	}
+	@Override
+	public int insertNotice(HashMap<String, Object> map) {
+		return sqlSession.insert(namespace+".insertNotice", map);
+	}	
+	@Override
+	public int deleteNotice(String tid) {
+		return sqlSession.insert(namespace+".deleteNotice", tid);
+	}
+	@Override
+	public int modifyNotice(HashMap<String, Object> map) {
+		return sqlSession.insert(namespace+".modifyNotice", map);
+	}
 }

@@ -1,9 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.dongyang.project.domain.CommunityVO "%>
+<%@ page import="java.util.List"%>
+<%
+	List<CommunityVO> list = (List<CommunityVO>) request.getAttribute("list");
+%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
@@ -34,13 +38,22 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td><a href="javascript:button('VIEW')">서울점 노트북 재고 확인
-								부탁드려요.</a></td>
-						<td>인천점(홍길동)</td>
-						<td>2018-10-09</td>
+					<%
+						if (0 < list.size()) {
+
+							for (int i = 0; i < list.size(); i++) {
+								CommunityVO bean = list.get(i);
+					%>
+					<tr style="cursor: pointer;" onclick="viewCommunity('<%=bean.getTid()%>')">
+						<td><%=bean.getTid()%></td>
+						<td><%=bean.getTitle()%></td>
+						<td><%=bean.getUser_name()%></td>
+						<td><%=bean.getCreate_date()%></td>
 					</tr>
+					<%
+						}
+						}
+					%>
 				</tbody>
 
 			</table>
@@ -50,18 +63,22 @@
 		</div>
 	</div>
 </body>
-</html>
-
 <script type="text/javascript">
-	function button(cmd) {
-		var path = "${pageContext.request.contextPath}";
-		if ("WRITE" == cmd) {
-			$('#thisForm').attr('action', path + '/free_write_commu.do');
-		} else if ("NOTICE_VIEW" == cmd) {
-			$('#thisForm').attr('action', path + '/notice_commu_view.do');
-		} else if ("VIEW" == cmd) {
-			$('#thisForm').attr('action', path + '/free_commu_view.do');
-		}
-		$('#thisForm')[0].submit();
+function button(cmd) {
+	var path = "${pageContext.request.contextPath}";
+	if ("WRITE" == cmd) {
+		$('#thisForm').attr('action', path + '/free_write_commu.do');
+	} else if ("NOTICE_VIEW" == cmd) {
+		$('#thisForm').attr('action', path + '/notice_commu_view.do');
+	} else if ("VIEW" == cmd) {
+		$('#thisForm').attr('action', path + '/free_commu_view.do');
 	}
+	$('#thisForm')[0].submit();
+}
+function viewCommunity(tid){
+	var path = "${pageContext.request.contextPath}";
+	$('#thisForm').attr('action', path + '/free_commu_view.do?tid='+tid+'');
+	$('#thisForm')[0].submit();
+}
 </script>
+</html>

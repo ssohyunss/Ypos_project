@@ -1,5 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.dongyang.project.domain.NoticeVO "%>
+<%@ page import="java.util.List"%>
+<%
+	List<NoticeVO> list = (List<NoticeVO>) request.getAttribute("list");
+%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
@@ -38,27 +42,45 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td><a href="javascript:button('NOTICE_VIEW')">안녕하세요.</td>
-						<td>관리자(권소현)</td>
-						<td>2018-10-14</td>
+					<%
+						if (0 < list.size()) {
+							for (int i = 0; i < list.size(); i++) {
+								NoticeVO bean = list.get(i);
+					%>
+					<tr style="cursor: pointer;" onclick="viewNotice('<%=bean.getTid()%>')">
+						<td><%=bean.getTid()%></td>
+						<td><%=bean.getTitle()%></td>
+						<td><%=bean.getUser_name()%></td>
+						<td><%=bean.getCreate_date()%></td>
 					</tr>
+					<%
+						}
+						}
+					%>				
 				</tbody>
-
 			</table>
-
+			<%if("1".equals((String)session.getAttribute("site"))) {%>
+				<a href="javascript:button('WRITE')"
+				class="btn btn-primary pull-right"
+				style="border: none; background-color: #56baed">글쓰기 </a>
+			<%} %>
 		</div>
 	</div>
 </body>
-</html>
-
 <script type="text/javascript">
-	function button(cmd) {
-		var path = "${pageContext.request.contextPath}";
-		if ("NOTICE_VIEW" == cmd) {
-			$('#thisForm').attr('action', path + '/notice_commu_view.do');
-		} 
-		$('#thisForm')[0].submit();
+function button(cmd) {
+	var path = "${pageContext.request.contextPath}";
+	if ("NOTICE_VIEW" == cmd) {
+		$('#thisForm').attr('action', path + '/notice_commu_view.do');
+	}else if ("WRITE" == cmd) {
+		$('#thisForm').attr('action', path + '/notice_write_commu.do'); 
 	}
+	$('#thisForm')[0].submit();
+}
+function viewNotice(tid){
+	var path = "${pageContext.request.contextPath}";
+	$('#thisForm').attr('action', path + '/notice_commu_view.do?tid='+tid+'');
+	$('#thisForm')[0].submit();
+}
 </script>
+</html>
