@@ -36,9 +36,9 @@
 						<td><select name="manageDivide"
 							class="form-control mx-1 mt-2" style="width: 100%;">
 								<option value="전체">전체</option>
-								<option value="지점">지점</option>
 								<option value="상품코드">상품코드</option>
 								<option value="상품명">상품명</option>
+								<option value="지점">지점</option>
 						</select></td>
 
 						<td colspan="3"><input type="text" name="search"
@@ -56,10 +56,10 @@
 				<table class="table table-striped" style="text-align: center">
 					<thead>
 						<tr>
-							<th style="background-color: #eeeeee; text-align: center;">지점</th>
 							<th style="background-color: #eeeeee; text-align: center;">상품코드</th>
 							<th style="background-color: #eeeeee; text-align: center;">상품명</th>
 							<th style="background-color: #eeeeee; text-align: center;">상품가격</th>
+							<th style="background-color: #eeeeee; text-align: center;">지점</th>
 							<th style="background-color: #eeeeee; text-align: center;">수량</th>
 						</tr>
 					</thead>

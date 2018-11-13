@@ -37,8 +37,8 @@
 			<table class="table table-striped" style="text-align: center;">
 				<thead>
 					<tr>
-						<th style="background-color: #eeeeee; text-align: center;">상품명</th>
 						<th style="background-color: #eeeeee; text-align: center;">상품코드</th>
+						<th style="background-color: #eeeeee; text-align: center;">상품명</th>
 						<th style="background-color: #eeeeee; text-align: center;">수량</th>
 						<th style="background-color: #eeeeee; text-align: center;">지점</th>
 						<th style="background-color: #eeeeee; text-align: center;">반품사유</th>
@@ -54,8 +54,8 @@
 								ReturnVO bean = list.get(i);
 					%>
 					<tr>
-						<td><%=bean.getProduct_name()%></td>
 						<td><%=bean.getProduct_code()%></td>
+						<td><%=bean.getProduct_name()%></td>
 						<td><%=bean.getCount()%></td>
 						<td><%=bean.getSite_name()%></td>
 						<td><%=bean.getDescription()%></td>

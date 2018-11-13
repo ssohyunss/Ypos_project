@@ -84,7 +84,7 @@
 	<select id="modifyCommunity" resultType="com.dongyang.project.domain.CommunityVO">
 		update COMMUNITY set TITLE = #{title}, CONTENTS = #{contents}, MODIFY_DATE = #{date} where 1=1 and TID = #{tid}  
 	</select>
-	
+
 	
 	
 	<select id="selectNotice" resultType="com.dongyang.project.domain.NoticeVO">

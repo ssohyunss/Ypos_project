@@ -69,7 +69,7 @@
 				</table>
 				<input type="button" class="btn btn-primary pull-right" value="등록" style="border: none; background-color:#56baed" onClick="insertNotice()">
 			<%} %>
-			<input type="button" class="btn btn-primary pull-right" value="취소" style="border: none; margin-right:10px; background-color:#ccc"  onClick="javascript:menu('FREE')" >
+			<input type="button" class="btn btn-primary pull-right" value="취소" style="border: none; margin-right:10px; background-color:#ccc"  onClick="javascript:menu('NOTICE')" >
 			</form>
 		</div>
 	</div>

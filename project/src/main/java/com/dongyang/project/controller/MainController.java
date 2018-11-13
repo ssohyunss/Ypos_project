@@ -67,39 +67,27 @@ private LoginService service;
 		return "main";
 	}
 	
-	@RequestMapping("/sale.do")
-	public String sale(Model model) {
-		model.addAttribute("message","판매관리");
-		return "sale";
-	}
-	
-	@RequestMapping("sale/regist")
-	public String regist(Model model) {
+	@RequestMapping("/sale_regist.do")
+	public String sale_regist(Model model) {
 		model.addAttribute("message","판매등록");
-		return "sale/regist";
+		return "sale_regist";
 	}
 	
-	@RequestMapping("sale/deadline")
-	public String deadline(Model model) {
+	@RequestMapping("/sale_deadline.do")
+	public String sale_deadline(Model model) {
 		model.addAttribute("message","판매마감현황");
-		
-		return "sale/deadline";
+		return "sale_deadline";
 	}
 	
-	@RequestMapping("sale/status")
-	public String status(Model model) {
-		model.addAttribute("message","품번별판매현황");
-		
-		return "sale/status";
+	
+	@RequestMapping("/sale_pro_manage.do")
+	public String sale_pro_manage(Model model) {
+		model.addAttribute("message","상품코드별 판매현황");
+		return "sale_pro_manage";
 	}
 	
-	@RequestMapping("sale/graph")
-	public String graph(Model model) {
-		model.addAttribute("message","월별그래프");
-		
-		return "sale/graph";
-		
-	}
+
+
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/manage.do", method = {RequestMethod.GET, RequestMethod.POST})
@@ -245,6 +233,20 @@ private LoginService service;
 		request.setAttribute("jsonOut", obj);
 		return "stringout";
 	}
+	
+	@RequestMapping("/order_input_confirm.do")
+	public String order_input_confirm(Model model) {
+		model.addAttribute("message","입점확인");
+		return "order_input_confirm";
+	}
+	
+	@RequestMapping("/order_output_history.do")
+	public String order_output_history(Model model) {
+		model.addAttribute("message","출고주문내역");
+		return "order_output_history";
+	}
+	
+	
 	@RequestMapping("/notice_commu.do")
 	public String notice_commu (HttpServletRequest request, NoticeVO vo, Model model, HttpSession session) {
 		List<NoticeVO> list = service.selectNotice();
