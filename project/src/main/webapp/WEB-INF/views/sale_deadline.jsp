@@ -17,9 +17,6 @@
 <script>
 	$(function() {
 
-		//오늘 날짜를 출력
-		$("#today").text(new Date().toLocaleDateString());
-
 		$.datepicker.setDefaults($.datepicker.regional['ko']);
 		// 시작일(fromDate)은 종료일(toDate) 이후 날짜 선택 불가
 		// 종료일(toDate)은 시작일(fromDate) 이전 날짜 선택 불가
@@ -134,7 +131,7 @@ input[type=text] {
 							<td>iphoneX_AA128</td>
 							<td>아이폰x_128GB</td>
 							<td>1</td>
-							<td>1,100,00O</td>
+							<td>1,100,000</td>
 							<td>2018-11-15</td>
 						</tr>
 						<tr>
@@ -142,7 +139,7 @@ input[type=text] {
 							<td>iphoneX_AA128</td>
 							<td>아이폰x_128GB</td>
 							<td>1</td>
-							<td>-1,100,00O</td>
+							<td>-1,100,000</td>
 							<td>2018-11-15</td>
 						</tr>
 					</tbody>

@@ -4,37 +4,54 @@
 <%@ page import="com.dongyang.project.domain.ProductVO "%>
 <%@ page import="java.util.List"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<title>Y-POS</title>
-<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-<link rel="stylesheet" href="/css/jquery-ui.min.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport " content="width=device-width ,initial-scale=1">
+<link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <script
-	src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-<script type='text/javascript' src='//code.jquery.com/jquery-1.8.3.js'></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker3.min.css">
-<script type='text/javascript'
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
-<script src="/js/bootstrap-datepicker.kr.js" charset="UTF-8"></script>
-
-<script type='text/javascript'>
+	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
+<script>
 	$(function() {
-		$('.input-group.date').datepicker({
-			calendarWeeks : false,
-			todayHighlight : true,
-			autoclose : true,
-			format : "yyyy/mm/dd",
-			language : "kr"
+
+		$.datepicker.setDefaults($.datepicker.regional['ko']);
+		// 시작일(fromDate)은 종료일(toDate) 이후 날짜 선택 불가
+		// 종료일(toDate)은 시작일(fromDate) 이전 날짜 선택 불가
+
+		//시작일.
+		$('#fromDate').datepicker({
+			showOn : "both", // 달력을 표시할 타이밍 (both: focus or button)
+			buttonImage : "img/calendar.png", // 버튼 이미지
+			buttonImageOnly : true, // 버튼 이미지만 표시할지 여부
+			buttonText : "날짜선택", // 버튼의 대체 텍스트
+			dateFormat : "yy-mm-dd", // 날짜의 형식
+			changeMonth : true, // 월을 이동하기 위한 선택상자 표시여부
+		//minDate: 0,                       // 선택할수있는 최소날짜, ( 0 : 오늘 이전 날짜 선택 불가)
+
 		});
 
 	});
 </script>
+<title>Y-POS</title>
 </head>
 <style>
+img.ui-datepicker-trigger {
+	margin-left: 5px;
+	vertical-align: middle;
+	cursor: pointer;
+	width: 15px;
+}
+
+input[type=text] {
+	padding: 5px 5px;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+}
 </style>
 <body>
 	<form id="thisForm" name="thisForm" onsubmit="return check_onclick();"
@@ -44,27 +61,46 @@
 			<h3>
 				<b>일자별 수불현황</b>
 			</h3>
-			<div class="input-group date" style="width: 20%;" >
-
-            <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-
-        </div>
+			<div style="margin-top: 40px; margin-bottom: 40px" align="left">
+				<form>
+					<label>날짜선택&nbsp;</label> <input type="text" name="fromDate"
+						id="fromDate">
+					<button type="submit" class="btn btn-primary mx-1 mt-2"
+						style="border: none; background-color: #56baed; margin-left: 5px">조회</button>
+				</form>
+			</div>
 			<div class="row" style="margin-top: 20px">
 				<table class="table table-striped" style="text-align: center">
 					<thead>
 						<tr>
 							<th style="background-color: #eeeeee; text-align: center;">날짜</th>
+							<th style="background-color: #eeeeee; text-align: center;">상품코드</th>
 							<th style="background-color: #eeeeee; text-align: center;">상품명</th>
 							<th style="background-color: #eeeeee; text-align: center;">상품가격</th>
-							<th style="background-color: #eeeeee; text-align: center;">수량</th>
 							<th style="background-color: #eeeeee; text-align: center;">입고수량</th>
 							<th style="background-color: #eeeeee; text-align: center;">출고수량</th>
 							<th style="background-color: #eeeeee; text-align: center;">지점명</th>
 						</tr>
 					</thead>
 					<tbody>
-
-
+						<tr>
+							<td>2018-11-14</td>
+							<td>headset_HH_SONY</td>
+							<td>헤드셋_소니</td>
+							<td>130,00O</td>
+							<td>1</td>
+							<td></td>
+							<td>본사</td>
+						</tr>
+						<tr>
+							<td>2018-11-14</td>
+							<td>iphoneX_AA128</td>
+							<td>아이폰x_128GB</td>
+							<td>1,100,000</td>
+							<td></td>
+							<td>1</td>
+							<td>인천점</td>
+						</tr>
 					</tbody>
 
 				</table>
