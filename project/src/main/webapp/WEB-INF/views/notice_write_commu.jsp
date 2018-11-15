@@ -21,7 +21,7 @@
 		<%@include file="./include/menu.jsp"%>
 
 	</form>
-	<div class="container">
+	<div class="container" style="margin-top: 40px">
 		<div class="row">
 			<form method="post" action="#">
 			<%if("" != bean.getTid()) {%>

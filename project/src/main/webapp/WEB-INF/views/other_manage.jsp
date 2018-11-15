@@ -30,7 +30,7 @@
 				<b>타매장재고현황</b>
 			</h3>
 
-			<div class="search" align="right">
+			<div class="search" style="margin-top: 40px; margin-bottom: 40px" align="left">
 				<table>
 					<tr>
 						<td><select name="manageDivide"
@@ -46,7 +46,7 @@
 							style="width: 300px; margin-left: 5px"></td>
 
 						<td><button type="submit" class="btn btn-primary mx-1 mt-2"
-								style="border: none; background-color: #56baed; margin-left: 5px">검색</button></td>
+								style="border: none; background-color: #56baed; margin-left: 5px">조회</button></td>
 
 					</tr>
 				</table>

@@ -21,7 +21,7 @@
 	<form id="thisForm" name="thisForm" onsubmit="return false;" action="/" method="post" enctype="multipart/form-data">
 		<%@include file="./include/menu.jsp"%>
 	</form>
-	<div class="container" style="margin-top: 50px">
+	<div class="container" style="margin-top: 40px">
 		<div class="row">
 			<table class="table table-striped" style="text-align: center;">
 				<thead>

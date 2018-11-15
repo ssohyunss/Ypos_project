@@ -31,7 +31,7 @@
 			<b>공지사항</b>
 		</h3>
 
-		<div class="row">
+		<div class="row" style="margin-top: 40px">
 			<table class="table table-striped" style="text-align: center;">
 				<thead>
 					<tr>

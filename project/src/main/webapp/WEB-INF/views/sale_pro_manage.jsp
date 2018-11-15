@@ -16,9 +16,9 @@
 	<script src="js/bootstrap.js"></script>
 	<form id="thisForm" name="thisForm" onsubmit="return false;" action="/"
 		method="post" enctype="multipart/form-data">
-	
+
 		<%@include file="./include/menu.jsp"%>
-	
+
 	</form>
 
 	<div class="container">
@@ -26,92 +26,100 @@
 		<h3>
 			<b>상품코드별 판매현황</b>
 		</h3>
-		
-		
-		<a class="btn btn-primary pull-right" data-toggle="modal" href="#orderRegist" style="border: none; margin-bottom:20px; background-color: #56baed">주문등록하기</a>
-			
-			<div class="row">
+
+		<div style="margin-top: 40px; margin-bottom: 40px" align="left">
+			<table>
+				<tr>
+					<td><b>상품코드</b></td>
+					<td colspan="3"><input type="text" name="search"
+						class="form-control mx-1 mt-2" placeholder="상품코드를 입력하세요."
+						style="width: 300px; margin-left: 5px"></td>
+
+					<td><button type="submit" class="btn btn-primary mx-1 mt-2"
+							style="border: none; background-color: #56baed; margin-left: 5px">조회</button></td>
+
+				</tr>
+			</table>
+		</div>
+
+		<div class="row">
 			<table class="table table-striped" style="text-align: center;">
 				<thead>
 					<tr>
-						<th style="background-color: #eeeeee; text-align: center;">주문명</th>
+						<th style="background-color: #eeeeee; text-align: center;">분류</th>
 						<th style="background-color: #eeeeee; text-align: center;">상품코드</th>
 						<th style="background-color: #eeeeee; text-align: center;">상품명</th>
 						<th style="background-color: #eeeeee; text-align: center;">수량</th>
-						<th style="background-color: #eeeeee; text-align: center;">지점명</th>
-						<th style="background-color: #eeeeee; text-align: center;">내용</th>
-						<th style="background-color: #eeeeee; text-align: center;">등록일</th>
-						<th style="background-color: #eeeeee; text-align: center;">출고여부</th>
-						<th style="background-color: #eeeeee; text-align: center;">출고일</th>
-						
+						<th style="background-color: #eeeeee; text-align: center;">금액</th>
+						<th style="background-color: #eeeeee; text-align: center;">날짜</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td>아이폰x주문</td>
+						<td>판매</td>
 						<td>iphoneX_AA128</td>
 						<td>아이폰x_128GB</td>
-						<td>8</td>
-						<td>인천점</td>
-						<td>주문건입니다. 입고부탁드려요.</td>
-						<td>2018-10-08</td>
-						<td>O</td>
-						<td>2018-10-08</td>
-					</tr>
-					<tr>
-						<td>헤드셋주문</td>
-						<td>headset_HH_SONY</td>
-						<td>헤드셋_소니</td>
 						<td>1</td>
-						<td>본사</td>
-						<td>불량/교체건입니다.</td>
-						<td>2018-10-09</td>
-						<td>O</td>
-						<td>2018-10-11</td>
+						<td>1,100,00O</td>
+						<td>2018-10-21</td>
 					</tr>
 					<tr>
-						<td>마우스 주문</td>
-						<td>mouse_logitech</td>
-						<td>마우스_로지텍</td>
-						<td>10</td>
-						<td>본사</td>
-						<td>쓰리팝단체주문건입니다.</td>
-						<td>2018-10-11</td>
-						<td>X</td>
-						<td>-</td>
+						<td>반품</td>
+						<td>iphoneX_AA128</td>
+						<td>아이폰x_128GB</td>
+						<td>1</td>
+						<td>-1,100,00O</td>
+						<td>2018-10-30</td>
+					</tr>
+					<tr>
+						<td>판매</td>
+						<td>iphoneX_AA128</td>
+						<td>아이폰x_128GB</td>
+						<td>1</td>
+						<td>1,100,00O</td>
+						<td>2018-11-15</td>
+					</tr>
+					<tr>
+						<td>반품</td>
+						<td>iphoneX_AA128</td>
+						<td>아이폰x_128GB</td>
+						<td>1</td>
+						<td>-1,100,00O</td>
+						<td>2018-11-15</td>
 					</tr>
 				</tbody>
 
 			</table>
 		</div>
-		
+
 	</div>
-	
+
 	<div class="modal fade" id="orderRegist" tabindex="-1" role="dialog"
 		aria-labelledby="modal" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="modal">주문 등록</h5>
-					<button type="button" class="close" data-dismiss="modal"aria-label="Close">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 
 				<div class="modal-body">
 					<form action="#" method="post">
-					
 
-					<div class="form-group col-sm-12">
-					<label>지점선택</label>
-					<select name="selectstore" class="form-control">
-									<option value="본사">본사</option>
-									<option value="서울점">서울점</option>
-									<option value="인천점">인천점</option>
-								</select>
 
-					
-					</div>
+						<div class="form-group col-sm-12">
+							<label>지점선택</label> <select name="selectstore"
+								class="form-control">
+								<option value="본사">본사</option>
+								<option value="서울점">서울점</option>
+								<option value="인천점">인천점</option>
+							</select>
+
+
+						</div>
 						<div class="form-row">
 							<div class="form-group col-sm-4">
 								<label>년</label> <select name="orderYear" class="form-control">
@@ -195,12 +203,13 @@
 						<div class="form-group col-sm-12">
 							<label>내용</label>
 							<textarea type="text" name="evaluationContent"
-								class="form-control" maxlength=2048  style="height: 150px;"></textarea>
+								class="form-control" maxlength=2048 style="height: 150px;"></textarea>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
 								data-dismiss="modal">취소</button>
-							<button type="submit" class="btn btn-primary" style="border: none; background-color: #56baed">등록</button>
+							<button type="submit" class="btn btn-primary"
+								style="border: none; background-color: #56baed">등록</button>
 						</div>
 					</form>
 				</div>

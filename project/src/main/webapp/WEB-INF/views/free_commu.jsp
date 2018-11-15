@@ -23,11 +23,11 @@
 		<%@include file="./include/menu.jsp"%>
 	</form>
 
-	<div class="container">
+	<div class="container" >
 		<h3>
 			<b>자유게시판</b>
 		</h3>
-		<div class="row">
+		<div class="row" style="margin-top: 40px">
 			<table class="table table-striped" style="text-align: center;">
 				<thead>
 					<tr>

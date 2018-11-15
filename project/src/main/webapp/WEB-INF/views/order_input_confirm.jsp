@@ -1,24 +1,84 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport " content="width=device-width ,initial-scale=1">
 <link rel="stylesheet" href="css/bootstrap.css">
-<title>Y-POS</title>
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
+<script>
+	$(function() {
+
+		//오늘 날짜를 출력
+		$("#today").text(new Date().toLocaleDateString());
+
+		$.datepicker.setDefaults($.datepicker.regional['ko']);
+		// 시작일(fromDate)은 종료일(toDate) 이후 날짜 선택 불가
+		// 종료일(toDate)은 시작일(fromDate) 이전 날짜 선택 불가
+
+		//시작일.
+		$('#fromDate').datepicker({
+			showOn : "both", // 달력을 표시할 타이밍 (both: focus or button)
+			buttonImage : "img/calendar.png", // 버튼 이미지
+			buttonImageOnly : true, // 버튼 이미지만 표시할지 여부
+			buttonText : "날짜선택", // 버튼의 대체 텍스트
+			dateFormat : "yy-mm-dd", // 날짜의 형식
+			changeMonth : true, // 월을 이동하기 위한 선택상자 표시여부
+			//minDate: 0,                       // 선택할수있는 최소날짜, ( 0 : 오늘 이전 날짜 선택 불가)
+			onClose : function(selectedDate) {
+				// 시작일(fromDate) datepicker가 닫힐때
+				// 종료일(toDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
+				$("#toDate").datepicker("option", "minDate", selectedDate);
+			}
+		});
+
+		//종료일
+		$('#toDate').datepicker({
+			showOn : "both",
+			buttonImage : "img/calendar.png",
+			buttonImageOnly : true,
+			buttonText : "날짜선택",
+			dateFormat : "yy-mm-dd",
+			changeMonth : true,
+			//minDate: 0, // 오늘 이전 날짜 선택 불가
+			onClose : function(selectedDate) {
+				// 종료일(toDate) datepicker가 닫힐때
+				// 시작일(fromDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정 
+				$("#fromDate").datepicker("option", "maxDate", selectedDate);
+			}
+		});
+
+	});
+</script><title>Y-POS</title>
 </head>
 <style>
+img.ui-datepicker-trigger {
+	margin-left: 5px;
+	vertical-align: middle;
+	cursor: pointer;
+	width: 15px;
+}
+
+input[type=text] {
+	padding: 5px 5px;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+}
 </style>
 <body>
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="js/bootstrap.js"></script>
 	<form id="thisForm" name="thisForm" onsubmit="return false;" action="/"
 		method="post" enctype="multipart/form-data">
-	
+
 		<%@include file="./include/menu.jsp"%>
-	
+
 	</form>
 
 	<div class="container">
@@ -26,11 +86,19 @@
 		<h3>
 			<b>입점확인</b>
 		</h3>
-		
-		
-		<a class="btn btn-primary pull-right" data-toggle="modal" href="#orderRegist" style="border: none; margin-bottom:20px; background-color: #56baed">주문등록하기</a>
-			
-			<div class="row">
+
+		<div style="margin-top: 40px; margin-bottom: 40px" align="left">
+			<form>
+				<label>날짜선택&nbsp;</label> <input type="text" name="fromDate"
+					id="fromDate"> &nbsp;~&nbsp; <input type="text"
+					name="toDate" id="toDate">
+				<button type="submit" class="btn btn-primary mx-1 mt-2"
+					style="border: none; background-color: #56baed; margin-left: 5px">조회</button>
+			</form>
+		</div>
+
+
+		<div class="row">
 			<table class="table table-striped" style="text-align: center;">
 				<thead>
 					<tr>
@@ -40,7 +108,7 @@
 						<th style="background-color: #eeeeee; text-align: center;">지점명</th>
 						<th style="background-color: #eeeeee; text-align: center;">내용</th>
 						<th style="background-color: #eeeeee; text-align: center;">출고일</th>
-						
+
 					</tr>
 				</thead>
 				<tbody>
@@ -96,34 +164,35 @@
 
 			</table>
 		</div>
-		
+
 	</div>
-	
+
 	<div class="modal fade" id="orderRegist" tabindex="-1" role="dialog"
 		aria-labelledby="modal" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="modal">주문 등록</h5>
-					<button type="button" class="close" data-dismiss="modal"aria-label="Close">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 
 				<div class="modal-body">
 					<form action="#" method="post">
-					
 
-					<div class="form-group col-sm-12">
-					<label>지점선택</label>
-					<select name="selectstore" class="form-control">
-									<option value="본사">본사</option>
-									<option value="서울점">서울점</option>
-									<option value="인천점">인천점</option>
-								</select>
 
-					
-					</div>
+						<div class="form-group col-sm-12">
+							<label>지점선택</label> <select name="selectstore"
+								class="form-control">
+								<option value="본사">본사</option>
+								<option value="서울점">서울점</option>
+								<option value="인천점">인천점</option>
+							</select>
+
+
+						</div>
 						<div class="form-row">
 							<div class="form-group col-sm-4">
 								<label>년</label> <select name="orderYear" class="form-control">
@@ -207,12 +276,13 @@
 						<div class="form-group col-sm-12">
 							<label>내용</label>
 							<textarea type="text" name="evaluationContent"
-								class="form-control" maxlength=2048  style="height: 150px;"></textarea>
+								class="form-control" maxlength=2048 style="height: 150px;"></textarea>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
 								data-dismiss="modal">취소</button>
-							<button type="submit" class="btn btn-primary" style="border: none; background-color: #56baed">등록</button>
+							<button type="submit" class="btn btn-primary"
+								style="border: none; background-color: #56baed">등록</button>
 						</div>
 					</form>
 				</div>
