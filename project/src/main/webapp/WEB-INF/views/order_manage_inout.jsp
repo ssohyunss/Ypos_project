@@ -2,10 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="com.dongyang.project.domain.OrderVO "%>
 <%@ page import="com.dongyang.project.domain.ProductVO "%>
+<%@ page import="com.dongyang.project.domain.SiteVO "%>
 <%@ page import="java.util.List"%>
 <%
 	List<ProductVO> productList = (List<ProductVO>) request.getAttribute("productList");
 	List<OrderVO> list = (List<OrderVO>) request.getAttribute("list");
+	List<SiteVO> siteList = (List<SiteVO>) request.getAttribute("siteList");
 %>
 <!DOCTYPE html>
 <html>
@@ -92,10 +94,6 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-group col-sm-12">
-						<label>주문명</label> <input type="text" id="order"
-							class="form-control" maxlength="20">
-					</div>
-					<div class="form-group col-sm-12">
 						<label>상품명</label> <select id="orderName" class="form-control"
 							onchange="changeOrderName()">
 							<option hidden>상품을 선택해주세요.</option>
@@ -115,6 +113,20 @@
 						<label>상품코드</label> <input type="text" id="orderCode"
 							class="form-control" maxlength="20" readonly="readonly">
 					</div>
+					<div class="form-group col-sm-12">
+						<label>지점선택</label> <select id="orderSite" class="form-control">
+							<option hidden>지점을 선택해주세요.</option>
+							<%
+								if (0 < siteList.size()) {
+									for (int i = 0; i < siteList.size(); i++) {
+							%>
+							<option value="<%=siteList.get(i).getTid()%>"><%=siteList.get(i).getName()%></option>
+							<%
+								}
+								}
+							%>
+						</select>
+					</div>				
 					<div class="form-group col-sm-12">
 						<label>수량</label> <input type="text" id="orderCount"
 							class="form-control" maxlength="20">
@@ -163,11 +175,11 @@
 		}
 	}
 	function insertOrder() {
-		var param = "orderName=" + $('#orderName').val() + "";
-		param += "&orderCode=" + $('#orderCode').val() + "";
+		var param = "orderCode=" + $('#orderCode').val() + "";
 		param += "&orderCount=" + $('#orderCount').val() + "";
 		param += "&orderDesc=" + $('#orderDesc').val() + "";
-		param += "&order=" + $('#order').val() + "";
+		param += "&orderName=" + $('#orderName').val() + "";
+		param += "&orderSite=" + $('#orderSite option:selected').val() + "";
 		ajaxCall('/project/insertOrder', param,
 				function(data) {
 					var mapResult = JSON.parse(data);

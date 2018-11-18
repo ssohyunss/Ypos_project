@@ -24,6 +24,7 @@ import com.dongyang.project.domain.NoticeVO;
 import com.dongyang.project.domain.OrderVO;
 import com.dongyang.project.domain.ProductVO;
 import com.dongyang.project.domain.ReturnVO;
+import com.dongyang.project.domain.SiteVO;
 import com.dongyang.project.service.LoginService;
 
 @Controller
@@ -173,8 +174,10 @@ private LoginService service;
 		if(null == productList) {
 			productList = new ArrayList<ProductVO>(); 
 		}
+		List<SiteVO> siteList = service.selectSite(site);
 		request.setAttribute("list",list);
 		request.setAttribute("productList",productList);
+		request.setAttribute("siteList",siteList);
 		return "order_manage_inout";
 	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -189,7 +192,7 @@ private LoginService service;
 		map.put("orderCode", (String)request.getParameter("orderCode"));
 		map.put("orderCount", (String)request.getParameter("orderCount"));
 		map.put("orderDesc", (String)request.getParameter("orderDesc"));
-		map.put("order", (String)request.getParameter("order"));
+		map.put("orderSite", (String)request.getParameter("orderSite"));
 		map.put("date", default_format.format(new Date()));
 		result = service.insertOrder(map);
 		if(0 < result) {
@@ -235,17 +238,47 @@ private LoginService service;
 	}
 	
 	@RequestMapping("/order_input_confirm.do")
-	public String order_input_confirm(Model model) {
-		model.addAttribute("message","입점확인");
+	public String order_input_confirm(HttpServletRequest request, OrderVO vo, Model model, HttpSession session) throws Exception {
+		String site = (String)session.getAttribute("site");
+		List<OrderVO> list = service.selectOrderInput((String)session.getAttribute("site"));
+		if(null == list) {
+			list = new ArrayList<OrderVO>(); 
+		}
+		request.setAttribute("list",list);
 		return "order_input_confirm";
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@RequestMapping("/order_output_history.do")
-	public String order_output_history(Model model) {
-		model.addAttribute("message","출고주문내역");
+	public String order_output_history(HttpServletRequest request, OrderVO vo, Model model, HttpSession session) throws Exception {
+		String site = (String)session.getAttribute("site");
+		HashMap<String,Object> map = new HashMap();
+		map.put("site", (String)session.getAttribute("site"));
+		map.put("showValue", (String)request.getParameter("showValue"));
+		List<OrderVO> list = service.selectOrderSite(map);
+		if(null == list) {
+			list = new ArrayList<OrderVO>(); 
+		}
+		request.setAttribute("list",list);
 		return "order_output_history";
 	}
-	
+	@SuppressWarnings("rawtypes")
+	@RequestMapping("/order_output_history_update")
+	public String order_output_history_update(HttpServletRequest request, OrderVO vo, Model model, HttpSession session) throws Exception {
+		JSONObject obj = new JSONObject();
+		int result = 0;
+		obj.put("successYN", "N");
+		HashMap<String,Object> map = new HashMap();
+		map.put("tid", (String)request.getParameter("tid"));
+		map.put("showValue", (String)request.getParameter("outYN"));
+		map.put("date", default_format.format(new Date()));
+		result = service.updateOrder(map);
+		if(0 < result) {
+			obj.put("successYN", "Y");
+		}
+		request.setAttribute("jsonOut", obj);
+		return "stringout";
+	}
 	
 	@RequestMapping("/notice_commu.do")
 	public String notice_commu (HttpServletRequest request, NoticeVO vo, Model model, HttpSession session) {

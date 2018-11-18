@@ -4,7 +4,7 @@ public class OrderVO {
     private String tid = "";
     private String site_tid = "";
     private String site_name = "";
-    private String order_name = "";
+    private String order_site = "";
     private String product_name = "";
     private String product_code = "";
     private String count = "";
@@ -30,11 +30,11 @@ public class OrderVO {
 	public void setSite_name(String site_name) {
 		this.site_name = site_name;
 	}
-	public String getOrder_name() {
-		return order_name;
+	public String getOrder_site() {
+		return order_site;
 	}
-	public void setOrder_name(String order_name) {
-		this.order_name = order_name;
+	public void setOrder_site(String order_site) {
+		this.order_site = order_site;
 	}
 	public String getProduct_name() {
 		return product_name;

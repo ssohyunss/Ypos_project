@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.dongyang.project.domain.OrderVO "%>
+<%@ page import="java.util.List"%>
+<%
+	List<OrderVO> list = (List<OrderVO>) request.getAttribute("list");
+%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
@@ -112,54 +117,24 @@ input[type=text] {
 					</tr>
 				</thead>
 				<tbody>
+					<%
+						if (0 < list.size()) {
+
+							for (int i = 0; i < list.size(); i++) {
+								OrderVO bean = list.get(i);
+					%>
 					<tr>
-						<td>iphoneX_AA128</td>
-						<td>아이폰x_128GB</td>
-						<td>8</td>
-						<td>인천점</td>
-						<td>주문건입니다. 입고부탁드려요.</td>
-						<td>2018-10-08</td>
+						<td><%=bean.getProduct_code()%></td>
+						<td><%=bean.getProduct_name()%></td>
+						<td><%=bean.getCount()%></td>
+						<td><%=bean.getSite_name()%></td>
+						<td><%=bean.getDescription()%></td>
+						<td><%=bean.getOut_date()%></td>
 					</tr>
-					<tr>
-						<td>iphoneX_AA128</td>
-						<td>아이폰x_128GB</td>
-						<td>8</td>
-						<td>인천점</td>
-						<td>주문건입니다. 입고부탁드려요.</td>
-						<td>2018-10-08</td>
-					</tr>
-					<tr>
-						<td>iphoneX_AA128</td>
-						<td>아이폰x_128GB</td>
-						<td>8</td>
-						<td>인천점</td>
-						<td>주문건입니다. 입고부탁드려요.</td>
-						<td>2018-10-08</td>
-					</tr>
-					<tr>
-						<td>iphoneX_AA128</td>
-						<td>아이폰x_128GB</td>
-						<td>8</td>
-						<td>인천점</td>
-						<td>주문건입니다. 입고부탁드려요.</td>
-						<td>2018-10-08</td>
-					</tr>
-					<tr>
-						<td>iphoneX_AA128</td>
-						<td>아이폰x_128GB</td>
-						<td>8</td>
-						<td>인천점</td>
-						<td>주문건입니다. 입고부탁드려요.</td>
-						<td>2018-10-08</td>
-					</tr>
-					<tr>
-						<td>iphoneX_AA128</td>
-						<td>아이폰x_128GB</td>
-						<td>8</td>
-						<td>인천점</td>
-						<td>주문건입니다. 입고부탁드려요.</td>
-						<td>2018-10-08</td>
-					</tr>
+					<%
+						}
+						}
+					%>
 				</tbody>
 
 			</table>
