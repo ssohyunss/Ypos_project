@@ -9,6 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport " content="width=device-width ,initial-scale=1">
 <link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -28,6 +29,27 @@
 <title>Y-POS</title>
 </head>
 <style>
+.content{
+        margin: 10px 20px;
+        display: flex;
+    }
+    
+    
+    
+    @media(max-width:767px) {
+       
+        input[type="text"] {
+       margin : 10px 0;
+    }
+    
+        .date , .price{
+        	margin-left: 20px;
+        }
+    
+        .content{
+            display: inline-block;
+        }
+    }
 </style>
 <body>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -45,7 +67,7 @@
 				<b>판매등록</b>
 			</h3>
 
-			<div style="margin-top: 40px; margin-bottom: 20px" align="left">
+			<div  class="date" style="margin-top: 40px; margin-bottom: 20px" align="left">
 				<table>
 					<tr>
 						<td><b><span id="today"></span></b></td>
@@ -53,9 +75,17 @@
 				</table>
 			</div>
 
-			<div style="margin-top: 20px; margin-bottom: 20px"
+			<div class="content" style="margin-top: 20px; margin-bottom: 20px"
 				align="left">
-				<table>
+				
+				 <b>상품코드</b>
+        <input type="text" name="productCode" class="form-control mx-1 mt-2" placeholder="상품코드를 입력하세요." style="width: 300px; margin-left: 15px; margin-right: 15px"> <b>수량</b>
+        <input type="text" name="count" class="form-control mx-1 mt-2" placeholder="수량입력" style="width: 100px; margin-left: 15px">
+        <input type="radio" name="sale" value="판매" style="margin-left: 10px"/> 판매
+        <input type="radio" name="sale" value="반품" /> 반품
+        <input type="submit" value="등록" class="btn btn-primary mx-1 mt-2" style="border: none; background-color: #56baed; margin-left: 15px" onclick="#" /> 
+        
+<!-- 			<table>
 					<tr>
 						<td><b>상품코드</b></td>
 						<td colspan="3"><input type="text" name="productCode"
@@ -75,10 +105,10 @@
 						</td>
 
 					</tr>
-				</table>
+				</table>-->
 			</div>
 
-			<div style="margin-top: 20px; margin-bottom: 40px" align="left">
+			<div class="price" style="margin-top: 20px; margin-bottom: 40px" align="left">
 				<table>
 					<tr>
 						<td><b>총 판매금액&nbsp;&nbsp;&nbsp;</b></td>

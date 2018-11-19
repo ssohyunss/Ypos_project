@@ -7,13 +7,17 @@
 <!DOCTYPE>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 <title>Y-POS</title>
 </head>
-<body>
+<style>
+@media(max-width:767px) {
 
-<div style="display:flex">
+</style>
+<body>
+<div class="content" style="display:flex">
  <div class="container" style="width: 50%; margin-top:150px; display: inline-block">
         <canvas id="myChart"> </canvas>
     </div>

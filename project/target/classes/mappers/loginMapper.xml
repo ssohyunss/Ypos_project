@@ -49,20 +49,20 @@
 		update PRODUCT_LIST set count = count - #{count} where 1=1 and BARCODE = #{barcode}
 	</select>
 	<select id="selectOrder" resultType="com.dongyang.project.domain.OrderVO">
-		select *, (select name from SITE where 1=1 and TID = SITE_TID) SITE_NAME from ORDER_LIST where 1=1
-		<if test="null != _parameter and _parameter != 1">
+		select *, (select name from SITE where 1=1 and TID = ORDER_SITE) SITE_NAME from ORDER_LIST where 1=1
+		<if test="null != _parameter">
 			and SITE_TID = #{_parameter}
 		</if>
 	</select>
-		<select id="selectReturn" resultType="com.dongyang.project.domain.ReturnVO">
+	<select id="selectReturn" resultType="com.dongyang.project.domain.ReturnVO">
 		select *, (select name from SITE where 1=1 and TID = SITE_TID) SITE_NAME from RETURN_LIST where 1=1
 		<if test="null != _parameter and _parameter != 1">
 			and SITE_TID = #{_parameter}
 		</if>
 	</select>
 	<select id="insertOrder" resultType="com.dongyang.project.domain.OrderVO">
-		insert into ORDER_LIST(SITE_TID, ORDER_NAME, PRODUCT_NAME, PRODUCT_CODE, COUNT, DESCRIPTION, CREATE_DATE) 
-		VALUES(#{site},#{order},#{orderName},#{orderCode},#{orderCount},#{orderDesc},#{date})
+		insert into ORDER_LIST(SITE_TID, ORDER_SITE, PRODUCT_NAME, PRODUCT_CODE, COUNT, DESCRIPTION, CREATE_DATE) 
+		VALUES(#{site},#{orderSite},#{orderName},#{orderCode},#{orderCount},#{orderDesc},#{date})
 	</select>
 	<select id="insertReturn" resultType="com.dongyang.project.domain.ReturnVO">
 		insert into RETURN_LIST(SITE_TID, PRODUCT_NAME, PRODUCT_CODE, COUNT, DESCRIPTION, CREATE_DATE) 
@@ -84,9 +84,6 @@
 	<select id="modifyCommunity" resultType="com.dongyang.project.domain.CommunityVO">
 		update COMMUNITY set TITLE = #{title}, CONTENTS = #{contents}, MODIFY_DATE = #{date} where 1=1 and TID = #{tid}  
 	</select>
-
-	
-	
 	<select id="selectNotice" resultType="com.dongyang.project.domain.NoticeVO">
 		select *, (SELECT NAME FROM MANAGER_MASTER WHERE 1=1 AND TID = USER_MASTER_TID) USER_NAME from NOTICE order by CREATE_DATE DESC
 	</select>
@@ -103,4 +100,28 @@
 	<select id="modifyNotice" resultType="com.dongyang.project.domain.NoticeVO">
 		update NOTICE set TITLE = #{title}, CONTENTS = #{contents}, MODIFY_DATE = #{date} where 1=1 and TID = #{tid}  
 	</select>
+	
+	<select id="selectSite" resultType="com.dongyang.project.domain.SiteVO">
+		select * from SITE WHERE 1=1
+		<if test="null != _parameter">
+			and TID != #{_parameter}
+		</if>
+	</select>
+	<select id="selectOrderSite" resultType="com.dongyang.project.domain.OrderVO">
+		select *, (select name from SITE where 1=1 and TID = SITE_TID) SITE_NAME from ORDER_LIST where 1=1 and ORDER_SITE = #{site}
+  	  <choose>
+	    <when test="showValue != null">
+	    	AND OUT_YN = #{showValue}
+	    </when>
+	  </choose>
+	</select>
+	<select id="updateOrder" resultType="com.dongyang.project.domain.OrderVO">
+		update ORDER_LIST set OUT_YN = #{showValue}, OUT_DATE = #{date} where 1=1 and TID = #{tid}  
+	</select>
+	<select id="selectOrderInput" resultType="com.dongyang.project.domain.OrderVO">
+		select *, (select name from SITE where 1=1 and TID = SITE_TID) SITE_NAME from ORDER_LIST where 1=1 and OUT_YN = 'Y'
+		<if test="null != _parameter">
+			and SITE_TID = #{_parameter}
+		</if>
+	</select>	
 </mapper>

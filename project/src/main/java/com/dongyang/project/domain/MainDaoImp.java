@@ -62,6 +62,10 @@ public class MainDaoImp implements MainDao{
 		return sqlSession.selectList(namespace+".selectOrder", site);
 	}
 	@Override
+	public List<OrderVO> selectOrderSite(HashMap<String, Object> map) throws Exception {
+		return sqlSession.selectList(namespace+".selectOrderSite", map);
+	}
+	@Override
 	public List<ReturnVO> selectReturn(String site) throws Exception {
 		return sqlSession.selectList(namespace+".selectReturn", site);
 	}
@@ -112,5 +116,17 @@ public class MainDaoImp implements MainDao{
 	@Override
 	public int modifyNotice(HashMap<String, Object> map) {
 		return sqlSession.insert(namespace+".modifyNotice", map);
+	}
+	@Override
+	public List<SiteVO> selectSite(String site) {
+		return sqlSession.selectList(namespace+".selectSite", site);
+	}
+	@Override
+	public int updateOrder(HashMap<String, Object> map) {
+		return sqlSession.update(namespace+".updateOrder",map);
+	}
+	@Override
+	public List<OrderVO> selectOrderInput(String site) throws Exception {
+		return sqlSession.selectList(namespace+".selectOrderInput", site);
 	}
 }

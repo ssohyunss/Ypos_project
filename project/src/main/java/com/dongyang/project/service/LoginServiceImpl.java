@@ -15,6 +15,7 @@ import com.dongyang.project.domain.NoticeVO;
 import com.dongyang.project.domain.OrderVO;
 import com.dongyang.project.domain.ProductVO;
 import com.dongyang.project.domain.ReturnVO;
+import com.dongyang.project.domain.SiteVO;
 
 @Service
 public class LoginServiceImpl implements LoginService{
@@ -70,6 +71,10 @@ public class LoginServiceImpl implements LoginService{
 		return dao.selectOrder(site);
 	}
 	@Override
+	public List<OrderVO> selectOrderSite(HashMap<String, Object> map) throws Exception{
+		return dao.selectOrderSite(map);
+	}
+	@Override
 	public List<ReturnVO> selectReturn(String site) throws Exception {
 		return dao.selectReturn(site);
 	}
@@ -120,5 +125,17 @@ public class LoginServiceImpl implements LoginService{
 	@Override
 	public int modifyNotice(HashMap<String, Object> map) {
 		return dao.modifyNotice(map);
+	}
+	@Override
+	public List<SiteVO> selectSite(String site) {
+		return dao.selectSite(site);
+	}
+	@Override
+	public int updateOrder(HashMap<String, Object> map) {
+		return dao.updateOrder(map);
+	}
+	@Override
+	public List<OrderVO> selectOrderInput(String site) throws Exception {
+		return dao.selectOrderInput(site);
 	}
 }
