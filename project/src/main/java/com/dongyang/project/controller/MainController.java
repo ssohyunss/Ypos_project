@@ -24,6 +24,7 @@ import com.dongyang.project.domain.NoticeVO;
 import com.dongyang.project.domain.OrderVO;
 import com.dongyang.project.domain.ProductVO;
 import com.dongyang.project.domain.ReturnVO;
+import com.dongyang.project.domain.SiteVO;
 import com.dongyang.project.service.LoginService;
 
 @Controller
@@ -67,39 +68,27 @@ private LoginService service;
 		return "main";
 	}
 	
-	@RequestMapping("/sale.do")
-	public String sale(Model model) {
-		model.addAttribute("message","판매관리");
-		return "sale";
-	}
-	
-	@RequestMapping("sale/regist")
-	public String regist(Model model) {
+	@RequestMapping("/sale_regist.do")
+	public String sale_regist(Model model) {
 		model.addAttribute("message","판매등록");
-		return "sale/regist";
+		return "sale_regist";
 	}
 	
-	@RequestMapping("sale/deadline")
-	public String deadline(Model model) {
+	@RequestMapping("/sale_deadline.do")
+	public String sale_deadline(Model model) {
 		model.addAttribute("message","판매마감현황");
-		
-		return "sale/deadline";
+		return "sale_deadline";
 	}
 	
-	@RequestMapping("sale/status")
-	public String status(Model model) {
-		model.addAttribute("message","품번별판매현황");
-		
-		return "sale/status";
+	
+	@RequestMapping("/sale_pro_manage.do")
+	public String sale_pro_manage(Model model) {
+		model.addAttribute("message","상품코드별 판매현황");
+		return "sale_pro_manage";
 	}
 	
-	@RequestMapping("sale/graph")
-	public String graph(Model model) {
-		model.addAttribute("message","월별그래프");
-		
-		return "sale/graph";
-		
-	}
+
+
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/manage.do", method = {RequestMethod.GET, RequestMethod.POST})
@@ -177,6 +166,7 @@ private LoginService service;
 	@RequestMapping("/order_manage_inout.do")
 	public String order(HttpServletRequest request, OrderVO vo, Model model, HttpSession session) throws Exception {
 		String site = (String)session.getAttribute("site");
+		System.out.println(site);
 		List<OrderVO> list = service.selectOrder(site);
 		if(null == list) {
 			list = new ArrayList<OrderVO>(); 
@@ -185,8 +175,10 @@ private LoginService service;
 		if(null == productList) {
 			productList = new ArrayList<ProductVO>(); 
 		}
+		List<SiteVO> siteList = service.selectSite(site);
 		request.setAttribute("list",list);
 		request.setAttribute("productList",productList);
+		request.setAttribute("siteList",siteList);
 		return "order_manage_inout";
 	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -201,7 +193,7 @@ private LoginService service;
 		map.put("orderCode", (String)request.getParameter("orderCode"));
 		map.put("orderCount", (String)request.getParameter("orderCount"));
 		map.put("orderDesc", (String)request.getParameter("orderDesc"));
-		map.put("order", (String)request.getParameter("order"));
+		map.put("orderSite", (String)request.getParameter("orderSite"));
 		map.put("date", default_format.format(new Date()));
 		result = service.insertOrder(map);
 		if(0 < result) {
@@ -245,6 +237,50 @@ private LoginService service;
 		request.setAttribute("jsonOut", obj);
 		return "stringout";
 	}
+	
+	@RequestMapping("/order_input_confirm.do")
+	public String order_input_confirm(HttpServletRequest request, OrderVO vo, Model model, HttpSession session) throws Exception {
+		String site = (String)session.getAttribute("site");
+		List<OrderVO> list = service.selectOrderInput((String)session.getAttribute("site"));
+		if(null == list) {
+			list = new ArrayList<OrderVO>(); 
+		}
+		request.setAttribute("list",list);
+		return "order_input_confirm";
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@RequestMapping("/order_output_history.do")
+	public String order_output_history(HttpServletRequest request, OrderVO vo, Model model, HttpSession session) throws Exception {
+		String site = (String)session.getAttribute("site");
+		HashMap<String,Object> map = new HashMap();
+		map.put("site", (String)session.getAttribute("site"));
+		map.put("showValue", (String)request.getParameter("showValue"));
+		List<OrderVO> list = service.selectOrderSite(map);
+		if(null == list) {
+			list = new ArrayList<OrderVO>(); 
+		}
+		request.setAttribute("list",list);
+		return "order_output_history";
+	}
+	@SuppressWarnings("rawtypes")
+	@RequestMapping("/order_output_history_update")
+	public String order_output_history_update(HttpServletRequest request, OrderVO vo, Model model, HttpSession session) throws Exception {
+		JSONObject obj = new JSONObject();
+		int result = 0;
+		obj.put("successYN", "N");
+		HashMap<String,Object> map = new HashMap();
+		map.put("tid", (String)request.getParameter("tid"));
+		map.put("showValue", (String)request.getParameter("outYN"));
+		map.put("date", default_format.format(new Date()));
+		result = service.updateOrder(map);
+		if(0 < result) {
+			obj.put("successYN", "Y");
+		}
+		request.setAttribute("jsonOut", obj);
+		return "stringout";
+	}
+	
 	@RequestMapping("/notice_commu.do")
 	public String notice_commu (HttpServletRequest request, NoticeVO vo, Model model, HttpSession session) {
 		List<NoticeVO> list = service.selectNotice();

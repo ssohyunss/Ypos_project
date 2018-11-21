@@ -9,6 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <meta name="viewport " content="width=device-width ,initial-scale=1">
 <link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/style.css">
 <title>Y-POS</title>
 </head>
 
@@ -21,7 +22,7 @@
 		<%@include file="./include/menu.jsp"%>
 
 	</form>
-	<div class="container">
+	<div class="container" style="margin-top: 40px">
 		<div class="row">
 			<form method="post" action="#">
 			<%if("" != bean.getTid()) {%>
@@ -69,7 +70,7 @@
 				</table>
 				<input type="button" class="btn btn-primary pull-right" value="등록" style="border: none; background-color:#56baed" onClick="insertNotice()">
 			<%} %>
-			<input type="button" class="btn btn-primary pull-right" value="취소" style="border: none; margin-right:10px; background-color:#ccc"  onClick="javascript:menu('FREE')" >
+			<input type="button" class="btn btn-primary pull-right" value="취소" style="border: none; margin-right:10px; background-color:#ccc"  onClick="javascript:menu('NOTICE')" >
 			</form>
 		</div>
 	</div>

@@ -13,9 +13,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <meta name="viewport " content="width=device-width ,initial-scale=1">
 <link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/style.css">
 <title>Y-POS</title>
 </head>
 <style>
+
+
+
 </style>
 <body>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -31,7 +35,7 @@
 			<b>공지사항</b>
 		</h3>
 
-		<div class="row">
+		<div class="row" style="margin-top: 40px">
 			<table class="table table-striped" style="text-align: center;">
 				<thead>
 					<tr>

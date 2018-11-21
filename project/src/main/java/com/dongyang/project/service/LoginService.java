@@ -10,6 +10,7 @@ import com.dongyang.project.domain.NoticeVO;
 import com.dongyang.project.domain.OrderVO;
 import com.dongyang.project.domain.ProductVO;
 import com.dongyang.project.domain.ReturnVO;
+import com.dongyang.project.domain.SiteVO;
 
 public interface LoginService {
 	public LoginVO select(String mid) throws Exception;
@@ -42,4 +43,8 @@ public interface LoginService {
 	public int insertNotice(HashMap<String, Object> map);
 	public int deleteNotice(String tid);
 	public int modifyNotice(HashMap<String, Object> map);
+	public List<SiteVO> selectSite(String site);
+	public List<OrderVO> selectOrderSite(HashMap<String, Object> map) throws Exception;
+	public int updateOrder(HashMap<String, Object> map);
+	public List<OrderVO> selectOrderInput(String site) throws Exception;
 }

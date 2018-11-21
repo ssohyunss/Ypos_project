@@ -20,8 +20,8 @@
 <style>
 </style>
 <body>
-	<form id="thisForm" name="thisForm" onsubmit="return check_onclick();" action="/"
-		method="post" enctype="multipart/form-data">
+	<form id="thisForm" name="thisForm" onsubmit="return check_onclick();"
+		action="/" method="post" enctype="multipart/form-data">
 		<%@include file="./include/menu.jsp"%>
 
 		<div class="container">
@@ -29,7 +29,8 @@
 				<b>상품코드별 수불현황</b>
 			</h3>
 
-			<div class="search" align="right">
+			<div class="search" style="margin-top: 40px; margin-bottom: 40px"
+				align="left">
 				<table>
 					<tr>
 
@@ -38,7 +39,7 @@
 							style="width: 300px; margin-left: 5px"></td>
 
 						<td><button type="submit" class="btn btn-primary mx-1 mt-2"
-								style="border: none; background-color: #56baed; margin-left: 5px">검색</button></td>
+								style="border: none; background-color: #56baed; margin-left: 5px">조회</button></td>
 
 					</tr>
 				</table>
@@ -51,7 +52,7 @@
 							<th style="background-color: #eeeeee; text-align: center;">상품코드</th>
 							<th style="background-color: #eeeeee; text-align: center;">상품명</th>
 							<th style="background-color: #eeeeee; text-align: center;">상품가격</th>
-							<th style="background-color: #eeeeee; text-align: center;">수량</th>
+							<th style="background-color: #eeeeee; text-align: center;">총수량</th>
 							<th style="background-color: #eeeeee; text-align: center;">입고날짜</th>
 							<th style="background-color: #eeeeee; text-align: center;">입고수량</th>
 							<th style="background-color: #eeeeee; text-align: center;">출고날짜</th>
@@ -60,8 +61,39 @@
 						</tr>
 					</thead>
 					<tbody>
-
-
+						<tr>
+							<td>iphoneX_AA128</td>
+							<td>아이폰x_128GB</td>
+							<td>1,100,000</td>
+							<td>3</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>2018-11-02</td>
+							<td>5</td>
+							<td></td>
+							<td></td>
+							<td>본사</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>2</td>
+							<td>2018-11-03</td>
+							<td>인천점</td>
+						</tr>
 					</tbody>
 
 				</table>
@@ -74,15 +106,14 @@
 
 
 <script type="text/javascript">
-function check_onclick(){
-	if(thisForm.search.value==""){
-		alert("상품코드를 입력해 주세요.");
-		thisForm.search.focus();
-		return false;
-	}
-	
-	else
-		return true;
-}
+	function check_onclick() {
+		if (thisForm.search.value == "") {
+			alert("상품코드를 입력해 주세요.");
+			thisForm.search.focus();
+			return false;
+		}
 
+		else
+			return true;
+	}
 </script>

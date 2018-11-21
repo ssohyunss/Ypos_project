@@ -13,6 +13,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <meta name="viewport" content="width=device-width ,initial-scale=1">
 <link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/style.css">
 <title>Y-POS</title>
 </head>
 <body>
@@ -23,11 +24,11 @@
 		<%@include file="./include/menu.jsp"%>
 	</form>
 
-	<div class="container">
+	<div class="container" >
 		<h3>
 			<b>자유게시판</b>
 		</h3>
-		<div class="row">
+		<div class="row" style="margin-top: 40px">
 			<table class="table table-striped" style="text-align: center;">
 				<thead>
 					<tr>

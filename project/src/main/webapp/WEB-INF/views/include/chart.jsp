@@ -7,13 +7,17 @@
 <!DOCTYPE>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 <title>Y-POS</title>
 </head>
-<body>
+<style>
+@media(max-width:767px) {
 
-<div style="display:flex">
+</style>
+<body>
+<div class="content" style="display:flex">
  <div class="container" style="width: 50%; margin-top:150px; display: inline-block">
         <canvas id="myChart"> </canvas>
     </div>
@@ -57,7 +61,6 @@
 			<table class="table table-striped" style="text-align: center;">
 				<thead>
 					<tr>
-						<th style="background-color: #eeeeee; text-align: center;">주문명</th>
 						<th style="background-color: #eeeeee; text-align: center;">상품코드</th>
 						<th style="background-color: #eeeeee; text-align: center;">상품명</th>
 						<th style="background-color: #eeeeee; text-align: center;">수량</th>
@@ -68,7 +71,6 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>아이폰x주문</td>
 						<td>iphoneX_AA128</td>
 						<td>아이폰x_128GB</td>
 						<td>8</td>
@@ -76,7 +78,6 @@
 						<td>2018-10-08</td>
 					</tr>
 					<tr>
-						<td>헤드셋주문</td>
 						<td>headset_HH_SONY</td>
 						<td>헤드셋_소니</td>
 						<td>1</td>
@@ -92,7 +93,6 @@
 			<table class="table table-striped" style="text-align: center;">
 				<thead>
 					<tr>
-						<th style="background-color: #eeeeee; text-align: center;">주문명</th>
 						<th style="background-color: #eeeeee; text-align: center;">상품코드</th>
 						<th style="background-color: #eeeeee; text-align: center;">상품명</th>
 						<th style="background-color: #eeeeee; text-align: center;">수량</th>
@@ -103,7 +103,6 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>아이폰xs주문</td>
 						<td>iphonexs_AA128</td>
 						<td>아이폰xs_128GB</td>
 						<td>2</td>
@@ -111,7 +110,6 @@
 						<td>2018-11-03</td>
 					</tr>
 					<tr>
-						<td>헤드셋주문</td>
 						<td>headset_HH_SONY</td>
 						<td>헤드셋_소니</td>
 						<td>1</td>
@@ -119,7 +117,6 @@
 						<td>2018-10-11</td>
 					</tr>
 					<tr>
-						<td>헤드셋주문</td>
 						<td>headset_HH_SONY</td>
 						<td>헤드셋_소니</td>
 						<td>1</td>
@@ -192,8 +189,12 @@
                        , 301000
                         , 405120
                    ],
-                   type:'line',
+                   type:'bar',
                    borderColor:'#56baed'
+                	   , borderWidth: 1
+                       , borderColor: '#777'
+                       , hoverBorderWidth: 3
+                       , hoberBorderColor: '#000'
                }],
                labels: ['1월', '2월', '3월', '4월', '5월','6월','7월', '8월', '9월', '10월', '11월','12월']
             

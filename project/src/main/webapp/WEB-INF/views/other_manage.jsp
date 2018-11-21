@@ -30,15 +30,15 @@
 				<b>타매장재고현황</b>
 			</h3>
 
-			<div class="search" align="right">
+			<div class="search" style="margin-top: 40px; margin-bottom: 40px" align="left">
 				<table>
 					<tr>
 						<td><select name="manageDivide"
 							class="form-control mx-1 mt-2" style="width: 100%;">
 								<option value="전체">전체</option>
-								<option value="지점">지점</option>
 								<option value="상품코드">상품코드</option>
 								<option value="상품명">상품명</option>
+								<option value="지점">지점</option>
 						</select></td>
 
 						<td colspan="3"><input type="text" name="search"
@@ -46,7 +46,7 @@
 							style="width: 300px; margin-left: 5px"></td>
 
 						<td><button type="submit" class="btn btn-primary mx-1 mt-2"
-								style="border: none; background-color: #56baed; margin-left: 5px">검색</button></td>
+								style="border: none; background-color: #56baed; margin-left: 5px">조회</button></td>
 
 					</tr>
 				</table>
@@ -56,10 +56,10 @@
 				<table class="table table-striped" style="text-align: center">
 					<thead>
 						<tr>
-							<th style="background-color: #eeeeee; text-align: center;">지점</th>
 							<th style="background-color: #eeeeee; text-align: center;">상품코드</th>
 							<th style="background-color: #eeeeee; text-align: center;">상품명</th>
 							<th style="background-color: #eeeeee; text-align: center;">상품가격</th>
+							<th style="background-color: #eeeeee; text-align: center;">지점</th>
 							<th style="background-color: #eeeeee; text-align: center;">수량</th>
 						</tr>
 					</thead>

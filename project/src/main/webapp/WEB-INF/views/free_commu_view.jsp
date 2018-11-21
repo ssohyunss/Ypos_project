@@ -11,6 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/style.css">
 <title>Y-POS</title>
 </head>
 
@@ -21,7 +22,7 @@
 	<form id="thisForm" name="thisForm" onsubmit="return false;" action="/" method="post" enctype="multipart/form-data">
 		<%@include file="./include/menu.jsp"%>
 	</form>
-	<div class="container" style="margin-top: 50px">
+	<div class="container" style="margin-top: 40px">
 		<div class="row">
 			<table class="table table-striped" style="text-align: center;">
 				<thead>
