@@ -166,6 +166,7 @@ private LoginService service;
 	@RequestMapping("/order_manage_inout.do")
 	public String order(HttpServletRequest request, OrderVO vo, Model model, HttpSession session) throws Exception {
 		String site = (String)session.getAttribute("site");
+		System.out.println(site);
 		List<OrderVO> list = service.selectOrder(site);
 		if(null == list) {
 			list = new ArrayList<OrderVO>(); 
