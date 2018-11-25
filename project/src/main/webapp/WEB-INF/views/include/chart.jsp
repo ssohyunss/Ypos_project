@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.dongyang.project.domain.NoticeVO "%>
+<%@ page import="com.dongyang.project.domain.OrderVO "%>
 <%@ page import="java.util.List"%>
 <%
+	List<OrderVO> inputList = (List<OrderVO>) request.getAttribute("inputList");
 	List<NoticeVO> list = (List<NoticeVO>) request.getAttribute("list");
+	List<OrderVO> outList = (List<OrderVO>) request.getAttribute("outList");
+	
 %>
 <!DOCTYPE>
 <html>
@@ -59,31 +63,36 @@
         <h2><b>입점확인</b></h2>
        <div class="row">
 			<table class="table table-striped" style="text-align: center;">
-				<thead>
+								<thead>
 					<tr>
 						<th style="background-color: #eeeeee; text-align: center;">상품코드</th>
 						<th style="background-color: #eeeeee; text-align: center;">상품명</th>
 						<th style="background-color: #eeeeee; text-align: center;">수량</th>
 						<th style="background-color: #eeeeee; text-align: center;">지점명</th>
+						<th style="background-color: #eeeeee; text-align: center;">내용</th>
 						<th style="background-color: #eeeeee; text-align: center;">출고일</th>
-						
+
 					</tr>
 				</thead>
 				<tbody>
+					<%
+						if (0 < inputList.size()) {
+
+							for (int i = 0; i < inputList.size(); i++) {
+								OrderVO bean = inputList.get(i);
+					%>
 					<tr>
-						<td>iphoneX_AA128</td>
-						<td>아이폰x_128GB</td>
-						<td>8</td>
-						<td>인천점</td>
-						<td>2018-10-08</td>
+						<td><%=bean.getProduct_code()%></td>
+						<td><%=bean.getProduct_name()%></td>
+						<td><%=bean.getCount()%></td>
+						<td><%=bean.getSite_name()%></td>
+						<td><%=bean.getDescription()%></td>
+						<td><%=bean.getOut_date()%></td>
 					</tr>
-					<tr>
-						<td>headset_HH_SONY</td>
-						<td>헤드셋_소니</td>
-						<td>1</td>
-						<td>본사</td>
-						<td>2018-10-11</td>
-					</tr>
+					<%
+						}
+						}
+					%>
 				</tbody>
 
 			</table>
@@ -97,32 +106,35 @@
 						<th style="background-color: #eeeeee; text-align: center;">상품명</th>
 						<th style="background-color: #eeeeee; text-align: center;">수량</th>
 						<th style="background-color: #eeeeee; text-align: center;">지점명</th>
+						<th style="background-color: #eeeeee; text-align: center;">내용</th>
 						<th style="background-color: #eeeeee; text-align: center;">등록일</th>
-						
+						<th style="background-color: #eeeeee; text-align: center;">출고여부</th>
 					</tr>
 				</thead>
 				<tbody>
+					<%
+						if (0 < outList.size()) {
+
+							for (int i = 0; i < outList.size(); i++) {
+								OrderVO bean = outList.get(i);
+					%>
 					<tr>
-						<td>iphonexs_AA128</td>
-						<td>아이폰xs_128GB</td>
-						<td>2</td>
-						<td>서울점</td>
-						<td>2018-11-03</td>
+						<td><%=bean.getProduct_code()%></td>
+						<td><%=bean.getProduct_name()%></td>
+						<td><%=bean.getCount()%></td>
+						<td><%=bean.getSite_name()%></td>
+						<td><%=bean.getDescription()%></td>
+						<td><%=bean.getCreate_date()%></td>
+						<%if("Y".equals(bean.getOut_yn())) {%>
+							<td>출고</td>
+						<%}else {%>
+							<td>미출고</td>	
+						<%} %>
 					</tr>
-					<tr>
-						<td>headset_HH_SONY</td>
-						<td>헤드셋_소니</td>
-						<td>1</td>
-						<td>서울점</td>
-						<td>2018-10-11</td>
-					</tr>
-					<tr>
-						<td>headset_HH_SONY</td>
-						<td>헤드셋_소니</td>
-						<td>1</td>
-						<td>서울점</td>
-						<td>2018-10-11</td>
-					</tr>
+					<%
+						}
+						}
+					%>
 				</tbody>
 
 			</table>

@@ -243,7 +243,7 @@ public class BarcodeApi {
         response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
         JSONObject jResponse = new JSONObject();
-        List<ProductVO> list = service.selectProduct();
+        List<ProductVO> list = service.selectProduct("");
         JSONArray ary = new JSONArray(); 
         if(null != list) {
         	for(int i =0; i < list.size(); i++) {

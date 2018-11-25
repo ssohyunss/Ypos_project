@@ -88,7 +88,8 @@
 								<%if(0 < productList.size()){
 									for(int i = 0; i < productList.size(); i++){
 								%>
-									<option value="<%=productList.get(i).getName()%>" data-value="<%=productList.get(i).getBarcode()%>"><%=productList.get(i).getName() %></option>
+									<option value="<%=productList.get(i).getName()%>" data-value="<%=productList.get(i).getBarcode()%>"
+									data-value2 = "<%=productList.get(i).getTid()%>"><%=productList.get(i).getName() %></option>
 								<%} }%>
 							</select> 
 						</div>
@@ -150,6 +151,7 @@ function insertReturn(){
 	param += "&returnCode="+$('#returnCode').val()+"";
 	param += "&returnCount="+$('#returnCount').val()+"";
 	param += "&returnReason="+$('#returnReason').val()+"";
+	param += "&productTid=" + $('#orderName option:selected').attr('data-value2') + "";
 	ajaxCall('/project/insertReturn',param , function(data){
 		var mapResult = JSON.parse(data);
 		if("Y" == mapResult['successYN']){

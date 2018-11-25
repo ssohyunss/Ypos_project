@@ -102,7 +102,8 @@
 									for (int i = 0; i < productList.size(); i++) {
 							%>
 							<option value="<%=productList.get(i).getName()%>"
-								data-value="<%=productList.get(i).getBarcode()%>"><%=productList.get(i).getName()%></option>
+								data-value="<%=productList.get(i).getBarcode()%>"
+								data-value2="<%=productList.get(i).getTid()%>"><%=productList.get(i).getName()%></option>
 							<%
 								}
 								}
@@ -179,6 +180,7 @@
 		param += "&orderCount=" + $('#orderCount').val() + "";
 		param += "&orderDesc=" + $('#orderDesc').val() + "";
 		param += "&orderName=" + $('#orderName').val() + "";
+		param += "&productTid=" + $('#orderName option:selected').attr('data-value2') + "";
 		param += "&orderSite=" + $('#orderSite option:selected').val() + "";
 		ajaxCall('/project/insertOrder', param,
 				function(data) {

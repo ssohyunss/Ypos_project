@@ -1,9 +1,11 @@
+<%@page import="java.sql.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.dongyang.project.domain.ProductVO "%>
+<%@ page import="com.dongyang.project.domain.InOutVO "%>
 <%@ page import="java.util.List"%>
-<c:set var="path" value="${pageContext.request.contextPath}" />
+<%
+	List<InOutVO> list = (List<InOutVO>) request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,26 +84,32 @@ input[type=text] {
 							<th style="background-color: #eeeeee; text-align: center;">지점명</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td>2018-11-14</td>
-							<td>headset_HH_SONY</td>
-							<td>헤드셋_소니</td>
-							<td>130,00O</td>
-							<td>1</td>
+<tbody>
+					<%
+						if (0 < list.size()) {
+
+							for (int i = 0; i < list.size(); i++) {
+								InOutVO bean = list.get(i);
+					%>
+					<tr>
+						<td><%=bean.getCreate_date()%></td>
+						<td><%=bean.getProduct_code()%></td>
+						<td><%=bean.getProduct_name()%></td>
+						<td><%=bean.getProduct_price()%></td>
+						<%if("IN".equals(bean.getStatus())) {%>
+							<td><%=bean.getCount()%></td>
 							<td></td>
-							<td>본사</td>
-						</tr>
-						<tr>
-							<td>2018-11-14</td>
-							<td>iphoneX_AA128</td>
-							<td>아이폰x_128GB</td>
-							<td>1,100,000</td>
+						<%}else{ %>
 							<td></td>
-							<td>1</td>
-							<td>인천점</td>
-						</tr>
-					</tbody>
+							<td><%=bean.getCount()%></td>
+						<%} %>
+						<td><%=bean.getSite_name()%></td>
+					</tr>
+					<%
+						}
+						}
+					%>
+				</tbody>
 
 				</table>
 
