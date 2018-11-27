@@ -10,8 +10,12 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/style.css">
 <title>Y-POS</title>
 </head>
+<style>
+
+</style>
 <body>
 	<form id="thisForm" name="thisForm" onsubmit="return false;" action="/"
 		method="post" enctype="multipart/form-data">
@@ -20,7 +24,7 @@
 			<h3>
 				<b>매장재고현황</b>
 			</h3>
-			<div class="search" style="margin-top: 40px; margin-bottom: 40px" align="left" >
+			<div class="search" style="margin-top: 40px; margin-bottom: 40px;" >
 				<table>
 				<tr>
 				<td>
