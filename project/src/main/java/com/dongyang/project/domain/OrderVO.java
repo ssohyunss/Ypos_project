@@ -5,6 +5,7 @@ public class OrderVO {
     private String site_tid = "";
     private String site_name = "";
     private String order_site = "";
+    private String product_tid = "";
     private String product_name = "";
     private String product_code = "";
     private String count = "";
@@ -77,6 +78,12 @@ public class OrderVO {
 	}
 	public void setOut_date(String out_date) {
 		this.out_date = out_date;
+	}
+	public String getProduct_tid() {
+		return product_tid;
+	}
+	public void setProduct_tid(String product_tid) {
+		this.product_tid = product_tid;
 	}
     
 }

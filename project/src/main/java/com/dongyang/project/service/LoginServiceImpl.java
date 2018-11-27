@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.dongyang.project.dao.MainDao;
 import com.dongyang.project.domain.CommunityVO;
 import com.dongyang.project.domain.ImageVO;
+import com.dongyang.project.domain.InOutVO;
 import com.dongyang.project.domain.LoginVO;
 import com.dongyang.project.domain.NoticeVO;
 import com.dongyang.project.domain.OrderVO;
@@ -35,8 +36,8 @@ public class LoginServiceImpl implements LoginService{
 		return dao.insertImage(vo);
 	}
 	@Override
-	public List<ProductVO> selectProduct() throws Exception{
-		return dao.selectProduct();
+	public List<ProductVO> selectProduct(String site) throws Exception{
+		return dao.selectProduct(site);
 	}
 	@Override
 	public ImageVO selectImage(String id) throws Exception{
@@ -137,5 +138,13 @@ public class LoginServiceImpl implements LoginService{
 	@Override
 	public List<OrderVO> selectOrderInput(String site) throws Exception {
 		return dao.selectOrderInput(site);
+	}
+	@Override
+	public int insertLog(HashMap<String, Object> map) {
+		return dao.insertLog(map);
+	}
+	@Override
+	public List<InOutVO> selectInOut(HashMap<String, Object> map) {
+		return dao.selectInOut(map);
 	}
 }

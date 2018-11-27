@@ -78,13 +78,13 @@
 		</div>
 	</form>
 </body>
-</html>
 <script>
 function search(){
-	$('#thisForm').attr('action', '/project/manage.do?searchText='+$('#searchText').val()+'?type='+$('#manageDivide option:selected').val());
+	$('#thisForm').attr('action', '/project/manage.do?searchText='+$('#searchText').val()+'&type='+$('#manageDivide option:selected').val());
 	$('#searchText').val($('#searchText').val());
 	$('#type').val($('#seamanageDividerchText').val());
 	$('#thisForm')[0].submit();
 }
 </script>
+</html>
 

@@ -28,8 +28,8 @@ public class MainDaoImp implements MainDao{
 		return sqlSession.insert(namespace+".insertImageManager",vo);
 	}
 	@Override
-	public List<ProductVO> selectProduct() throws Exception{
-		return sqlSession.selectList(namespace+".selectProduct");
+	public List<ProductVO> selectProduct(String site) throws Exception{
+		return sqlSession.selectList(namespace+".selectProduct", site);
 	}
 	@Override
 	public ImageVO selectImage(String id) throws Exception{
@@ -128,5 +128,13 @@ public class MainDaoImp implements MainDao{
 	@Override
 	public List<OrderVO> selectOrderInput(String site) throws Exception {
 		return sqlSession.selectList(namespace+".selectOrderInput", site);
+	}
+	@Override
+	public int insertLog(HashMap<String, Object> map) {
+		return sqlSession.insert(namespace+".insertLog", map);
+	}
+	@Override
+	public List<InOutVO> selectInOut(HashMap<String, Object> map) {
+		return sqlSession.selectList(namespace+".selectInOut", map);
 	}
 }

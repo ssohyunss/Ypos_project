@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dongyang.project.domain.CommunityVO;
+import com.dongyang.project.domain.InOutVO;
 import com.dongyang.project.domain.LoginVO;
 import com.dongyang.project.domain.NoticeVO;
 import com.dongyang.project.domain.OrderVO;
@@ -65,6 +66,19 @@ private LoginService service;
 			list = new ArrayList<NoticeVO>(); 
 		}
 		request.setAttribute("list",list);
+		List<OrderVO> inputList = service.selectOrderInput((String)session.getAttribute("site"));
+		if(null == inputList) {
+			inputList = new ArrayList<OrderVO>(); 
+		}
+		request.setAttribute("inputList",inputList);
+		HashMap<String,Object> map = new HashMap();
+		map.put("site", (String)session.getAttribute("site"));
+		map.put("showValue", (String)request.getParameter("showValue"));
+		List<OrderVO> outList = service.selectOrderSite(map);
+		if(null == outList) {
+			outList = new ArrayList<OrderVO>(); 
+		}
+		request.setAttribute("outList",outList);
 		return "main";
 	}
 	
@@ -102,7 +116,7 @@ private LoginService service;
 			map.put("site", (String)session.getAttribute("site"));
 			list = service.searchProduct(map);
 		}else {
-			list = service.selectProduct();
+			list = service.selectProduct((String)session.getAttribute("site"));
 		}
 		if(null == list) {
 			list = new ArrayList<ProductVO>(); 
@@ -112,9 +126,22 @@ private LoginService service;
 	}
 	
 	@RequestMapping("/other_manage.do")
-	public String otherStore(Model model) {
-		model.addAttribute("message","타매장재고현황");
-		
+	public String otherStore(HttpServletRequest request,ProductVO vo, Model model, HttpSession session) throws Exception {
+		List<ProductVO> list = new ArrayList<ProductVO>();
+		if(null != (String)request.getParameter("searchText")) {
+			@SuppressWarnings("rawtypes")
+			HashMap<String,Object> map = new HashMap();
+			map.put("type", (String)request.getParameter("type"));
+			map.put("keyword", (String)request.getParameter("searchText"));
+			map.put("site", "");
+			list = service.searchProduct(map);
+		}else {
+			list = service.selectProduct("");
+		}
+		if(null == list) {
+			list = new ArrayList<ProductVO>(); 
+		}
+		request.setAttribute("list",list);
 		return "other_manage";
 	}
 	
@@ -126,20 +153,23 @@ private LoginService service;
 	}
 	
 	@RequestMapping("/date_manage.do")
-	public String date_manage(Model model) {
-		model.addAttribute("message","일자별 수불현황");
-		
+	public String date_manage(HttpServletRequest request, InOutVO vo, Model model, HttpSession session) throws Exception {
+		List<InOutVO> list = new ArrayList<InOutVO>();
+		@SuppressWarnings("rawtypes")
+		HashMap<String,Object> map = new HashMap();
+		map.put("date", "");
+		map.put("site", (String)session.getAttribute("site"));
+		list = service.selectInOut(map);
+		if(null == list) {
+			list = new ArrayList<InOutVO>(); 
+		}
+		request.setAttribute("list",list);
 		return "date_manage";
 	}
 	
 	
 	@RequestMapping("manage/store")
 	public String store(HttpServletRequest request,Model model) throws Exception {
-		List<ProductVO> list = service.selectProduct();
-		if(null == list) {
-			list = new ArrayList<ProductVO>(); 
-		}
-		request.setAttribute("list",list);
 		return "manage/store";
 	}
 	
@@ -148,13 +178,6 @@ private LoginService service;
 		model.addAttribute("message","품번별수불현황");
 		
 		return "manage/proStatus";
-	}
-	
-	@RequestMapping("manage/dateStatus")
-	public String dateStatus(Model model) {
-		model.addAttribute("message","일자별수불현황");
-		
-		return "manage/dateStatus";
 	}
 	
 	@RequestMapping("/inout.do")
@@ -166,11 +189,12 @@ private LoginService service;
 	@RequestMapping("/order_manage_inout.do")
 	public String order(HttpServletRequest request, OrderVO vo, Model model, HttpSession session) throws Exception {
 		String site = (String)session.getAttribute("site");
+		System.out.println(site);
 		List<OrderVO> list = service.selectOrder(site);
 		if(null == list) {
 			list = new ArrayList<OrderVO>(); 
 		}
-		List<ProductVO> productList = service.selectProduct();
+		List<ProductVO> productList = service.selectProduct((String)session.getAttribute("site"));
 		if(null == productList) {
 			productList = new ArrayList<ProductVO>(); 
 		}
@@ -193,6 +217,7 @@ private LoginService service;
 		map.put("orderCount", (String)request.getParameter("orderCount"));
 		map.put("orderDesc", (String)request.getParameter("orderDesc"));
 		map.put("orderSite", (String)request.getParameter("orderSite"));
+		map.put("productTid", (String)request.getParameter("productTid"));
 		map.put("date", default_format.format(new Date()));
 		result = service.insertOrder(map);
 		if(0 < result) {
@@ -208,7 +233,7 @@ private LoginService service;
 		if(null == list) {
 			list = new ArrayList<ReturnVO>(); 
 		}
-		List<ProductVO> productList = service.selectProduct();
+		List<ProductVO> productList = service.selectProduct((String)session.getAttribute("site"));
 		if(null == productList) {
 			productList = new ArrayList<ProductVO>(); 
 		}
@@ -228,6 +253,7 @@ private LoginService service;
 		map.put("returnCode", (String)request.getParameter("returnCode"));
 		map.put("returnCount", (String)request.getParameter("returnCount"));
 		map.put("returnReason", (String)request.getParameter("returnReason"));
+		map.put("productTid", (String)request.getParameter("productTid"));
 		map.put("date", default_format.format(new Date()));
 		result = service.insertReturn(map);
 		if(0 < result) {
@@ -276,6 +302,20 @@ private LoginService service;
 		if(0 < result) {
 			obj.put("successYN", "Y");
 		}
+		map = new HashMap();
+		map.put("productTid", (String)request.getParameter("productTid"));
+		map.put("site", (String)request.getParameter("otherSite"));
+		map.put("status", "IN");
+		map.put("count", (String)request.getParameter("count"));
+		map.put("date", default_format.format(new Date()));
+		service.insertLog(map);
+		map = new HashMap();
+		map.put("productTid", (String)request.getParameter("productTid"));
+		map.put("site", (String)request.getParameter("mySite"));
+		map.put("count", (String)request.getParameter("count"));
+		map.put("status", "OUT");
+		map.put("date", default_format.format(new Date()));
+		service.insertLog(map);
 		request.setAttribute("jsonOut", obj);
 		return "stringout";
 	}
