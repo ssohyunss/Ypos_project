@@ -1,9 +1,11 @@
+<%@page import="java.sql.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.dongyang.project.domain.ProductVO "%>
+<%@ page import="com.dongyang.project.domain.InOutVO "%>
 <%@ page import="java.util.List"%>
-<c:set var="path" value="${pageContext.request.contextPath}" />
+<%
+	List<InOutVO> list = (List<InOutVO>) request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,19 +56,21 @@ input[type=text] {
 }
 </style>
 <body>
-	<form id="thisForm" name="thisForm" onsubmit="return check_onclick();"
-		action="/" method="post" enctype="multipart/form-data">
+	<form id="thisForm" name="thisForm" onsubmit="return false;" action="/"
+		method="post" enctype="multipart/form-data">
+
 		<%@include file="./include/menu.jsp"%>
+
+	</form>
 		<div class="container">
 			<h3>
 				<b>일자별 수불현황</b>
 			</h3>
 			<div style="margin-top: 40px; margin-bottom: 40px" align="left">
 				<form>
-					<label>날짜선택&nbsp;</label> <input type="text" name="fromDate"
-						id="fromDate">
-					<button type="submit" class="btn btn-primary mx-1 mt-2"
-						style="border: none; background-color: #56baed; margin-left: 5px">조회</button>
+					<label>날짜선택&nbsp;</label> <input type="text" id="fromDate">
+					<button type="button" class="btn btn-primary mx-1 mt-2"
+						style="border: none; background-color: #56baed; margin-left: 5px" onclick="searchList()">조회</button>
 				</form>
 			</div>
 			<div class="row" style="margin-top: 20px">
@@ -82,32 +86,47 @@ input[type=text] {
 							<th style="background-color: #eeeeee; text-align: center;">지점명</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td>2018-11-14</td>
-							<td>headset_HH_SONY</td>
-							<td>헤드셋_소니</td>
-							<td>130,00O</td>
-							<td>1</td>
+<tbody>
+					<%
+						if (0 < list.size()) {
+
+							for (int i = 0; i < list.size(); i++) {
+								InOutVO bean = list.get(i);
+					%>
+					<tr>
+						<td><%=bean.getCreate_date()%></td>
+						<td><%=bean.getProduct_code()%></td>
+						<td><%=bean.getProduct_name()%></td>
+						<td><%=bean.getProduct_price()%></td>
+						<%if("IN".equals(bean.getStatus())) {%>
+							<td><%=bean.getCount()%></td>
 							<td></td>
-							<td>본사</td>
-						</tr>
-						<tr>
-							<td>2018-11-14</td>
-							<td>iphoneX_AA128</td>
-							<td>아이폰x_128GB</td>
-							<td>1,100,000</td>
+						<%}else{ %>
 							<td></td>
-							<td>1</td>
-							<td>인천점</td>
-						</tr>
-					</tbody>
+							<td><%=bean.getCount()%></td>
+						<%} %>
+						<td><%=bean.getSite_name()%></td>
+					</tr>
+					<%
+						}
+						}
+					%>
+				</tbody>
 
 				</table>
 
 			</div>
 		</div>
-	</form>
 </body>
+<script type="text/javascript">
+function searchList(){
+	if("" == $('#fromDate').val()){
+		return false;
+	}
+	$('#thisForm').attr('action',
+	'/project/date_manage.do?date='+$('#fromDate').val()+'');
+	$('#thisForm')[0].submit();
+}
+</script>
 </html>
 

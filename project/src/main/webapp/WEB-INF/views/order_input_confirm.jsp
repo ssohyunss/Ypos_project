@@ -13,6 +13,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport " content="width=device-width ,initial-scale=1">
 <link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -77,6 +78,17 @@ input[type=text] {
 	border: 2px solid #ccc;
 	border-radius: 4px;
 }
+
+@media(max-width:767px) {
+
+.selectDate{
+	text-align: center;
+}
+
+}
+
+
+
 </style>
 <body>
 	<form id="thisForm" name="thisForm" onsubmit="return false;" action="/"
@@ -92,7 +104,7 @@ input[type=text] {
 			<b>입점확인</b>
 		</h3>
 
-		<div style="margin-top: 40px; margin-bottom: 40px" align="left">
+		<div class="selectDate" style="margin-top: 40px; margin-bottom: 40px;" >
 			<form>
 				<label>날짜선택&nbsp;</label> <input type="text" name="fromDate"
 					id="fromDate"> &nbsp;~&nbsp; <input type="text"

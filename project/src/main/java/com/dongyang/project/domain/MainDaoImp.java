@@ -28,8 +28,8 @@ public class MainDaoImp implements MainDao{
 		return sqlSession.insert(namespace+".insertImageManager",vo);
 	}
 	@Override
-	public List<ProductVO> selectProduct() throws Exception{
-		return sqlSession.selectList(namespace+".selectProduct");
+	public List<ProductVO> selectProduct(String site) throws Exception{
+		return sqlSession.selectList(namespace+".selectProduct", site);
 	}
 	@Override
 	public ImageVO selectImage(String id) throws Exception{
@@ -45,6 +45,10 @@ public class MainDaoImp implements MainDao{
 	@Override
 	public ProductVO selectProductInfo(String barcode) throws Exception{
 		return sqlSession.selectOne(namespace+".selectProductInfo",barcode);
+	}
+	@Override
+	public ProductVO selectProductInfo(HashMap<String,Object> map) throws Exception{
+		return sqlSession.selectOne(namespace+".selectProductInfoMap",map);
 	}
 	@Override
 	public int updateProductIn(ProductVO vo) throws Exception{
@@ -129,4 +133,41 @@ public class MainDaoImp implements MainDao{
 	public List<OrderVO> selectOrderInput(String site) throws Exception {
 		return sqlSession.selectList(namespace+".selectOrderInput", site);
 	}
+	@Override
+	public int insertLog(HashMap<String, Object> map) {
+		return sqlSession.insert(namespace+".insertLog", map);
+	}
+	@Override
+	public List<InOutVO> selectInOut(HashMap<String, Object> map) {
+		return sqlSession.selectList(namespace+".selectInOut", map);
+	}
+	@Override
+	public String selectSaleCount(HashMap<String, Object> map) {
+		return sqlSession.selectOne(namespace+".selectSaleCount", map);
+	}
+	@Override
+	public int insertSale(HashMap<String, Object> map) {
+		return sqlSession.insert(namespace+".insertSale", map);
+	}
+	@Override
+	public int updateProduct(HashMap<String, Object> map) {
+		return sqlSession.update(namespace+".updateProduct",map);
+	}
+	@Override
+	public String selectSaleCountReturn(HashMap<String, Object> map) {
+		return sqlSession.selectOne(namespace+".selectSaleCountReturn", map);
+	}
+	@Override
+	public String selectSaleMoney(HashMap<String, Object> map) {
+		return sqlSession.selectOne(namespace+".selectSaleMoney", map);
+	}
+	@Override
+	public String selectSaleReturnMoney(HashMap<String, Object> map) {
+		return sqlSession.selectOne(namespace+".selectSaleReturnMoney", map);
+	}
+	@Override
+	public List<SaleVO> selectSaleList(HashMap<String, Object> map) {
+		return sqlSession.selectList(namespace+".selectSaleList", map);
+	}
+	
 }

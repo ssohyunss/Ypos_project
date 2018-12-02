@@ -11,6 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <meta name="viewport " content="width=device-width ,initial-scale=1">
 <link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/style.css">
 <title>Y-POS</title>
 </head>
 <style>
@@ -70,7 +71,7 @@
 						<td><%=bean.getDescription()%></td>
 						<td><%=bean.getCreate_date()%></td>
 						<%if("" == bean.getOut_date()) {%>
-						<td><select id="selectstore" onchange="saveHistory('<%=bean.getTid()%>')">
+						<td><select id="selectstore" onchange="saveHistory('<%=bean.getTid()%>','<%=bean.getProduct_tid()%>','<%=bean.getSite_tid()%>','<%=bean.getOrder_site()%>','<%=bean.getCount()%>')">
 								<option value="-">-</option>
 								<option value="Y">출고</option>
 								<option value="N">미출고</option>
@@ -121,9 +122,13 @@ function ajaxCall() {
 		alert("request 생성 실패!!");
 	}
 }
-function saveHistory(tid) {
+function saveHistory(tid,productTid,site1, site2, count) {
 	var param = "outYN=" + $('#selectstore option:selected').val() + "";
 		param += "&tid="+tid+"";
+		param += "&productTid="+productTid+"";
+		param += "&otherSite="+site1+"";
+		param += "&mySite="+site2+"";
+		param += "&count="+count+"";
 	ajaxCall('/project/order_output_history_update', param,
 			function(data) {
 				var mapResult = JSON.parse(data);

@@ -3,6 +3,7 @@ package com.dongyang.project.domain;
 public class ProductVO {
     private String tid = "";
     private String site_tid = "";
+    private String site_name ="";
     private String image_id = "";
     private String name = "";
     private String price = "";
@@ -49,6 +50,12 @@ public class ProductVO {
 	}
 	public void setBarcode(String barcode) {
 		this.barcode = barcode;
+	}
+	public String getSite_name() {
+		return site_name;
+	}
+	public void setSite_name(String site_name) {
+		this.site_name = site_name;
 	}
     
 }
