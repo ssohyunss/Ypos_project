@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="path" value="${pageContext.request.contextPath}" />
+<%@ page import="com.dongyang.project.domain.SaleVO "%>
+<%@ page import="java.util.List"%>
+<%
+	List<SaleVO> list = (List<SaleVO>) request.getAttribute("saleList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,8 +75,7 @@ input[type=text] {
 }
 </style>
 <body>
-	<form id="thisForm" name="thisForm" onsubmit="return check_onclick();"
-		action="/" method="post" enctype="multipart/form-data">
+	<form id="thisForm" name="thisForm" action="/" method="post" enctype="multipart/form-data">
 
 		<%@include file="./include/menu.jsp"%>
 
@@ -88,11 +90,11 @@ input[type=text] {
 
 			<div style="margin-top: 40px; margin-bottom: 40px" align="left">
 				<form>
-					<label>날짜선택&nbsp;</label> <input type="text" name="fromDate"
-						id="fromDate"> &nbsp;~&nbsp; <input type="text"
-						name="toDate" id="toDate">
+					<label>날짜선택&nbsp;</label> 
+					<input type="text" id="fromDate"> &nbsp;~&nbsp; 
+					<input type="text" id="toDate">
 					<button type="submit" class="btn btn-primary mx-1 mt-2"
-						style="border: none; background-color: #56baed; margin-left: 5px">조회</button>
+						style="border: none; background-color: #56baed; margin-left: 5px" onclick="searchList()">조회</button>
 				</form>
 			</div>
 
@@ -109,40 +111,34 @@ input[type=text] {
 
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
+				<tbody>
+					<%
+						if (0 < list.size()) {
+
+							for (int i = 0; i < list.size(); i++) {
+								SaleVO bean = list.get(i);
+					%>
+					<tr>
+						<%if("RETURN".equals(bean.getStatus())){ %>
+							<td>반품</td>	
+						<%}else{ %>
 							<td>판매</td>
-							<td>headset_HH_SONY</td>
-							<td>헤드셋_소니</td>
-							<td>1</td>
-							<td>130,00O</td>
-							<td>2018-11-14</td>
-						</tr>
-						<tr>
-							<td>반품</td>
-							<td>headset_HH_SONY</td>
-							<td>헤드셋_소니</td>
-							<td>1</td>
-							<td>-130,00O</td>
-							<td>2018-11-14</td>
-						</tr>
-						<tr>
-							<td>판매</td>
-							<td>iphoneX_AA128</td>
-							<td>아이폰x_128GB</td>
-							<td>1</td>
-							<td>1,100,000</td>
-							<td>2018-11-15</td>
-						</tr>
-						<tr>
-							<td>반품</td>
-							<td>iphoneX_AA128</td>
-							<td>아이폰x_128GB</td>
-							<td>1</td>
-							<td>-1,100,000</td>
-							<td>2018-11-15</td>
-						</tr>
-					</tbody>
+						<%} %>
+						<td><%=bean.getProduct_code()%></td>
+						<td><%=bean.getProduct_name()%></td>
+						<td><%=bean.getCount()%></td>
+						<%if("RETURN".equals(bean.getStatus())){ %>
+							<td>-<%=bean.getPrice()%></td>	
+						<%}else{ %>
+							<td><%=bean.getPrice()%></td>
+						<%} %>
+						<td><%=bean.getCreate_date()%></td>
+					</tr>
+					<%
+						}
+						}
+					%>
+				</tbody>
 
 				</table>
 			</div>
@@ -150,4 +146,18 @@ input[type=text] {
 		</div>
 	</form>
 </body>
+<script type="text/javascript">
+function searchList(){
+	if("" == $('#fromDate').val() || "" == $('#toDate').val()){
+		return false;
+	}
+	if($('#toDate').val() < $('#fromDate').val()){
+		alert('잘못된 기간입니다.');
+		return false;
+	}
+	$('#thisForm').attr('action',
+	'/project/sale_deadline.do?date='+$('#fromDate').val()+'&date2='+$('#toDate').val()+'');
+	$('#thisForm')[0].submit();
+}
+</script>
 </html>

@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="path" value="${pageContext.request.contextPath}" />
-
+<%@ page import="com.dongyang.project.domain.SaleVO "%>
+<%@ page import="java.util.List"%>
+<%
+	List<SaleVO> list = (List<SaleVO>) request.getAttribute("saleList");
+	String total = (String)request.getAttribute("saleMoney");
+	if("" == total || null == total){
+		total = "0";
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,8 +60,7 @@
 <body>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
-	<form id="thisForm" name="thisForm" onsubmit="return check_onclick();"
-		action="/" method="post" enctype="multipart/form-data">
+	<form id="thisForm" name="thisForm" action="/" method="post" enctype="multipart/form-data">
 
 		<%@include file="./include/menu.jsp"%>
 
@@ -79,40 +84,18 @@
 				align="left">
 				
 				 <b>상품코드</b>
-        <input type="text" name="productCode" class="form-control mx-1 mt-2" placeholder="상품코드를 입력하세요." style="width: 300px; margin-left: 15px; margin-right: 15px"> <b>수량</b>
-        <input type="text" name="count" class="form-control mx-1 mt-2" placeholder="수량입력" style="width: 100px; margin-left: 15px">
-        <input type="radio" name="sale" value="판매" style="margin-left: 10px"/> 판매
-        <input type="radio" name="sale" value="반품" /> 반품
-        <input type="submit" value="등록" class="btn btn-primary mx-1 mt-2" style="border: none; background-color: #56baed; margin-left: 15px" onclick="#" /> 
-        
-<!-- 			<table>
-					<tr>
-						<td><b>상품코드</b></td>
-						<td colspan="3"><input type="text" name="productCode"
-							class="form-control mx-1 mt-2" placeholder="상품코드를 입력하세요."
-							style="width: 300px; margin-left: 5px; margin-right: 5px"></td>
-						<td><b>수량</b></td>
-						<td><input type="text" name="count"
-							class="form-control mx-1 mt-2" placeholder="수량입력"
-							style="width: 100px; margin-left: 5px"></td>
-						<td>
-							<input type="radio" name="sale" value="판매" style="margin-left: 10px"/> 판매 
-							<input type="radio" name="sale" value="반품"/> 반품</td>
-						<td>
-							<button type="submit" class="btn btn-primary mx-1 mt-2"
-								style="border: none; background-color: #56baed; margin-left: 10px"
-								onclick="#">등록</button>
-						</td>
-
-					</tr>
-				</table>-->
+        <input type="text" id="code" class="form-control mx-1 mt-2" placeholder="상품코드를 입력하세요." style="width: 300px; margin-left: 15px; margin-right: 15px"> <b>수량</b>
+        <input type="text" id="count" class="form-control mx-1 mt-2" placeholder="수량입력" style="width: 100px; margin-left: 15px">
+        <input type="radio" name="sale" value="SALE" style="margin-left: 10px" checked="checked"/> 판매
+        <input type="radio" name="sale" value="RETURN" /> 반품
+        <input type="button" value="등록" class="btn btn-primary mx-1 mt-2" style="border: none; background-color: #56baed; margin-left: 15px" onclick="insertReg()" /> 
 			</div>
 
 			<div class="price" style="margin-top: 20px; margin-bottom: 40px" align="left">
 				<table>
 					<tr>
 						<td><b>총 판매금액&nbsp;&nbsp;&nbsp;</b></td>
-						<td><b style="font-size: 20px">0</b></td>
+						<td><b style="font-size: 20px"><%=total %></b></td>
 
 					</tr>
 				</table>
@@ -130,24 +113,34 @@
 							<th style="background-color: #eeeeee; text-align: center;">날짜</th>
 						</tr>
 					</thead>
-					<tbody>
+				<tbody>
+					<%
+						if (0 < list.size()) {
+
+							for (int i = 0; i < list.size(); i++) {
+								SaleVO bean = list.get(i);
+					%>
 					<tr>
-						<td>판매</td>
-						<td>iphoneX_AA128</td>
-						<td>아이폰x_128GB</td>
-						<td>1</td>
-						<td>1,100,00O</td>
-						<td>2018-11-15</td>
+						<%if("RETURN".equals(bean.getStatus())){ %>
+							<td>반품</td>	
+						<%}else{ %>
+							<td>판매</td>
+						<%} %>
+						<td><%=bean.getProduct_code()%></td>
+						<td><%=bean.getProduct_name()%></td>
+						<td><%=bean.getCount()%></td>
+						<%if("RETURN".equals(bean.getStatus())){ %>
+							<td>-<%=bean.getPrice()%></td>	
+						<%}else{ %>
+							<td><%=bean.getPrice()%></td>
+						<%} %>
+						<td><%=bean.getCreate_date()%></td>
 					</tr>
-					<tr>
-						<td>반품</td>
-						<td>iphoneX_AA128</td>
-						<td>아이폰x_128GB</td>
-						<td>1</td>
-						<td>-1,100,00O</td>
-						<td>2018-11-15</td>
-					</tr>
-					</tbody>
+					<%
+						}
+						}
+					%>
+				</tbody>
 
 				</table>
 			</div>
@@ -155,23 +148,56 @@
 		</div>
 	</form>
 </body>
+<script type="text/javascript">
+function ajaxCall() {
+	var req = null;
+	var args = this.ajaxCall.arguments;
+	// 브라우져 호환성 검사
+	if (window.XMLHttpRequest) {
+		req = new XMLHttpRequest();
+	} else if (window.ActiveXObject) {
+		req = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	if (req) {
+		req.open('POST', args[0], true); // request open
+		req.setRequestHeader("Content-Type",
+				"application/x-www-form-urlencoded; charset=UTF-8"); // 헤더지정
+		req.send(args[1]); // 요청
+		req.onreadystatechange = function() {
+			if (req.readyState == 4) {
+				if (req.status == 200) {
+					args[2](req.responseText, args[3], args[4]);
+				}
+			}
+		};
+
+	} else {
+		alert("request 생성 실패!!");
+	}
+}
+function insertReg(){
+	if("" == $('#code').val() || "" == $('#count').val()){
+		return false;
+	}
+	if(13>$('#code').val().length || 13<$('#code').val().length){
+		alert('올바른 코드를 입력해주세요.');
+		return false;
+	}
+	var param = "code=" + $('#code').val() + "";
+	param += "&status=" + $('input[name=sale]:checked').val() + "";
+	param += "&count=" + $('#count').val() + "";
+	ajaxCall('/project/insertSale', param,
+			function(data) {
+				var mapResult = JSON.parse(data);
+				if ("Y" == mapResult['successYN']) {
+					$('#thisForm').attr('action',
+							'/project/sale_regist.do');
+					$('#thisForm')[0].submit();
+				} else {
+					alert(mapResult['error']);
+				}
+			});
+}
+</script>
 </html>
 
-<script type="text/javascript">
-function check_onclick(){
-	if(thisForm.productCode.value==""){
-		alert("상품코드를 입력해 주세요.");
-		thisForm.productCode.focus();
-		return false;
-	}
-	
-	else if(thisForm.productCode.value!=""&&thisForm.count.value==""){
-		alert("수량을 입력해 주세요.");
-		thisForm.count.focus();
-		return false;
-	}
-	else 
-		return true;
-}
-
-</script>
