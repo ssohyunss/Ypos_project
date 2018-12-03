@@ -49,7 +49,7 @@ public interface LoginService {
 	public List<SiteVO> selectSite(String site);
 	public List<OrderVO> selectOrderSite(HashMap<String, Object> map) throws Exception;
 	public int updateOrder(HashMap<String, Object> map);
-	public List<OrderVO> selectOrderInput(String site) throws Exception;
+	public List<OrderVO> selectOrderInput(HashMap<String, Object> map) throws Exception;
 	public int insertLog(HashMap<String, Object> map);
 	public List<InOutVO> selectInOut(HashMap<String, Object> map);
 	public String selectSaleCount(HashMap<String, Object> map);

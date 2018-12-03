@@ -93,7 +93,7 @@ input[type=text] {
 					<label>날짜선택&nbsp;</label> 
 					<input type="text" id="fromDate"> &nbsp;~&nbsp; 
 					<input type="text" id="toDate">
-					<button type="submit" class="btn btn-primary mx-1 mt-2"
+					<button type="button" class="btn btn-primary mx-1 mt-2"
 						style="border: none; background-color: #56baed; margin-left: 5px" onclick="searchList()">조회</button>
 				</form>
 			</div>

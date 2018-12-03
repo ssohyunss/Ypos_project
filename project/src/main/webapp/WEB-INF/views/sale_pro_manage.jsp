@@ -38,7 +38,7 @@
 						class="form-control mx-1 mt-2" placeholder="상품코드를 입력하세요."
 						style="width: 300px; margin-left: 5px"></td>
 
-					<td><button type="submit" class="btn btn-primary mx-1 mt-2"
+					<td><button type="button" class="btn btn-primary mx-1 mt-2"
 							style="border: none; background-color: #56baed; margin-left: 5px" onclick="searchList()">조회</button></td>
 
 				</tr>

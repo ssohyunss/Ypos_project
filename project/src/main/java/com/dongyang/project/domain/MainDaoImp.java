@@ -130,8 +130,8 @@ public class MainDaoImp implements MainDao{
 		return sqlSession.update(namespace+".updateOrder",map);
 	}
 	@Override
-	public List<OrderVO> selectOrderInput(String site) throws Exception {
-		return sqlSession.selectList(namespace+".selectOrderInput", site);
+	public List<OrderVO> selectOrderInput(HashMap<String, Object> map) throws Exception {
+		return sqlSession.selectList(namespace+".selectOrderInput", map);
 	}
 	@Override
 	public int insertLog(HashMap<String, Object> map) {

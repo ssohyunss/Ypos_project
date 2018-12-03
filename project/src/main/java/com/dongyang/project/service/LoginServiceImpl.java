@@ -141,8 +141,8 @@ public class LoginServiceImpl implements LoginService{
 		return dao.updateOrder(map);
 	}
 	@Override
-	public List<OrderVO> selectOrderInput(String site) throws Exception {
-		return dao.selectOrderInput(site);
+	public List<OrderVO> selectOrderInput(HashMap<String, Object> map) throws Exception {
+		return dao.selectOrderInput(map);
 	}
 	@Override
 	public int insertLog(HashMap<String, Object> map) {

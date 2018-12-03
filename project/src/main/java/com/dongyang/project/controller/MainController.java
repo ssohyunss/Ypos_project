@@ -69,12 +69,16 @@ private LoginService service;
 			list = new ArrayList<NoticeVO>(); 
 		}
 		request.setAttribute("list",list);
-		List<OrderVO> inputList = service.selectOrderInput((String)session.getAttribute("site"));
+		HashMap<String,Object> map = new HashMap();
+		map.put("site", (String)session.getAttribute("site"));
+		map.put("date", "");
+		map.put("date2", "");
+		List<OrderVO> inputList = service.selectOrderInput(map);
 		if(null == inputList) {
 			inputList = new ArrayList<OrderVO>(); 
 		}
 		request.setAttribute("inputList",inputList);
-		HashMap<String,Object> map = new HashMap();
+		map = new HashMap();
 		map.put("site", (String)session.getAttribute("site"));
 		map.put("showValue", (String)request.getParameter("showValue"));
 		List<OrderVO> outList = service.selectOrderSite(map);
@@ -356,7 +360,11 @@ private LoginService service;
 	@RequestMapping("/order_input_confirm.do")
 	public String order_input_confirm(HttpServletRequest request, OrderVO vo, Model model, HttpSession session) throws Exception {
 		String site = (String)session.getAttribute("site");
-		List<OrderVO> list = service.selectOrderInput((String)session.getAttribute("site"));
+		HashMap<String,Object> map = new HashMap();
+		map.put("site", (String)session.getAttribute("site"));
+		map.put("date", (String)request.getParameter("date"));
+		map.put("date2", (String)request.getParameter("date2"));
+		List<OrderVO> list = service.selectOrderInput(map);
 		if(null == list) {
 			list = new ArrayList<OrderVO>(); 
 		}
