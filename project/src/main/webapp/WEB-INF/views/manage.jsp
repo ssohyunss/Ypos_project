@@ -20,7 +20,8 @@
 	<form id="thisForm" name="thisForm" onsubmit="return false;" action="/"
 		method="post" enctype="multipart/form-data">
 		<%@include file="./include/menu.jsp"%>
-		<div class="container">
+	</form>
+<div class="container">
 			<h3>
 				<b>매장재고현황</b>
 			</h3>
@@ -79,8 +80,7 @@
 				</table>
 
 			</div>
-		</div>
-	</form>
+		</div>	
 </body>
 <script>
 function search(){

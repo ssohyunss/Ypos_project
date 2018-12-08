@@ -14,16 +14,13 @@
 <link rel="stylesheet" href="css/style.css">
 <title>Y-POS</title>
 </head>
-
 <body>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
-	
 	<form id="thisForm" name="thisForm" onsubmit="return false;" action="/"
 		method="post" enctype="multipart/form-data">
 		<%@include file="./include/menu.jsp"%>
 	</form>
-	
 	<div class="container" style="margin-top: 40px">
 		<div class="row">
 			<form method="post" action="#">

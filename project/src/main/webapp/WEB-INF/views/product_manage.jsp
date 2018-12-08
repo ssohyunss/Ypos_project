@@ -24,8 +24,8 @@
 <body>
 	<form id="thisForm" name="thisForm" action="/" method="post" enctype="multipart/form-data">
 		<%@include file="./include/menu.jsp"%>
-
-		<div class="container">
+	</form>
+	<div class="container">
 			<h3>
 				<b>상품코드별 수불현황</b>
 			</h3>
@@ -59,38 +59,36 @@
 							<th style="background-color: #eeeeee; text-align: center;">지점명</th>
 						</tr>
 					</thead>
-<tbody>
-					<%
-						if (0 < list.size()) {
-
-							for (int i = 0; i < list.size(); i++) {
-								InOutVO bean = list.get(i);
-					%>
-					<tr>
-						<td><%=bean.getCreate_date()%></td>
-						<td><%=bean.getProduct_code()%></td>
-						<td><%=bean.getProduct_name()%></td>
-						<td><%=bean.getProduct_price()%></td>
-						<%if("IN".equals(bean.getStatus())) {%>
-							<td><%=bean.getCount()%></td>
-							<td></td>
-						<%}else{ %>
-							<td></td>
-							<td><%=bean.getCount()%></td>
-						<%} %>
-						<td><%=bean.getSite_name()%></td>
-					</tr>
-					<%
-						}
-						}
-					%>
-				</tbody>
-
+					<tbody>
+						<%
+							if (0 < list.size()) {
+	
+								for (int i = 0; i < list.size(); i++) {
+									InOutVO bean = list.get(i);
+						%>
+						<tr>
+							<td><%=bean.getCreate_date()%></td>
+							<td><%=bean.getProduct_code()%></td>
+							<td><%=bean.getProduct_name()%></td>
+							<td><%=bean.getProduct_price()%></td>
+							<%if("IN".equals(bean.getStatus())) {%>
+								<td><%=bean.getCount()%></td>
+								<td></td>
+							<%}else{ %>
+								<td></td>
+								<td><%=bean.getCount()%></td>
+							<%} %>
+							<td><%=bean.getSite_name()%></td>
+						</tr>
+						<%
+							}
+							}
+						%>
+					</tbody>
 				</table>
 
 			</div>
-		</div>
-	</form>
+		</div>	
 </body>
 <script type="text/javascript">
 function searchList(){

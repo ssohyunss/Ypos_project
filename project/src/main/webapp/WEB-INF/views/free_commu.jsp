@@ -23,7 +23,6 @@
 		method="post" enctype="multipart/form-data">
 		<%@include file="./include/menu.jsp"%>
 	</form>
-
 	<div class="container" >
 		<h3>
 			<b>자유게시판</b>

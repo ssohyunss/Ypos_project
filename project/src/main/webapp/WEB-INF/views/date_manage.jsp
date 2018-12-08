@@ -58,9 +58,7 @@ input[type=text] {
 <body>
 	<form id="thisForm" name="thisForm" onsubmit="return false;" action="/"
 		method="post" enctype="multipart/form-data">
-
 		<%@include file="./include/menu.jsp"%>
-
 	</form>
 		<div class="container">
 			<h3>

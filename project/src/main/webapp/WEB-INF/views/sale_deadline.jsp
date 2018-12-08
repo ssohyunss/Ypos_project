@@ -78,10 +78,8 @@ input[type=text] {
 	<form id="thisForm" name="thisForm" action="/" method="post" enctype="multipart/form-data">
 
 		<%@include file="./include/menu.jsp"%>
-
-
-
-		<div class="container">
+	</form>
+<div class="container">
 
 			<h3>
 				<b>판매마감현황</b>
@@ -143,8 +141,7 @@ input[type=text] {
 				</table>
 			</div>
 
-		</div>
-	</form>
+		</div>	
 </body>
 <script type="text/javascript">
 function searchList(){

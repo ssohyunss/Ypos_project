@@ -61,12 +61,9 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<form id="thisForm" name="thisForm" action="/" method="post" enctype="multipart/form-data">
-
 		<%@include file="./include/menu.jsp"%>
-
-
-
-		<div class="container">
+	</form>
+	<div class="container">
 
 			<h3>
 				<b>판매등록</b>
@@ -146,7 +143,6 @@
 			</div>
 
 		</div>
-	</form>
 </body>
 <script type="text/javascript">
 function ajaxCall() {

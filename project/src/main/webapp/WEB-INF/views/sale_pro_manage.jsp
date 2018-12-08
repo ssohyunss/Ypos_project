@@ -19,9 +19,7 @@
 	<script src="js/bootstrap.js"></script>
 	<form id="thisForm" name="thisForm" onsubmit="return false;" action="/"
 		method="post" enctype="multipart/form-data">
-
 		<%@include file="./include/menu.jsp"%>
-
 	</form>
 
 	<div class="container">
