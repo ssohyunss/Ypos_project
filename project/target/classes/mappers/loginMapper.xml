@@ -137,8 +137,12 @@
 	</select>
 	<select id="selectOrderInput" resultType="com.dongyang.project.domain.OrderVO">
 		select *, (select name from SITE where 1=1 and TID = SITE_TID) SITE_NAME from ORDER_LIST where 1=1 and OUT_YN = 'Y'
-		<if test="null != _parameter">
-			and SITE_TID = #{_parameter}
+		<if test="null != site and '' != date">
+			and SITE_TID = #{site}
+		</if>
+		<if test="null != date and '' != date">
+	    	and #{date} <![CDATA[<=]]> OUT_DATE
+	    	and OUT_DATE <![CDATA[<=]]> #{date2}
 		</if>
 	</select>
 	<select id="insertLog" resultType="com.dongyang.project.domain.InOutVO">
