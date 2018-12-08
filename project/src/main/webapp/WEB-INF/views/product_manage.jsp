@@ -37,7 +37,7 @@
 
 						<td colspan="3"><input type="text" id="search"
 							class="form-control mx-1 mt-2" placeholder="상품코드를 입력하세요."
-							style="width: 300px; margin-left: 5px"></td>
+							style="width: 300px; margin-left: 5px" onfocus="writeCode()"></td>
 
 						<td><button type="submit" class="btn btn-primary mx-1 mt-2"
 								style="border: none; background-color: #56baed; margin-left: 5px" onclick="searchList()">조회</button></td>
@@ -100,6 +100,18 @@ function searchList(){
 	$('#thisForm').attr('action',
 	'/project/product_manage.do?code='+$('#search').val()+'');
 	$('#thisForm')[0].submit();
+}
+function writeCode(){
+	if (isMobile()) {
+	    // 모바일이면 실행될 코드 들어가는 곳
+		Android.writeBarCode();
+	}
+}
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+function barcodeText(value){
+	$('#code').val(value);
 }
 </script>
 </html>

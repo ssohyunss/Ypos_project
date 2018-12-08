@@ -84,7 +84,7 @@
 				align="left">
 				
 				 <b>상품코드</b>
-        <input type="text" id="code" class="form-control mx-1 mt-2" placeholder="상품코드를 입력하세요." style="width: 300px; margin-left: 15px; margin-right: 15px"> <b>수량</b>
+        <input type="text" id="code" class="form-control mx-1 mt-2" placeholder="상품코드를 입력하세요." style="width: 300px; margin-left: 15px; margin-right: 15px" onfocus="writeCode()"> <b>수량</b>
         <input type="text" id="count" class="form-control mx-1 mt-2" placeholder="수량입력" style="width: 100px; margin-left: 15px">
         <input type="radio" name="sale" value="SALE" style="margin-left: 10px" checked="checked"/> 판매
         <input type="radio" name="sale" value="RETURN" /> 반품
@@ -197,6 +197,18 @@ function insertReg(){
 					alert(mapResult['error']);
 				}
 			});
+}
+function writeCode(){
+	if (isMobile()) {
+	    // 모바일이면 실행될 코드 들어가는 곳
+		Android.showToast("상품코드입력");
+	}
+}
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+function barcodeText(value){
+	$('#code').val(value);
 }
 </script>
 </html>
