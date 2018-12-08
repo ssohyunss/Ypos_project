@@ -13,10 +13,8 @@
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
 <script>
 	$(function() {
 
@@ -76,7 +74,6 @@ input[type=text] {
 </style>
 <body>
 	<form id="thisForm" name="thisForm" action="/" method="post" enctype="multipart/form-data">
-
 		<%@include file="./include/menu.jsp"%>
 	</form>
 <div class="container">
