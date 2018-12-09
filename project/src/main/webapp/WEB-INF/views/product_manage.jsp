@@ -107,7 +107,8 @@ function isMobile() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 function barcodeText(value){
-	$('#code').val(value);
+	$('#search').val(value);
+	$('#search').blur();
 }
 </script>
 </html>

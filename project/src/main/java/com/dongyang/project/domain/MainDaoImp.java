@@ -169,5 +169,9 @@ public class MainDaoImp implements MainDao{
 	public List<SaleVO> selectSaleList(HashMap<String, Object> map) {
 		return sqlSession.selectList(namespace+".selectSaleList", map);
 	}
+	@Override
+	public String searchProductName(HashMap<String, Object> map) {
+		return sqlSession.selectOne(namespace+".searchProductName", map);
+	}
 	
 }

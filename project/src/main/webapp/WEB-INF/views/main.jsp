@@ -41,16 +41,6 @@ margin:0px;
 	<%@include file="./include/chart.jsp"%>
 
 </body>
-<script type="text/javascript">
-var mobileCheck = function(){
-	if (isMobile()) {
-	    // 모바일이면 실행될 코드 들어가는 곳
-		Android.showToast("모바일이다.");
-	}
-}
-mobileCheck();
-
-</script>
 </html>
 
 

@@ -36,8 +36,8 @@
 					</select> 
 				</td>
 				
-				<td colspan="3">
-					<input type="text" id="searchText" class="form-control mx-1 mt-2" placeholder="내용을 입력하세요." style="width:300px; margin-left:5px">
+				<td colspan="3"> 
+					<input type="text" id="searchText" class="form-control mx-1 mt-2" placeholder="내용을 입력하세요." style="width:300px; margin-left:5px" onfocus="writeCode()">
 				</td>
 				
 				<td>
@@ -88,6 +88,21 @@ function search(){
 	$('#searchText').val($('#searchText').val());
 	$('#type').val($('#seamanageDividerchText').val());
 	$('#thisForm')[0].submit();
+}
+function writeCode(){
+	if (isMobile()) {
+	    // 모바일이면 실행될 코드 들어가는 곳
+	    if("BARCODE" == $('#manageDivide option:selected').val()){
+	    	Android.writeBarCode();	
+	    }
+	}
+}
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+function barcodeText(value){
+	$('#searchText').val(value);
+	$('#searchText').blur();
 }
 </script>
 </html>

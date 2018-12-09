@@ -82,7 +82,7 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body">
+				<div id="Modal" class="modal-body">
 					<div class="form-row">
 						<div class="form-group col-sm-4">
 							<label>상품명</label>
@@ -114,11 +114,47 @@
 						<button class="btn btn-primary" style="border: none; background-color: #56baed" onclick="insertReturn()">등록</button>
 					</div>
 				</div>
+				
+				<div id="mobileModal" class="modal-body">
+					<div class="form-row">
+						<div class="form-group col-sm-4">
+							<label>상품코드</label> 
+							<input type="text" id="returnCode_2"class="form-control" maxlength="20" onfocus="writeCode()">
+						</div>
+						<div class="form-group col-sm-4">
+							<label>상품명</label>
+							<input type="text" id="returnName_2"class="form-control" maxlength="20" readonly="readonly">
+						</div>
+						<div class="form-group col-sm-4">
+							<label>수량</label> 
+							<input type="text" id="returnCount_2" class="form-control" maxlength="20">
+						</div>
+					</div>
+					<div class="form-group col-sm-12">
+						<label>반품사유</label>
+						<textarea type="text" id="returnReason_2" class="form-control" maxlength=2048 " style="height: 150px;"></textarea>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-secondary" data-dismiss="modal">취소</button>
+						<button class="btn btn-primary" style="border: none; background-color: #56baed" onclick="insertReturn()">등록</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </body>
 <script>
+var mobileCheck = function(){
+	if (isMobile()) {
+	    // 모바일이면 실행될 코드 들어가는 곳
+	    $('#mobileModal').css('display','block');
+	    $('#Modal').css('display','none');
+	}else{
+		$('#mobileModal').css('display','none');
+	    $('#Modal').css('display','block');
+	}
+}
+mobileCheck();
 function ajaxCall() {
 	var req = null;
 	var args = this.ajaxCall.arguments;
@@ -150,11 +186,20 @@ function changeReturnName(){
 	$('#returnCode').val($('#returnName option:selected').attr('data-value'));
 }
 function insertReturn(){
-	var param = "returnName="+$('#returnName').val()+"";
-	param += "&returnCode="+$('#returnCode').val()+"";
-	param += "&returnCount="+$('#returnCount').val()+"";
-	param += "&returnReason="+$('#returnReason').val()+"";
-	param += "&productTid=" + $('#orderName option:selected').attr('data-value2') + "";
+	if (isMobile()) {
+		var param = "returnName="+$('#returnName_2').val()+"";
+		param += "&returnCode="+$('#returnCode_2').val()+"";
+		param += "&returnCount="+$('#returnCount_2').val()+"";
+		param += "&returnReason="+$('#returnReason_2').val()+"";
+		param += "&productTid=" + $('#returnName_2').attr('data-value') + "";
+	}else{
+		var param = "returnName="+$('#returnName').val()+"";
+		param += "&returnCode="+$('#returnCode').val()+"";
+		param += "&returnCount="+$('#returnCount').val()+"";
+		param += "&returnReason="+$('#returnReason').val()+"";
+		param += "&productTid=" + $('#returnName option:selected').attr('data-value2') + "";
+	}
+
 	ajaxCall('/project/insertReturn',param , function(data){
 		var mapResult = JSON.parse(data);
 		if("Y" == mapResult['successYN']){
@@ -163,6 +208,30 @@ function insertReturn(){
 		}else{
 			alert('주문등록에 실패했습니다.');
 		}
+	});
+}
+function writeCode(){
+	if (isMobile()) {
+	    // 모바일이면 실행될 코드 들어가는 곳
+    	Android.writeBarCode();	
+	}
+}
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+function barcodeText(value){
+	$('#returnCode_2').val(value);
+	$('#returnCode_2').blur();
+	var param = "barcode=" + value + "";
+	ajaxCall('/project/searchProduct', param,
+		function(data) {
+			var mapResult = JSON.parse(data);
+			if ("Y" == mapResult['successYN']) {
+				$('#returnName_2').val(mapResult['name']);
+				$('#returnName_2')[0].dataset.value = mapResult['value'];
+			} else {
+				alert('등록된 상품이 존재하지 않습니다.');
+			}
 	});
 }
 </script>

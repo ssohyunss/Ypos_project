@@ -195,7 +195,7 @@ function insertReg(){
 function writeCode(){
 	if (isMobile()) {
 	    // 모바일이면 실행될 코드 들어가는 곳
-		Android.showToast("상품코드입력");
+		Android.writeBarCode();
 	}
 }
 function isMobile() {
@@ -203,6 +203,7 @@ function isMobile() {
 }
 function barcodeText(value){
 	$('#code').val(value);
+	$('#code').blur();
 }
 </script>
 </html>

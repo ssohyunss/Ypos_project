@@ -9,6 +9,7 @@ public class ProductVO {
     private String price = "";
     private String count = "";
     private String barcode = "";
+    private String create_date = "";
 	public String getTid() {
 		return tid;
 	}
@@ -56,6 +57,12 @@ public class ProductVO {
 	}
 	public void setSite_name(String site_name) {
 		this.site_name = site_name;
+	}
+	public String getCreate_date() {
+		return create_date;
+	}
+	public void setCreate_date(String create_date) {
+		this.create_date = create_date;
 	}
     
 }

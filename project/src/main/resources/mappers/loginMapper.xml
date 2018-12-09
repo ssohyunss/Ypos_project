@@ -51,7 +51,7 @@
 		select IFNULL(max(TID)+1,1) as TID from PRODUCT_LIST
 	</select>
 	<select id="insertPro" resultType="com.dongyang.project.domain.ProductVO">
-		insert into PRODUCT_LIST(SITE_TID,IMAGE_ID,NAME,PRICE,COUNT,BARCODE) VALUES('1',(select max(id) from ImageEntity),#{name},#{price},#{count},#{barcode})
+		insert into PRODUCT_LIST(SITE_TID,IMAGE_ID,NAME,PRICE,COUNT,BARCODE,CREATE_DATE) VALUES('1',(select max(id) from ImageEntity),#{name},#{price},#{count},#{barcode},#{create_date})
 	</select>
 	<select id="selectProductInfo" resultType="com.dongyang.project.domain.ProductVO">
 		select * from PRODUCT_LIST where 1=1 and BARCODE = #{barcode}
@@ -218,5 +218,17 @@
 	    	and PRODUCT_CODE = #{code}
 	    </when>    
 	  </choose>		
-	</select>		
+	</select>	
+	<select id="searchProductName" resultType="java.lang.String">
+	  <choose>
+	    <when test="'' != type and null != type and type.equals('NAME') ">
+	    	select NAME  
+	    </when>
+   	    <otherwise>
+	    	select TID
+	    </otherwise>    
+	  </choose>	
+		 
+		from PRODUCT_LIST where 1=1 and site_tid = #{site} and barcode = #{barcode}
+	</select>	
 </mapper>
