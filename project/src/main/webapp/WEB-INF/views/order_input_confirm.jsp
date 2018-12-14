@@ -109,8 +109,8 @@ input[type=text] {
 				<label>날짜선택&nbsp;</label> <input type="text" name="fromDate"
 					id="fromDate"> &nbsp;~&nbsp; <input type="text"
 					name="toDate" id="toDate">
-				<button type="submit" class="btn btn-primary mx-1 mt-2"
-					style="border: none; background-color: #56baed; margin-left: 5px">조회</button>
+				<button type="button" class="btn btn-primary mx-1 mt-2"
+					style="border: none; background-color: #56baed; margin-left: 5px" onclick="searchList()">조회</button>
 			</form>
 		</div>
 
@@ -277,4 +277,18 @@ input[type=text] {
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+function searchList(){
+	if("" == $('#fromDate').val() || "" == $('#toDate').val()){
+		return false;
+	}
+	if($('#toDate').val() < $('#fromDate').val()){
+		alert('잘못된 기간입니다.');
+		return false;
+	}
+	$('#thisForm').attr('action',
+	'/project/order_input_confirm.do?date='+$('#fromDate').val()+'&date2='+$('#toDate').val()+'');
+	$('#thisForm')[0].submit();
+}
+</script>
 </html>

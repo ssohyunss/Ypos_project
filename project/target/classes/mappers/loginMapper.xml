@@ -56,6 +56,9 @@
 	<select id="selectProductInfo" resultType="com.dongyang.project.domain.ProductVO">
 		select * from PRODUCT_LIST where 1=1 and BARCODE = #{barcode}
 	</select>
+	<select id="selectProductInfoMap" resultType="com.dongyang.project.domain.ProductVO">
+		select * from PRODUCT_LIST where 1=1 and site_tid = #{site} and BARCODE = #{code}
+	</select>	
 	<select id="updateProductIn" resultType="com.dongyang.project.domain.ProductVO">
 		update PRODUCT_LIST set count = count + #{count} where 1=1 and BARCODE = #{barcode}
 	</select>
@@ -134,8 +137,12 @@
 	</select>
 	<select id="selectOrderInput" resultType="com.dongyang.project.domain.OrderVO">
 		select *, (select name from SITE where 1=1 and TID = SITE_TID) SITE_NAME from ORDER_LIST where 1=1 and OUT_YN = 'Y'
-		<if test="null != _parameter">
-			and SITE_TID = #{_parameter}
+		<if test="null != site and '' != date">
+			and SITE_TID = #{site}
+		</if>
+		<if test="null != date and '' != date">
+	    	and #{date} <![CDATA[<=]]> OUT_DATE
+	    	and OUT_DATE <![CDATA[<=]]> #{date2}
 		</if>
 	</select>
 	<select id="insertLog" resultType="com.dongyang.project.domain.InOutVO">
@@ -143,19 +150,73 @@
 		VALUES(#{site},#{productTid},#{status},#{count},#{date})
 	</select>	
 	<select id="selectInOut" resultType="com.dongyang.project.domain.InOutVO">
+		select * from (
 		select *,
 		(select name from PRODUCT_LIST where TID = PRODUCT_LIST_TID) PRODUCT_NAME,
 		(select barcode from PRODUCT_LIST where TID = PRODUCT_LIST_TID) PRODUCT_CODE,
 		(select price from PRODUCT_LIST where TID = PRODUCT_LIST_TID) PRODUCT_PRICE,
 		(select name from SITE where 1=1 and TID = SITE_TID) SITE_NAME
 		 from IN_OUT_STATUS WHERE 1=1
+		)T
+		where 1=1
 		<if test="1 != site">
 			and SITE_TID = #{site}
 		</if>
-		<if test="'' != date">
-			and CREATE_DATE = #{date}
+		<if test="'' != date and null != date">
+			and CREATE_DATE >= #{date}
+		</if>
+		<if test="'' != code and null != code">
+			and PRODUCT_CODE = #{code}
 		</if>
 	</select>
-	
-	
+	<select id="selectSaleCount" resultType="java.lang.String">
+		select sum(COUNT) from SALE_LIST where 1=1 and site_tid = #{site} and product_list_tid = #{productTid} and status = 'SALE' group by product_list_tid, status
+	</select>
+	<select id="selectSaleCountReturn" resultType="java.lang.String">
+		select sum(COUNT) from SALE_LIST where 1=1 and site_tid = #{site} and product_list_tid = #{productTid} and status = 'RETURN' group by product_list_tid, status
+	</select>
+	<select id="insertSale" resultType="com.dongyang.project.domain.SaleVO">
+		insert into SALE_LIST(SITE_TID, PRODUCT_LIST_TID, STATUS, COUNT, PRICE, CREATE_DATE) 
+		VALUES(#{site},#{productTid},#{status},#{count},#{price},#{date})
+	</select>
+	<select id="updateProduct" resultType="com.dongyang.project.domain.ProductVO">
+		update PRODUCT_LIST set 
+  	  <choose>
+	    <when test="status.equals('RETURN')">
+	    	count = count + #{count} 
+	    </when>
+	    <otherwise>
+	    	count = count - #{count}
+	    </otherwise>
+	  </choose>
+	  where 1=1 and site_tid = #{site} and tid = #{productTid}
+	</select>
+	<select id="selectSaleMoney" resultType="java.lang.String">
+		select sum(PRICE) from SALE_LIST where 1=1 and site_tid = #{site} and status = 'SALE' and create_date >= #{today} group by status
+	</select>
+	<select id="selectSaleReturnMoney" resultType="java.lang.String">
+		select sum(PRICE) from SALE_LIST where 1=1 and site_tid = #{site} and status = 'RETURN' and create_date >= #{today} group by status
+	</select>
+	<select id="selectSaleList" resultType="com.dongyang.project.domain.SaleVO">
+		select * from (
+		select *,
+		(select name from PRODUCT_LIST where TID = PRODUCT_LIST_TID) PRODUCT_NAME,
+		(select barcode from PRODUCT_LIST where TID = PRODUCT_LIST_TID) PRODUCT_CODE
+		 from SALE_LIST 
+		 )T
+		 where 1=1 and SITE_TID = #{site}
+  	  <choose>
+	    <when test="'' != today and null != today">
+	    	and #{today} <![CDATA[<=]]> CREATE_DATE
+	    	and CREATE_DATE <![CDATA[<=]]> #{last}  
+	    </when>
+	    <when test="'' != date and null != date">
+	    	and #{date} <![CDATA[<=]]> CREATE_DATE
+	    	and CREATE_DATE <![CDATA[<=]]> #{date2}
+	    </when>	
+   	    <when test="'' != code and null != code">
+	    	and PRODUCT_CODE = #{code}
+	    </when>    
+	  </choose>		
+	</select>		
 </mapper>

@@ -56,19 +56,21 @@ input[type=text] {
 }
 </style>
 <body>
-	<form id="thisForm" name="thisForm" onsubmit="return check_onclick();"
-		action="/" method="post" enctype="multipart/form-data">
+	<form id="thisForm" name="thisForm" onsubmit="return false;" action="/"
+		method="post" enctype="multipart/form-data">
+
 		<%@include file="./include/menu.jsp"%>
+
+	</form>
 		<div class="container">
 			<h3>
 				<b>일자별 수불현황</b>
 			</h3>
 			<div style="margin-top: 40px; margin-bottom: 40px" align="left">
 				<form>
-					<label>날짜선택&nbsp;</label> <input type="text" name="fromDate"
-						id="fromDate">
-					<button type="submit" class="btn btn-primary mx-1 mt-2"
-						style="border: none; background-color: #56baed; margin-left: 5px">조회</button>
+					<label>날짜선택&nbsp;</label> <input type="text" id="fromDate">
+					<button type="button" class="btn btn-primary mx-1 mt-2"
+						style="border: none; background-color: #56baed; margin-left: 5px" onclick="searchList()">조회</button>
 				</form>
 			</div>
 			<div class="row" style="margin-top: 20px">
@@ -115,7 +117,16 @@ input[type=text] {
 
 			</div>
 		</div>
-	</form>
 </body>
+<script type="text/javascript">
+function searchList(){
+	if("" == $('#fromDate').val()){
+		return false;
+	}
+	$('#thisForm').attr('action',
+	'/project/date_manage.do?date='+$('#fromDate').val()+'');
+	$('#thisForm')[0].submit();
+}
+</script>
 </html>
 
