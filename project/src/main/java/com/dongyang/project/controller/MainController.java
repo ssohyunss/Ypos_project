@@ -559,4 +559,24 @@ private LoginService service;
 		request.setAttribute("jsonOut", obj);
 		return "stringout";
 	}
+	@RequestMapping("/searchProduct")
+	public String searchProduct (HttpServletRequest request, CommunityVO vo, Model model, HttpSession session) throws JSONException {
+		JSONObject obj = new JSONObject();
+		String name = "";
+		String tid = "";
+		obj.put("successYN", "N");
+		HashMap<String,Object> map = new HashMap();
+		map.put("site", (String)session.getAttribute("site"));
+		map.put("barcode", (String)request.getParameter("barcode"));
+		map.put("type", "NAME");
+		name = service.searchProductName(map);
+		map.put("type", "tid");
+		tid = service.searchProductName(map);
+		obj.put("successYN", "Y");
+		obj.put("name", name);
+		obj.put("value", tid);
+		request.setAttribute("jsonOut", obj);
+		return "stringout";
+	}
+	
 }

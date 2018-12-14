@@ -14,6 +14,10 @@
 <meta name="viewport " content="width=device-width ,initial-scale=1">
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/style.css">
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
 <title>Y-POS</title>
 </head>
 <style>
@@ -22,8 +26,6 @@
 
 </style>
 <body>
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="js/bootstrap.js"></script>
 	<form id="thisForm" name="thisForm" onsubmit="return false;" action="/"
 		method="post" enctype="multipart/form-data">
 		<%@include file="./include/menu.jsp"%>

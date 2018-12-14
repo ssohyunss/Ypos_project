@@ -48,6 +48,9 @@
 										<li><a href="javascript:menu('CONFIRM')">입점확인</a></li>
 										<li><a href="javascript:menu('ORDER_HISTROY')">출고주문내역</a></li>
 									</ul></li>
+								<li id="orderRegLi" style="display: none;" onclick="javascript:andInsert()"><a data-toggle="dropdown"
+									class="dropdown-toggle" >상품등록</a>
+								</li>									
 								<li class="dropdown"><a data-toggle="dropdown"
 									class="dropdown-toggle">커뮤니티<span class="caret"></span></a>
 									<ul class="dropdown-menu">
@@ -75,6 +78,12 @@
 
 
 <script type="text/javascript">
+(function (){
+	if (isMobile()) {
+	    // 모바일이면 실행될 코드 들어가는 곳
+	   $('#orderRegLi').css('display','block');
+	}
+})();
 	function menu(cmd) {
 		var path = "${pageContext.request.contextPath}";
 		if ("MAIN" == cmd) {
@@ -113,6 +122,12 @@
 			$('#thisForm').attr('action', path);
 		}
 		$('#thisForm')[0].submit();
+	}
+	function isMobile() {
+	    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+	}
+	function andInsert(){
+		Android.makeBarcode();	
 	}
 </script>
 

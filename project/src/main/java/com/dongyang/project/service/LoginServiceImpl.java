@@ -180,4 +180,8 @@ public class LoginServiceImpl implements LoginService{
 	public List<SaleVO> selectSaleList(HashMap<String, Object> map) {
 		return dao.selectSaleList(map);
 	}
+	@Override
+	public String searchProductName(HashMap<String, Object> map) {
+		return dao.searchProductName(map);
+	}
 }

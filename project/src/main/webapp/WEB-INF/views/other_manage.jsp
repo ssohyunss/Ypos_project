@@ -7,19 +7,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<link rel="stylesheet" href="css/style.css">
 <title>Y-POS</title>
 </head>
 <style>
+@media ( max-width :767px) {
+	.search {
+		text-align: center;
+		margin-left: 20px;
+	}
+}
 </style>
 <body>
 	<form id="thisForm" name="thisForm" onsubmit="return false;" action="/"
 		method="post" enctype="multipart/form-data">
 		<%@include file="./include/menu.jsp"%>
-
-		<div class="container">
+	</form>
+<div class="container">
 			<h3>
 				<b>타매장재고현황</b>
 			</h3>
@@ -34,8 +43,8 @@
 					</select> 
 				</td>
 				
-				<td colspan="3">
-					<input type="text" id="searchText" class="form-control mx-1 mt-2" placeholder="내용을 입력하세요." style="width:300px; margin-left:5px">
+				<td colspan="3"> 
+					<input type="text" id="searchText" class="form-control mx-1 mt-2" placeholder="내용을 입력하세요." style="width:300px; margin-left:5px" onfocus="writeCode()">
 				</td>
 				
 				<td>
@@ -78,8 +87,7 @@
 					</tbody>
 				</table>
 			</div>
-		</div>
-	</form>
+		</div>	
 </body>
 <script>
 function search(){
@@ -87,6 +95,21 @@ function search(){
 	$('#searchText').val($('#searchText').val());
 	$('#type').val($('#seamanageDividerchText').val());
 	$('#thisForm')[0].submit();
+}
+function writeCode(){
+	if (isMobile()) {
+	    // 모바일이면 실행될 코드 들어가는 곳
+	    if("BARCODE" == $('#manageDivide option:selected').val()){
+	    	Android.writeBarCode();	
+	    }
+	}
+}
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+function barcodeText(value){
+	$('#searchText').val(value);
+	$('#searchText').blur();
 }
 </script>
 </html>

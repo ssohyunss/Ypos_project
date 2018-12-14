@@ -200,6 +200,7 @@ public class BarcodeApi {
                 pro.setPrice(content);
                 pro.setCount(count);
                 pro.setBarcode("88000001"+proTid+ean13);
+                pro.setCreate_date(default_format.format(new Date()));
                 service.insertPro(pro);
                 //13자리의 숫자 바코드 생성
                 //처음 3자리 국가코드 880(한국)

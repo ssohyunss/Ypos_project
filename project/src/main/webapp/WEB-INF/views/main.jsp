@@ -30,6 +30,10 @@ margin:0px;
     font-size: 20px;
 }
 
+@media ( max-width :767px) {
+
+
+}
 
 </style>
 <body>

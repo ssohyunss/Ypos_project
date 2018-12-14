@@ -9,23 +9,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
 <title>Y-POS</title>
 
 </head>
 <style>
+@media ( max-width :767px) {
+	.search {
+		margin-left: 20px;
+	}
+}
 </style>
 <body>
 	<form id="thisForm" name="thisForm" action="/" method="post" enctype="multipart/form-data">
 		<%@include file="./include/menu.jsp"%>
-
-		<div class="container">
+	</form>
+	<div class="container">
 			<h3>
 				<b>상품코드별 수불현황</b>
 			</h3>
@@ -37,7 +41,7 @@
 
 						<td colspan="3"><input type="text" id="search"
 							class="form-control mx-1 mt-2" placeholder="상품코드를 입력하세요."
-							style="width: 300px; margin-left: 5px"></td>
+							style="width: 300px; margin-left: 5px" onfocus="writeCode()"></td>
 
 						<td><button type="submit" class="btn btn-primary mx-1 mt-2"
 								style="border: none; background-color: #56baed; margin-left: 5px" onclick="searchList()">조회</button></td>
@@ -59,38 +63,36 @@
 							<th style="background-color: #eeeeee; text-align: center;">지점명</th>
 						</tr>
 					</thead>
-<tbody>
-					<%
-						if (0 < list.size()) {
-
-							for (int i = 0; i < list.size(); i++) {
-								InOutVO bean = list.get(i);
-					%>
-					<tr>
-						<td><%=bean.getCreate_date()%></td>
-						<td><%=bean.getProduct_code()%></td>
-						<td><%=bean.getProduct_name()%></td>
-						<td><%=bean.getProduct_price()%></td>
-						<%if("IN".equals(bean.getStatus())) {%>
-							<td><%=bean.getCount()%></td>
-							<td></td>
-						<%}else{ %>
-							<td></td>
-							<td><%=bean.getCount()%></td>
-						<%} %>
-						<td><%=bean.getSite_name()%></td>
-					</tr>
-					<%
-						}
-						}
-					%>
-				</tbody>
-
+					<tbody>
+						<%
+							if (0 < list.size()) {
+	
+								for (int i = 0; i < list.size(); i++) {
+									InOutVO bean = list.get(i);
+						%>
+						<tr>
+							<td><%=bean.getCreate_date()%></td>
+							<td><%=bean.getProduct_code()%></td>
+							<td><%=bean.getProduct_name()%></td>
+							<td><%=bean.getProduct_price()%></td>
+							<%if("IN".equals(bean.getStatus())) {%>
+								<td><%=bean.getCount()%></td>
+								<td></td>
+							<%}else{ %>
+								<td></td>
+								<td><%=bean.getCount()%></td>
+							<%} %>
+							<td><%=bean.getSite_name()%></td>
+						</tr>
+						<%
+							}
+							}
+						%>
+					</tbody>
 				</table>
 
 			</div>
-		</div>
-	</form>
+		</div>	
 </body>
 <script type="text/javascript">
 function searchList(){
@@ -100,6 +102,19 @@ function searchList(){
 	$('#thisForm').attr('action',
 	'/project/product_manage.do?code='+$('#search').val()+'');
 	$('#thisForm')[0].submit();
+}
+function writeCode(){
+	if (isMobile()) {
+	    // 모바일이면 실행될 코드 들어가는 곳
+		Android.writeBarCode();
+	}
+}
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+function barcodeText(value){
+	$('#search').val(value);
+	$('#search').blur();
 }
 </script>
 </html>

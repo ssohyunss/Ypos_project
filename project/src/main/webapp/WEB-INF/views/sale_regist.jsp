@@ -18,8 +18,8 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
 <script>
@@ -58,15 +58,10 @@
     }
 </style>
 <body>
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="js/bootstrap.js"></script>
 	<form id="thisForm" name="thisForm" action="/" method="post" enctype="multipart/form-data">
-
 		<%@include file="./include/menu.jsp"%>
-
-
-
-		<div class="container">
+	</form>
+	<div class="container">
 
 			<h3>
 				<b>판매등록</b>
@@ -84,7 +79,7 @@
 				align="left">
 				
 				 <b>상품코드</b>
-        <input type="text" id="code" class="form-control mx-1 mt-2" placeholder="상품코드를 입력하세요." style="width: 300px; margin-left: 15px; margin-right: 15px"> <b>수량</b>
+        <input type="text" id="code" class="form-control mx-1 mt-2" placeholder="상품코드를 입력하세요." style="width: 300px; margin-left: 15px; margin-right: 15px" onfocus="writeCode()"> <b>수량</b>
         <input type="text" id="count" class="form-control mx-1 mt-2" placeholder="수량입력" style="width: 100px; margin-left: 15px">
         <input type="radio" name="sale" value="SALE" style="margin-left: 10px" checked="checked"/> 판매
         <input type="radio" name="sale" value="RETURN" /> 반품
@@ -146,7 +141,6 @@
 			</div>
 
 		</div>
-	</form>
 </body>
 <script type="text/javascript">
 function ajaxCall() {
@@ -197,6 +191,19 @@ function insertReg(){
 					alert(mapResult['error']);
 				}
 			});
+}
+function writeCode(){
+	if (isMobile()) {
+	    // 모바일이면 실행될 코드 들어가는 곳
+		Android.writeBarCode();
+	}
+}
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+function barcodeText(value){
+	$('#code').val(value);
+	$('#code').blur();
 }
 </script>
 </html>

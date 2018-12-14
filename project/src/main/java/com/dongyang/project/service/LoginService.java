@@ -59,4 +59,5 @@ public interface LoginService {
 	public String selectSaleMoney(HashMap<String, Object> map);
 	public String selectSaleReturnMoney(HashMap<String, Object> map);
 	public List<SaleVO> selectSaleList(HashMap<String, Object> map);
+	public String searchProductName(HashMap<String, Object> map);
 }
