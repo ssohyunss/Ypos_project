@@ -11,6 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <meta name="viewport " content="width=device-width ,initial-scale=1">
 <link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -18,6 +19,12 @@
 <title>Y-POS</title>
 </head>
 <style>
+@media ( max-width :767px) {
+	.row {
+		font-size: 6px;
+	}
+	
+}
 </style>
 <body>
 	<form id="thisForm" name="thisForm" onsubmit="return false;" action="/"
@@ -33,7 +40,7 @@
 			<b>출고주문내역</b>
 		</h3>
 
-		<a class="btn btn-primary pull-right" 
+		<a class="btn btn-primary pull-right" id="search" 
 			style="border: none; margin-bottom: 20px; margin-right: 5px; background-color: #56baed" onclick="selectHistory('N')">미출고조회</a>
 
 

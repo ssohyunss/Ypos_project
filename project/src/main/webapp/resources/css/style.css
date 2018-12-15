@@ -1,16 +1,11 @@
-@media(max-width:767px) {
-
-h3 {
-
-text-align: center;
-
+@media ( max-width :767px) {
+	h3 {
+		text-align: center;
+	}
+	
 }
 
 .row {
-margin:0 20px;
-
-}
-
-
+	margin: 0 20px;
 }
 

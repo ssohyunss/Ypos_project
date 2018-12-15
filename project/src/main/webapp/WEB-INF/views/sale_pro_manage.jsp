@@ -11,12 +11,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <meta name="viewport " content="width=device-width ,initial-scale=1">
 <link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
 <title>Y-POS</title>
 </head>
+<style>
+@media ( max-width :767px) {
+	.search {
+		margin-left: 20px;
+	}
+}
+</style>
 <body>
 	<form id="thisForm" name="thisForm" onsubmit="return false;" action="/"
 		method="post" enctype="multipart/form-data">
@@ -29,7 +37,7 @@
 			<b>상품코드별 판매현황</b>
 		</h3>
 
-		<div style="margin-top: 40px; margin-bottom: 40px" align="left">
+		<div class="search" style="margin-top: 40px; margin-bottom: 40px" align="left">
 			<table>
 				<tr>
 					<td><b>상품코드</b></td>

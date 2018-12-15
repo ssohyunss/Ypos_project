@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet" href="css/style.css">
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
 <script

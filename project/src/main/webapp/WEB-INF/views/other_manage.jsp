@@ -12,9 +12,16 @@
 	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
+<link rel="stylesheet" href="css/style.css">
 <title>Y-POS</title>
 </head>
 <style>
+@media ( max-width :767px) {
+	.search {
+		text-align: center;
+		margin-left: 20px;
+	}
+}
 </style>
 <body>
 	<form id="thisForm" name="thisForm" onsubmit="return false;" action="/"

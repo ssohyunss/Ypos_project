@@ -8,6 +8,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -15,7 +16,18 @@
 <title>Y-POS</title>
 </head>
 <style>
+.search {
+	margin-top: 40px;
+	margin-bottom: 40px;
 
+}
+
+@media ( max-width :767px) {
+	.search {
+		text-align: center;
+		margin-left: 20px;
+	}
+}
 </style>
 <body>
 	<form id="thisForm" name="thisForm" onsubmit="return false;" action="/"
@@ -26,7 +38,7 @@
 			<h3>
 				<b>매장재고현황</b>
 			</h3>
-			<div class="search" style="margin-top: 40px; margin-bottom: 40px;" >
+			<div class="search" >
 				<table>
 				<tr>
 				<td>

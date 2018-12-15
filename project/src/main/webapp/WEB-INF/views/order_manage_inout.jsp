@@ -19,9 +19,22 @@
 	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
+<link rel="stylesheet" href="css/style.css">
 <title>Y-POS</title>
 </head>
 <style>
+@media ( max-width :767px) {
+	.row {
+		font-size: 6px;
+	}
+	
+	.btn{
+		margin: 0 20px;
+	}
+	
+}
+
+
 </style>
 <body>
 	<form id="thisForm" name="thisForm" onsubmit="return false;" action="/"
@@ -46,7 +59,7 @@
 			<table class="table table-striped" style="text-align: center;">
 				<thead>
 					<tr>
-						<th style="background-color: #eeeeee; text-align: center;">상품코드</th>
+						<th style="background-color: #eeeeee; text-align: center; ">상품코드</th>
 						<th style="background-color: #eeeeee; text-align: center;">상품명</th>
 						<th style="background-color: #eeeeee; text-align: center;">수량</th>
 						<th style="background-color: #eeeeee; text-align: center;">지점명</th>

@@ -10,6 +10,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -18,6 +19,11 @@
 
 </head>
 <style>
+@media ( max-width :767px) {
+	.search {
+		margin-left: 20px;
+	}
+}
 </style>
 <body>
 	<form id="thisForm" name="thisForm" action="/" method="post" enctype="multipart/form-data">

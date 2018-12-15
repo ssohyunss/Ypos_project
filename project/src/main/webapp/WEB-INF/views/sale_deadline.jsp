@@ -11,6 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport " content="width=device-width ,initial-scale=1">
 <link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -71,6 +72,12 @@ input[type=text] {
 	border: 2px solid #ccc;
 	border-radius: 4px;
 }
+@media ( max-width :767px) {
+	.search {
+		margin-left: 20px;
+	}
+}
+
 </style>
 <body>
 	<form id="thisForm" name="thisForm" action="/" method="post" enctype="multipart/form-data">
@@ -79,11 +86,11 @@ input[type=text] {
 <div class="container">
 
 			<h3>
-				<b>판매마감현황</b>
+				<b>판매마감현황</b> 
 			</h3>
 
 
-			<div style="margin-top: 40px; margin-bottom: 40px" align="left">
+			<div class="search" style="margin-top: 40px; margin-bottom: 40px" align="left">
 				<form>
 					<label>날짜선택&nbsp;</label> 
 					<input type="text" id="fromDate"> &nbsp;~&nbsp; 

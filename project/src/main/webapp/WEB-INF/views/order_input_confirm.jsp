@@ -13,6 +13,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport " content="width=device-width ,initial-scale=1">
 <link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -81,7 +82,7 @@ input[type=text] {
 @media(max-width:767px) {
 
 .selectDate{
-	text-align: center;
+	margin-left: 20px;
 }
 
 }

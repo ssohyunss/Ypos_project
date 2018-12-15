@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet" href="css/style.css">
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
 <script
@@ -54,6 +55,12 @@ input[type=text] {
 	border: 2px solid #ccc;
 	border-radius: 4px;
 }
+
+@media ( max-width :767px) {
+	.search {
+		margin-left: 20px;
+	}
+}
 </style>
 <body>
 	<form id="thisForm" name="thisForm" onsubmit="return false;" action="/"
@@ -64,7 +71,7 @@ input[type=text] {
 			<h3>
 				<b>일자별 수불현황</b>
 			</h3>
-			<div style="margin-top: 40px; margin-bottom: 40px" align="left">
+			<div class="search" style="margin-top: 40px; margin-bottom: 40px" align="left">
 				<form>
 					<label>날짜선택&nbsp;</label> <input type="text" id="fromDate">
 					<button type="button" class="btn btn-primary mx-1 mt-2"
