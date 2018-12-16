@@ -54,7 +54,7 @@
 				</td>
 				
 				<td>
-					<button type="submit" class="btn btn-primary mx-1 mt-2" style="border: none; background-color:#56baed; margin-left:5px" onclick="search()">조회</button>
+					<button type="button" class="btn btn-primary mx-1 mt-2" style="border: none; background-color:#56baed; margin-left:5px" onclick="search()">조회</button>
 				</td>
 				
 				</tr>

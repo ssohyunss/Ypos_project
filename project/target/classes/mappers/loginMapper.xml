@@ -26,7 +26,7 @@
 	<select id="searchProduct" parameterType="hashmap" resultType="com.dongyang.project.domain.ProductVO">
 		<choose>
 			  <when test="'' != site">
-			  	select * from PRODUCT_LIST where 1=1 and SITE_TID = #{_parameter}
+			  	select * from PRODUCT_LIST where 1=1 and SITE_TID = #{site}
 			  </when>
 			  <otherwise>
 			  	select *, (select name from SITE where 1=1 and TID = SITE_TID) SITE_NAME from PRODUCT_LIST where 1=1
