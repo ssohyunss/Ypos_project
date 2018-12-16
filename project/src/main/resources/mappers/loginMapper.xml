@@ -217,7 +217,8 @@
    	    <when test="'' != code and null != code">
 	    	and PRODUCT_CODE = #{code}
 	    </when>    
-	  </choose>		
+	  </choose>
+	  	order by CREATE_DATE desc		
 	</select>	
 	<select id="searchProductName" resultType="java.lang.String">
 	  <choose>
@@ -228,7 +229,6 @@
 	    	select TID
 	    </otherwise>    
 	  </choose>	
-		 
 		from PRODUCT_LIST where 1=1 and site_tid = #{site} and barcode = #{barcode}
 	</select>	
 </mapper>
