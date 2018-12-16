@@ -135,6 +135,9 @@ private LoginService service;
 		if("RETURN".equals((String)request.getParameter("status"))) {
 			String saleCount = service.selectSaleCount(map);
 			String saleCountReturn = service.selectSaleCountReturn(map);
+			if(null == saleCountReturn) {
+				saleCountReturn = "0";
+			}
 			int total = Integer.parseInt(saleCount) - Integer.parseInt(saleCountReturn);
 			if(total < Integer.parseInt((String)request.getParameter("count"))) {
 				obj.put("error", "판매수량과 반품수량이 맞지않습니다.");

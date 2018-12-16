@@ -12,10 +12,15 @@
 <meta name="viewport " content="width=device-width ,initial-scale=1">
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet"
-	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker3.min.css">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script src="js/bootstrap.js"></script>
+<script type='text/javascript' src='//code.jquery.com/jquery-1.8.3.js'></script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
 <script>
 	$(function() {
 
@@ -93,8 +98,8 @@ input[type=text] {
 			<div class="search" style="margin-top: 40px; margin-bottom: 40px" align="left">
 				<form>
 					<label>날짜선택&nbsp;</label> 
-					<input type="text" id="fromDate"> &nbsp;~&nbsp; 
-					<input type="text" id="toDate">
+					<input type="text" name="fromDate" id="fromDate"> &nbsp;~&nbsp; 
+					<input type="text" name="fromDate" id="toDate">
 					<button type="button" class="btn btn-primary mx-1 mt-2"
 						style="border: none; background-color: #56baed; margin-left: 5px" onclick="searchList()">조회</button>
 				</form>
